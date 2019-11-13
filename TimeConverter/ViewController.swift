@@ -82,7 +82,6 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         fpcSearch.surfaceView.grabberHandle.isHidden = true
         fpcSearch.panGestureRecognizer.isEnabled = false
         let searchContentVC = storyboard?.instantiateViewController(identifier: "searchPanel") as? SearchPanelViewController
-        searchContentVC?.mapView = mapView
         searchContentVC?.fpc = fpcSearch
         searchContentVC?.cellTapDelegate = self
         fpcSearch.set(contentViewController: searchContentVC)
@@ -105,9 +104,8 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         let locationStore = LocationStore()
         print(locationStore.read())
         mapView.removeAnnotations(mapView.annotations)
-        let search = BackendSearchLocations()
         for locationStruct in locationStore.read() {
-            let newAnnotation = CustomAnnotationClass(id:locationStruct.id, title: search.parseAddress(selectedItem: locationStruct.location.placemark), coordinate: locationStruct.location.placemark.coordinate)
+            let newAnnotation = CustomAnnotationClass(id:locationStruct.id, title: BackendSearchLocations.parseAddress(selectedItem: locationStruct.location.placemark), coordinate: locationStruct.location.placemark.coordinate)
             mapView.addAnnotation(newAnnotation)
         }
     }
@@ -194,11 +192,9 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
                return
             } else {
                 
-                let search = BackendSearchLocations()
-                
                 guard let id = locationStore.create(locationParam: item) else { return }
                 
-                let newAnnotation = CustomAnnotationClass(id:id, title: search.parseAddress(selectedItem: item.placemark), coordinate: item.placemark.coordinate)
+                let newAnnotation = CustomAnnotationClass(id:id, title: BackendSearchLocations.parseAddress(selectedItem: item.placemark), coordinate: item.placemark.coordinate)
                 
                 mapView.addAnnotation(newAnnotation)
                 
@@ -387,32 +383,39 @@ class TimesPanelLayout: FloatingPanelLayout {
 }
 
 // MARK: SearchViewController
-class SearchPanelViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UITableViewDelegate {
+class SearchPanelViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UITableViewDelegate, MKLocalSearchCompleterDelegate {
     
     // Passed through mapView
-    var mapView: MKMapView? = nil
+    //var mapView: MKMapView? = nil
     var fpc: FloatingPanelController? = nil
-    var search: BackendSearchLocations!
+    //var search: BackendSearchLocations!
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeButton: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet var closeButtonTapRecogniser: UITapGestureRecognizer!
     
     weak var cellTapDelegate: CellTapDelegate?
     
     let spacing: CGFloat = 5
+    
+    var searchCompleter = MKLocalSearchCompleter()
+    var searchResults = [MKLocalSearchCompletion]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         searchBar.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         
-        search = BackendSearchLocations()
-        search.mapView = mapView
+        closeButtonTapRecogniser.cancelsTouchesInView = false
+        tableView.allowsSelection = true
         
-        if search.matchingItems.count == 0 {
+        searchCompleter.delegate = self
+        
+        if searchResults.count == 0 {
             tableView.rowHeight = 353
         } else {
             tableView.rowHeight = 64 + spacing
@@ -434,28 +437,58 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
     
     // Table View Data Source and Delegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if search.matchingItems.count == 0 {
+        if searchResults.count == 0 {
             return 1
         } else {
-            return search.matchingItems.count // Number of rows basically
+            return searchResults.count // Number of rows basically
         }
     }
+    
+    // This function was adapted from: https://github.com/gm6379/MapKitAutocomplete
+    /**
+      Highlights the matching search strings with the results
+      - parameter text: The text to highlight
+      - parameter ranges: The ranges where the text should be highlighted
+      - parameter size: The size the text should be set at
+      - parameter semiBold: The bool that decides if the text is semi bold
+      - returns: A highlighted attributed string with the ranges highlighted.
+     */
+    private func highlightedText(_ text: String, inRanges ranges: [NSValue], size: CGFloat, semiBold: Bool = false) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString(string: text)
+        var regular = UIFont.systemFont(ofSize: size)
+        if semiBold {
+            regular = UIFont.systemFont(ofSize: size, weight: UIFont.Weight.semibold)
+        }
+        attributedText.addAttribute(NSAttributedString.Key.font, value:regular, range:NSMakeRange(0, text.count))
+
+        let bold = UIFont.boldSystemFont(ofSize: size)
+        for value in ranges {
+            attributedText.addAttribute(NSAttributedString.Key.font, value:bold, range:value.rangeValue)
+        }
+        return attributedText
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("updating")
-        
-        if search.matchingItems.count == 0 {
+        if searchResults.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NothingFoundTableViewCell", for: indexPath) as! NothingFoundTableViewCell
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CustomSearchTableViewCell", for: indexPath) as! CustomSearchTableViewCell
-            print(indexPath.section)
-            let item = search.matchingItems[indexPath.row]
-            print(item)
-            cell.title.text = "\(item.placemark.name ?? "") | \(item.placemark.country ?? "")"
-            cell.subtitle.text = "\(item.placemark.thoroughfare ?? ""), \(item.placemark.locality ?? ""), \(item.placemark.subLocality ?? ""), \(item.placemark.administrativeArea ?? ""), \(item.placemark.postalCode ?? ""), \(item.placemark.country ?? "")"
-            cell.bigRightLabel.text = item.timeZone?.abbreviation()
+            let completion = searchResults[indexPath.row]
+            cell.title.attributedText = highlightedText(completion.title, inRanges: completion.titleHighlightRanges, size: 20.0, semiBold: true)
+            cell.subtitle.attributedText = highlightedText(completion.subtitle, inRanges: completion.subtitleHighlightRanges, size: 14.0)
+            
+            let searchRequest = MKLocalSearch.Request(completion: completion)
+            let search = MKLocalSearch(request: searchRequest)
+            search.start { (response, error) in
+                if error == nil {
+                    let item = response?.mapItems[0]
+                    cell.bigRightLabel.text = item?.timeZone?.abbreviation()
+                    cell.smallRightLabel.text = item?.timeZone?.identifier
+                }
+            }
             
             return cell
         }
@@ -463,10 +496,22 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Cell Tapped
-        if !(self.search.matchingItems.count == 0) {
+        print("cell tapped")
+        tableView.deselectRow(at: indexPath, animated: false)
+    
+        if self.searchResults.count != 0 {
             if let cellTapDelegate = self.cellTapDelegate {
-                cellTapDelegate.cellTapped(matchingItem: search.matchingItems[indexPath.row])
-                close()
+                print("cell tapped 2")
+                let searchRequest = MKLocalSearch.Request(completion: searchResults[indexPath.row])
+                let search = MKLocalSearch(request: searchRequest)
+                search.start { (response, error) in
+                    if error == nil {
+                        cellTapDelegate.cellTapped(matchingItem: (response?.mapItems[0])!)
+                        self.close()
+                    } else {
+                        print(error ?? "no error?")
+                    }
+                }
             }
         }
         
@@ -474,15 +519,7 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
     
     // Search Bar Delegate Method
     func searchBar(_: UISearchBar, textDidChange: String) {
-        search.updateMatchingItems(text: textDidChange, completion: { () in
-            if self.search.matchingItems.count == 0 {
-                self.tableView.rowHeight = 353
-            } else {
-                self.tableView.rowHeight = 64 + self.spacing
-            }
-            
-            self.tableView.reloadData()
-        })
+        searchCompleter.queryFragment = searchBar.text!
     }
     
     // Close
@@ -493,6 +530,23 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
             () in
             print("dismissed")
         })
+    }
+    
+    // Local Search Completer Delegate
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results
+        
+        if searchResults.count == 0 {
+            tableView.rowHeight = 353
+        } else {
+            tableView.rowHeight = 64 + spacing
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print("completer error:: \(error)")
     }
     
 }
@@ -509,15 +563,28 @@ class CustomSearchTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var bigRightLabel: UILabel!
+    @IBOutlet weak var smallRightLabel: UILabel!
     
     override func layoutSubviews() {
+        
         super.layoutSubviews()
         
         let spacing: CGFloat = 7.5
-
+        
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: spacing, left: 0, bottom: 0, right: 0))
         contentView.layer.cornerRadius = 10
         contentView.clipsToBounds = true
+        
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+        if selected {
+            contentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3)
+            print("cool")
+        } else {
+            contentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.1)
+        }
     }
     
 }

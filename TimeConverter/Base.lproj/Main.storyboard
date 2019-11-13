@@ -164,7 +164,7 @@
                                             <gestureRecognizers/>
                                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <prototypes>
-                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomSearchTableViewCell" rowHeight="64" id="W4N-k3-tor" customClass="CustomSearchTableViewCell" customModule="TimeConverter" customModuleProvider="target">
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomSearchTableViewCell" rowHeight="64" id="W4N-k3-tor" customClass="CustomSearchTableViewCell" customModule="TimeConverter" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="28" width="382" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W4N-k3-tor" id="y0q-75-fuM">
@@ -181,14 +181,21 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMV-XE-mhX">
                                                                 <rect key="frame" x="20" y="35" width="220" height="18"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GMT+11" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxh-1W-Dbc">
-                                                                <rect key="frame" x="248" y="11" width="114" height="42"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GMT+11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxh-1W-Dbc">
+                                                                <rect key="frame" x="248" y="11" width="114" height="24"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Australia/Sydney" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdU-sI-jht">
+                                                                <rect key="frame" x="248" y="35" width="114" height="18"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -199,6 +206,7 @@
                                                     <gestureRecognizers/>
                                                     <connections>
                                                         <outlet property="bigRightLabel" destination="Uxh-1W-Dbc" id="0Dl-OD-7Dt"/>
+                                                        <outlet property="smallRightLabel" destination="LdU-sI-jht" id="swi-Xc-cF8"/>
                                                         <outlet property="subtitle" destination="MMV-XE-mhX" id="q22-Ni-BvA"/>
                                                         <outlet property="title" destination="qa9-nE-K01" id="kb6-F8-8Eo"/>
                                                     </connections>
@@ -269,6 +277,7 @@
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="3az-Kh-6fg" id="IK3-Sh-p9U"/>
+                        <outlet property="closeButtonTapRecogniser" destination="ZYS-Vj-J2g" id="dYy-SX-Gul"/>
                         <outlet property="searchBar" destination="9f1-4k-grf" id="zmx-gF-5eJ"/>
                         <outlet property="tableView" destination="Fel-Gx-Tm5" id="Ioz-LI-9X3"/>
                     </connections>
