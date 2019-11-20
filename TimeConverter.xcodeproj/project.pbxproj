@@ -7,21 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E9E5114B89D6C5AD95D467F /* Pods_TimeConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79A16562714C44C564729C8 /* Pods_TimeConverter.framework */; };
+		A741CEFC237D76C00050D4DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A74861E4236E91A50045CAA3 /* Assets.xcassets */; };
 		A74861D9236E919E0045CAA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74861D8236E919E0045CAA3 /* AppDelegate.swift */; };
 		A74861DB236E919E0045CAA3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74861DA236E919E0045CAA3 /* SceneDelegate.swift */; };
 		A74861DD236E919E0045CAA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74861DC236E919E0045CAA3 /* ViewController.swift */; };
 		A74861E0236E919E0045CAA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74861DE236E919E0045CAA3 /* Main.storyboard */; };
 		A74861E3236E919E0045CAA3 /* TimeConverter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A74861E1236E919E0045CAA3 /* TimeConverter.xcdatamodeld */; };
-		A74861E5236E91A50045CAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A74861E4236E91A50045CAA3 /* Assets.xcassets */; };
 		A74861E8236E91A50045CAA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74861E6236E91A50045CAA3 /* LaunchScreen.storyboard */; };
 		A7E2447F2372FCB200659290 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E2447D2372F14B00659290 /* Backend.swift */; };
-		A8350F79813C90948534ABE8 /* Pods_TimeConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 351D3A99768F4435BE75B426 /* Pods_TimeConverter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		100DD256F2C0C90BA0F0FDD2 /* Pods-TimeConverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeConverter.debug.xcconfig"; path = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter.debug.xcconfig"; sourceTree = "<group>"; };
-		351D3A99768F4435BE75B426 /* Pods_TimeConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DE24EDEF89D18511C88E999 /* Pods-TimeConverter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeConverter.release.xcconfig"; path = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter.release.xcconfig"; sourceTree = "<group>"; };
 		A74861D5236E919E0045CAA3 /* TimeConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74861D8236E919E0045CAA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A74861DA236E919E0045CAA3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +29,9 @@
 		A74861E7236E91A50045CAA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A74861E9236E91A50045CAA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7E2447D2372F14B00659290 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
+		ED8A8AEA8F67CCBB24E7815F /* Pods-TimeConverter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeConverter.release.xcconfig"; path = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter.release.xcconfig"; sourceTree = "<group>"; };
+		F79A16562714C44C564729C8 /* Pods_TimeConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7E36D5F4CE86813CF8B8EB6 /* Pods-TimeConverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeConverter.debug.xcconfig"; path = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,26 +39,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8350F79813C90948534ABE8 /* Pods_TimeConverter.framework in Frameworks */,
+				7E9E5114B89D6C5AD95D467F /* Pods_TimeConverter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		478066B0218259928A76E530 /* Frameworks */ = {
+		1207C2A0F8AB03A726AD2506 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				351D3A99768F4435BE75B426 /* Pods_TimeConverter.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		63055A9BDDB3FAA9DDACCC93 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				100DD256F2C0C90BA0F0FDD2 /* Pods-TimeConverter.debug.xcconfig */,
-				9DE24EDEF89D18511C88E999 /* Pods-TimeConverter.release.xcconfig */,
+				F7E36D5F4CE86813CF8B8EB6 /* Pods-TimeConverter.debug.xcconfig */,
+				ED8A8AEA8F67CCBB24E7815F /* Pods-TimeConverter.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -68,8 +60,8 @@
 			children = (
 				A74861D7236E919E0045CAA3 /* TimeConverter */,
 				A74861D6236E919E0045CAA3 /* Products */,
-				63055A9BDDB3FAA9DDACCC93 /* Pods */,
-				478066B0218259928A76E530 /* Frameworks */,
+				1207C2A0F8AB03A726AD2506 /* Pods */,
+				BFE2C317F0E698E864819FD5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +87,14 @@
 				A74861E1236E919E0045CAA3 /* TimeConverter.xcdatamodeld */,
 			);
 			path = TimeConverter;
+			sourceTree = "<group>";
+		};
+		BFE2C317F0E698E864819FD5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F79A16562714C44C564729C8 /* Pods_TimeConverter.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74861E8236E91A50045CAA3 /* LaunchScreen.storyboard in Resources */,
-				A74861E5236E91A50045CAA3 /* Assets.xcassets in Resources */,
+				A741CEFC237D76C00050D4DF /* Assets.xcassets in Resources */,
 				A74861E0236E919E0045CAA3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -346,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -358,11 +358,13 @@
 		};
 		A74861ED236E91A50045CAA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 100DD256F2C0C90BA0F0FDD2 /* Pods-TimeConverter.debug.xcconfig */;
+			baseConfigurationReference = F7E36D5F4CE86813CF8B8EB6 /* Pods-TimeConverter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QGD2RL4226;
 				INFOPLIST_FILE = TimeConverter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -376,11 +378,13 @@
 		};
 		A74861EE236E91A50045CAA3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9DE24EDEF89D18511C88E999 /* Pods-TimeConverter.release.xcconfig */;
+			baseConfigurationReference = ED8A8AEA8F67CCBB24E7815F /* Pods-TimeConverter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QGD2RL4226;
 				INFOPLIST_FILE = TimeConverter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

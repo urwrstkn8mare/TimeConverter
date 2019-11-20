@@ -6,13 +6,15 @@
 //  Copyright © 2019 Samit Shaikh. All rights reserved.
 //
 
-// TODO: Modify the tableviewcells of search panel so it shows region underneath
-//       the timezone abbreviation instead of next to the title.
 // TODO: Do the actual time conversion stuff and stuff.
+// TODO: Store universal time persitently via core data.
 
 import UIKit
 import MapKit
 import FloatingPanel // https://github.com/SCENEE/FloatingPanel
+import MapKit
+import CoreLocation
+import Foundation
 
 // MARK: ViewController
 class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTapDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
@@ -22,17 +24,29 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     @IBOutlet weak var searchIconView: UIView!
     @IBOutlet weak var locationIconView: UIView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var searchIconImageView: UIImageView!
+    @IBOutlet weak var locationIconImageView: UIImageView!
     
     var fpc: FloatingPanelController!
     var fpcSearch: FloatingPanelController!
     var fpcSearchShownBefore: Bool = false
     var locationButtonPressedBefore: Bool = false
     var locationManager: CLLocationManager!
+    var contentVC: TimesPanelViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        if #available(iOS 13, *) {
+            searchIconImageView.image = UIImage(systemName: "magnifyingglass")
+            locationIconImageView.image = UIImage(systemName: "location")
+        } else {
+            searchIconImageView.image = UIImage(named: "magnifyingglass-image")
+            locationIconImageView.image = UIImage(named: "location-image")
+        }
+        
+        // Prevents showing user location by default.
         mapView.showsUserLocation = false
         
         // Accessing Map View Delegate
@@ -40,14 +54,18 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         
         // Set up long press
         let longPressGestureRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(mapViewLongPress(recogniser:)))
-        longPressGestureRecogniser.minimumPressDuration = 1.0
+        longPressGestureRecogniser.minimumPressDuration = 0.4
         mapView.addGestureRecognizer(longPressGestureRecogniser)
         
         // Set up side buttons on the map
         sideButtons.layer.cornerRadius = 10.0
         sideButtons.clipsToBounds = true
         sideButtons.layer.borderWidth = 1
-        sideButtons.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        if #available(iOS 13, *) {
+            sideButtons.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        } else {
+            sideButtons.layer.borderColor = UIColor(red: 198.0/255.0, green: 198.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
+        }
         sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.height / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
         
         // Initialize a `FloatingPanelController` object.
@@ -69,7 +87,12 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         fpc.surfaceView.shadowHidden = false
         
         // Set a content view controller.
-        let contentVC = storyboard?.instantiateViewController(identifier: "TimesPanel") as? TimesPanelViewController
+        if #available(iOS 13.0, *) {
+            contentVC = (storyboard?.instantiateViewController(identifier: "TimesPanel") as? TimesPanelViewController)!
+        } else {
+            // Fallback on earlier versions
+            contentVC = (storyboard?.instantiateViewController(withIdentifier: "TimesPanel") as? TimesPanelViewController)!
+        }
         fpc.set(contentViewController: contentVC)
         
         // Add and show the views managed by the `FloatingPanelController` object to self.view.
@@ -81,9 +104,16 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         fpcSearch.surfaceView.backgroundColor = .clear
         fpcSearch.surfaceView.grabberHandle.isHidden = true
         fpcSearch.panGestureRecognizer.isEnabled = false
-        let searchContentVC = storyboard?.instantiateViewController(identifier: "searchPanel") as? SearchPanelViewController
-        searchContentVC?.fpc = fpcSearch
-        searchContentVC?.cellTapDelegate = self
+        fpcSearch.isRemovalInteractionEnabled = true
+        var searchContentVC: SearchPanelViewController
+        if #available(iOS 13.0, *) {
+            searchContentVC = (storyboard?.instantiateViewController(identifier: "searchPanel") as? SearchPanelViewController)!
+        } else {
+            // Fallback on earlier versions
+            searchContentVC = (storyboard?.instantiateViewController(withIdentifier: "searchPanel") as? SearchPanelViewController)!
+        }
+        searchContentVC.fpc = fpcSearch
+        searchContentVC.cellTapDelegate = self
         fpcSearch.set(contentViewController: searchContentVC)
         
         // Load annotations
@@ -96,17 +126,27 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
             let touchPoint = recogniser.location(in: mapView)
             let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             
-            addAnnotation(item: MKMapItem(placemark: MKPlacemark(coordinate: newCoordinates)))
+            print("detected")
+            CLLocation(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude).geocode(completion: { (placemark, error) in
+                if let error = error as? CLError {
+                    print("CLError:", error)
+                    return
+                } else if let placemark = placemark?.first {
+                    print(placemark)
+                    let mapItem = MKMapItem(placemark: MKPlacemark(placemark: placemark))
+                    self.addAnnotation(item: mapItem)
+                }
+            })
+            
         }
     }
     
     func loadAnnotations() {
         let locationStore = LocationStore()
-        print(locationStore.read())
         mapView.removeAnnotations(mapView.annotations)
         for locationStruct in locationStore.read() {
             let newAnnotation = CustomAnnotationClass(id:locationStruct.id, title: BackendSearchLocations.parseAddress(selectedItem: locationStruct.location.placemark), coordinate: locationStruct.location.placemark.coordinate)
-            mapView.addAnnotation(newAnnotation)
+            self.mapView.addAnnotation(newAnnotation)
         }
     }
     
@@ -174,17 +214,31 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         
         let locationStore = LocationStore()
         
-        if locationStore.read().count == 50 {
-            // Tell user that he/she needs to remove an annotation to create another one.
+        let maxCount: Int
+        if #available(iOS 13, *) {
+            maxCount = 50
         } else {
-            let distanceApartOtherAnnotationsMustBe: Int = 2000
+            maxCount = 10
+        }
+        
+        let result = locationStore.read()
+        if result.count == maxCount {
+            let alert = UIAlertController(title: "Too many locations!", message: "You can only create a maximum of \(maxCount) locations.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        } else {
+            let distanceApartOtherAnnotationsMustBe: Int = 10000
             
             var foundSimilar = false
-            for locationStruct in locationStore.read() {
+            for locationStruct in result {
                 if (item.placemark.location?.distance(from: locationStruct.location.placemark.location!))! < Double(distanceApartOtherAnnotationsMustBe + 1) {
                     print("too close")
-                    mapView.setCenter(locationStruct.location.placemark.coordinate, animated: true)
+                    self.mapView.setCenter(locationStruct.location.placemark.coordinate, animated: true)
                     foundSimilar = true
+                    
+                    let alert = UIAlertController(title: "Too many close!", message: "Your location must be at least \(distanceApartOtherAnnotationsMustBe/1000)km away from any other location.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
                 }
             }
             
@@ -192,11 +246,10 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
                return
             } else {
                 
-                guard let id = locationStore.create(locationParam: item) else { return }
+                let newAnnotation = CustomAnnotationClass(id:locationStore.create(locationParam: item)!, title: BackendSearchLocations.parseAddress(selectedItem: item.placemark), coordinate: item.placemark.coordinate)
                 
-                let newAnnotation = CustomAnnotationClass(id:id, title: BackendSearchLocations.parseAddress(selectedItem: item.placemark), coordinate: item.placemark.coordinate)
-                
-                mapView.addAnnotation(newAnnotation)
+                self.mapView.addAnnotation(newAnnotation)
+                self.contentVC?.tableView.reloadData()
                 
             }
         }
@@ -214,14 +267,22 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "AnnotationView")
         }
         
-        let image = UIImage(systemName: String(annotation.id) + ".circle.fill")
+        var image: UIImage
+        if #available(iOS 13.0, *) {
+            image = UIImage(systemName: String(annotation.id) + ".circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .medium))!
+        } else {
+            // Fallback on earlier versions
+            image = UIImage(named: String(annotation.id) + ".circle.fill-image")!
+        }
         let size = CGSize(width: 50, height: 50)
         let renderer = UIGraphicsImageRenderer(size: size)
         annotationView?.image = renderer.image { (context) in
-            image!.draw(in: CGRect(origin: .zero, size: size))
+            image.draw(in: CGRect(origin: .zero, size: size))
         }
         annotationView?.contentMode = .scaleAspectFit
-        annotationView?.largeContentTitle = annotation.title
+        if #available(iOS 13.0, *) {
+            annotationView?.largeContentTitle = annotation.title
+        }
         annotationView?.backgroundColor = .white
         annotationView?.clipsToBounds = true
         annotationView?.layer.cornerRadius = 25
@@ -242,11 +303,14 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // this function is delayed for some reason
+        print("location requested")
         if let location = locations.first {
-            print("location requested")
+            print("location requested 2")
             
             let span = MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            print("locaiton requested 3")
             mapView.setRegion(region, animated: true)
         }
     }
@@ -277,17 +341,24 @@ class CustomAnnotationClass: NSObject, MKAnnotation {
 }
 
 // MARK: TimesPanelViewController
-class TimesPanelViewController: UIViewController {
+class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UniversalTimeDelegate {
     
     // Outlets
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var topTitleView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     // For iOS 10 only
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
     
+    var universalTime: Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        universalTime = Date()
         
         // Programatically setup stuff in the top title section.
         // Subtitle
@@ -331,23 +402,94 @@ class TimesPanelViewController: UIViewController {
             // Add rounding corners on iOS 10
             visualEffectView.layer.cornerRadius = 9.0
             visualEffectView.clipsToBounds = true
-    
+        
             // Add shadow manually on iOS 10
             view.layer.insertSublayer(shadowLayer, at: 0)
             let rect = visualEffectView.frame
-            let path = UIBezierPath(roundedRect: rect,
-                                    byRoundingCorners: [.topLeft, .topRight],
-                                    cornerRadii: CGSize(width: 9.0, height: 9.0))
+            let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 9.0, height: 9.0))
             shadowLayer.frame = visualEffectView.frame
             shadowLayer.shadowPath = path.cgPath
             shadowLayer.shadowColor = UIColor.black.cgColor
             shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
             shadowLayer.shadowOpacity = 0.2
-            shadowLayer.shadowRadius = 3.0
+            if #available(iOS 11.0, *) {
+                shadowLayer.shadowRadius = 3.0
+            }
         }
         
     }
     
+    // Table View Delegate and Data Source
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return LocationStore().read().count
+        
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTimesTableViewCell") as! CustomTimesTableViewCell
+        cell.delegate = self
+        let item = LocationStore().read()[indexPath.row]
+        
+        if #available(iOS 13, *) {
+            cell.editImageView.image = UIImage(systemName: "square.and.pencil")
+            cell.trashImageView.image = UIImage(systemName: "trash")
+            cell.mainImageView.image = UIImage(systemName: String(item.id) + ".circle.fill")
+        } else {
+            cell.editImageView.image = UIImage(named: "square.and.pencil-image")
+            cell.trashImageView.image = UIImage(named: "trash-image")
+            cell.mainImageView.image = UIImage(named: String(item.id) + ".circle.fill-image")
+        }
+        cell.regionLabel.text = item.location.timeZone?.identifier.uppercased()
+        
+        let formatter = DateFormatter()
+        formatter.timeZone = item.location.timeZone
+        
+        formatter.dateFormat = "h:mm"
+        cell.timeLabel.text = formatter.string(from: universalTime!)
+        
+        formatter.dateFormat = "a"
+        cell.pmLabel.text = formatter.string(from: universalTime!).uppercased()
+        
+        formatter.dateFormat = "EEEE, d MMM"
+        cell.dateLabel.text = formatter.string(from: universalTime!)
+        
+        return cell
+    }
+    
+    // Universal Time Delegate Methods
+    func set(time: Date) {
+        universalTime = time
+    }
+    func get() -> Date {
+        return universalTime!
+    }
+    
+}
+
+// MARK: CustomTimesTableViewCell
+class CustomTimesTableViewCell: UITableViewCell {
+    
+    // Outlets
+    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var regionLabel: UILabel!
+    @IBOutlet weak var trashImageView: UIImageView!
+    @IBOutlet weak var editImageView: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var pmLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    var delegate: UniversalTimeDelegate?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
+}
+
+protocol UniversalTimeDelegate {
+    func set(time: Date)
+    func get() -> Date
 }
 
 // MARK: TimesPanelLayout
@@ -366,8 +508,8 @@ class TimesPanelLayout: FloatingPanelLayout {
         if #available(iOS 11.0, *) {
             bottomSafeArea = window.safeAreaInsets.bottom
         } else {
-            let safeFrame = window.safeAreaLayoutGuide.layoutFrame
-            bottomSafeArea = window.frame.maxY - safeFrame.maxY
+            // Fallback on earlier versions
+            bottomSafeArea = window.layoutMargins.bottom
         }
         
         // Setup snapping points of pull up view.
@@ -405,6 +547,12 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 13, *) {
+            closeButton.image = UIImage(systemName: "xmark.circle.fill")
+        } else {
+            closeButton.image = UIImage(named: "xmark.circle.fill-image")
+        }
         
         searchBar.delegate = self
         tableView.dataSource = self
@@ -585,6 +733,7 @@ class CustomSearchTableViewCell: UITableViewCell {
         } else {
             contentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.1)
         }
+        
     }
     
 }
@@ -597,7 +746,8 @@ class SearchPanelLayout: FloatingPanelLayout {
     }
     
     public var supportedPositions: Set<FloatingPanelPosition> {
-        return [.full, .hidden]
+        //return [.full, .hidden]
+        return [.full]
     }
     
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
@@ -609,8 +759,7 @@ class SearchPanelLayout: FloatingPanelLayout {
         if #available(iOS 11.0, *) {
             topSafeArea = window.safeAreaInsets.top
         } else {
-            let safeFrame = window.safeAreaLayoutGuide.layoutFrame
-            topSafeArea = safeFrame.minY
+            topSafeArea = window.layoutMargins.top
         }
         
         switch position {
@@ -626,18 +775,23 @@ class SearchPanelLayout: FloatingPanelLayout {
 // MARK: NothingFoundTableViewCell
 class NothingFoundTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var nothingFoundImageView: UIImageView!
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         contentView.layer.cornerRadius = 10
         contentView.clipsToBounds = true
+        
+        if #available(iOS 13, *) {
+            nothingFoundImageView.image = UIImage(systemName: "text.badge.xmark")
+        } else {
+            nothingFoundImageView.image = UIImage(named: "text.badge.xmark-image")
+        }
+        
     }
     
 }
 
-// To get name of class
-extension UIViewController {
-    var className: String {
-        return NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!
-    }
-}
+// 16.0
+//

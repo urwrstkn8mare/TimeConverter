@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:PlaygroundForTesting.playground">
+   </FileRef>
+   <FileRef
       location = "group:TimeConverter.xcodeproj">
    </FileRef>
    <FileRef

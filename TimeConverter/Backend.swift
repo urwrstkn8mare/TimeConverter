@@ -72,12 +72,41 @@ class LocationStore {
             if id == nil {
                 var returnArray: [LocationStruct] = []
                 for data in (result as! [NSManagedObject]) {
-                    returnArray.append(LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: data.value(forKey: "latitude") as! Double, longitude: data.value(forKey: "longtitude") as! Double)))))
+//                    CLLocation(latitude: CLLocationDegrees(exactly: data.value(forKey: "latitude") as! Double)!, longitude: CLLocationDegrees(exactly: data.value(forKey: "longtitude") as! Double)!).geocode() { (placemark, error) in
+//                        if let error = error as? CLError {
+//                            print("CLError:", error)
+//                            return
+//                        } else if let placemark = placemark?.first {
+//                            returnArray.append(LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: MKMapItem(placemark: MKPlacemark(placemark: placemark))))
+//                            if data == (result as! [NSManagedObject]).last {
+//                                completionHandler(returnArray)
+//                            }
+//                        }
+//                    }
+                    
+                    guard let decodedMapItem = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data.value(forKey: "mapItem") as! Data) as? MKMapItem else { return [] }
+                    returnArray.append(LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: decodedMapItem))
                 }
+                print(returnArray)
                 return returnArray
             } else {
                 let data = (result as! [NSManagedObject])[0]
-                return [LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: data.value(forKey: "latitude") as! Double, longitude: data.value(forKey: "longtitude") as! Double))))]
+                
+//                var mapItem: MKMapItem?
+//                CLLocation(latitude: CLLocationDegrees(exactly: data.value(forKey: "latitude") as! Double)!, longitude: CLLocationDegrees(exactly: data.value(forKey: "longtitude") as! Double)!).geocode() { (placemark, error) in
+//                    if let error = error as? CLError {
+//                        print("CLError:", error)
+//                        return
+//                    } else if let placemark = placemark?.first {
+//                        mapItem = MKMapItem(placemark: MKPlacemark(placemark: placemark))
+//                        completionHandler([LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: mapItem!)])
+//                    }
+//                }
+                
+                
+                guard let decodedMapItem = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data.value(forKey: "mapItem") as! Data) as? MKMapItem else { return [] }
+                return [LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: decodedMapItem)]
+                
             }
         } catch {
             print("Read Failed")
@@ -86,15 +115,25 @@ class LocationStore {
         // (result as! [NSManagedObject])
     }
     
-    public func create(locationParam: MKMapItem) -> Int? {
+    public func create(locationParam: MKMapItem) -> Int?{
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
         let managedContext = appDelegate.persistentContainer.viewContext
         let locationEntity = NSEntityDescription.entity(forEntityName: "LocationEntity", in: managedContext)!
         
         let location = NSManagedObject(entity: locationEntity, insertInto: managedContext)
-        location.setValue(locationParam.placemark.coordinate.longitude, forKey: "longtitude")
-        location.setValue(locationParam.placemark.coordinate.latitude, forKey: "latitude")
+        
+        if #available(iOS 11.0, *) {
+            do {
+                let mapItem = try NSKeyedArchiver.archivedData(withRootObject: locationParam, requiringSecureCoding: false)
+                location.setValue(mapItem, forKey: "mapItem")
+            } catch {
+                print("cant encode data")
+            }
+        } else {
+            let mapItem = NSKeyedArchiver.archivedData(withRootObject: locationParam)
+            location.setValue(mapItem, forKey: "mapItem")
+        }
         
         let newId = read().map{$0.id}.max()! + 1
         
@@ -124,8 +163,19 @@ class LocationStore {
                 let object = test[0] as! NSManagedObject
                 
                 if newLocation != nil {
-                    object.setValue(Double((newLocation!.placemark.coordinate.latitude)), forKey: "latitude")
-                    object.setValue(Double((newLocation!.placemark.coordinate.longitude)), forKey: "longtitude")
+                    
+                    if #available(iOS 11.0, *) {
+                        do {
+                            let mapItem = try NSKeyedArchiver.archivedData(withRootObject: newLocation!, requiringSecureCoding: false)
+                            object.setValue(mapItem, forKey: "mapItem")
+                        } catch {
+                            print("cant encode data")
+                        }
+                    } else {
+                        let mapItem = NSKeyedArchiver.archivedData(withRootObject: newLocation!)
+                        object.setValue(mapItem, forKey: "mapItem")
+                    }
+                    
                 }
                 
                 if newId != nil {
@@ -161,7 +211,7 @@ class LocationStore {
             
             for location in read() {
                 if location.id > id {
-                    update(id: location.id, newId: location.id - 1)
+                    self.update(id: location.id, newId: location.id - 1)
                 }
             }
             
@@ -177,4 +227,18 @@ class LocationStore {
         
     }
     
+}
+
+// To get name of class
+extension UIViewController {
+    var className: String {
+        return NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!
+    }
+}
+
+// Adapted from https://stackoverflow.com/a/46869540
+extension CLLocation {
+    func geocode(completion: @escaping (_ placemark: [CLPlacemark]?, _ error: Error?) -> Void)  {
+        CLGeocoder().reverseGeocodeLocation(self, completionHandler: completion)
+    }
 }
