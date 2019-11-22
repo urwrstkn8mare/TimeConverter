@@ -72,36 +72,13 @@ class LocationStore {
             if id == nil {
                 var returnArray: [LocationStruct] = []
                 for data in (result as! [NSManagedObject]) {
-//                    CLLocation(latitude: CLLocationDegrees(exactly: data.value(forKey: "latitude") as! Double)!, longitude: CLLocationDegrees(exactly: data.value(forKey: "longtitude") as! Double)!).geocode() { (placemark, error) in
-//                        if let error = error as? CLError {
-//                            print("CLError:", error)
-//                            return
-//                        } else if let placemark = placemark?.first {
-//                            returnArray.append(LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: MKMapItem(placemark: MKPlacemark(placemark: placemark))))
-//                            if data == (result as! [NSManagedObject]).last {
-//                                completionHandler(returnArray)
-//                            }
-//                        }
-//                    }
                     
                     guard let decodedMapItem = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data.value(forKey: "mapItem") as! Data) as? MKMapItem else { return [] }
                     returnArray.append(LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: decodedMapItem))
                 }
-                print(returnArray)
                 return returnArray
             } else {
                 let data = (result as! [NSManagedObject])[0]
-                
-//                var mapItem: MKMapItem?
-//                CLLocation(latitude: CLLocationDegrees(exactly: data.value(forKey: "latitude") as! Double)!, longitude: CLLocationDegrees(exactly: data.value(forKey: "longtitude") as! Double)!).geocode() { (placemark, error) in
-//                    if let error = error as? CLError {
-//                        print("CLError:", error)
-//                        return
-//                    } else if let placemark = placemark?.first {
-//                        mapItem = MKMapItem(placemark: MKPlacemark(placemark: placemark))
-//                        completionHandler([LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: mapItem!)])
-//                    }
-//                }
                 
                 
                 guard let decodedMapItem = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data.value(forKey: "mapItem") as! Data) as? MKMapItem else { return [] }
@@ -149,14 +126,14 @@ class LocationStore {
         
     }
     
-    public func update(id: Int, newLocation: MKMapItem? = nil, newId: Int? = nil) {
+    public func update(id: Int, newLocation: MKMapItem?, newId: Int?) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LocationEntity")
         fetchRequest.predicate = NSPredicate(format: "id = %@", id as NSNumber)
         
-        if newLocation != nil && newId != nil {
+        if !(newLocation == nil && newId == nil) {
             do {
                 let test = try managedContext.fetch(fetchRequest)
                 
@@ -184,6 +161,7 @@ class LocationStore {
                 
                 do {
                     try managedContext.save()
+                    print("saved: ", read(id: id))
                 } catch {
                     print(error)
                 }
@@ -211,7 +189,7 @@ class LocationStore {
             
             for location in read() {
                 if location.id > id {
-                    self.update(id: location.id, newId: location.id - 1)
+                    self.update(id: location.id, newLocation: nil, newId: location.id - 1)
                 }
             }
             

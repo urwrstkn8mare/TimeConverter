@@ -140,22 +140,6 @@
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aO1-0L-M8U">
-                                                                <rect key="frame" x="20" y="11" width="60" height="60"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="trash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Yfr-3c-5Ib">
-                                                                <rect key="frame" x="88" y="26" width="30" height="30"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="square.and.pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="606-Xz-U5C">
-                                                                <rect key="frame" x="126" y="26" width="30" height="30"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thursday, 17 Sep" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBx-mH-KuP">
                                                                 <rect key="frame" x="196" y="63" width="198" height="21"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -170,24 +154,48 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10:34" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiD-dp-5CN">
+                                                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vcO-ld-8tg">
+                                                                <rect key="frame" x="88" y="26" width="30" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <inset key="imageEdgeInsets" minX="1.5" minY="0.0" maxX="1.5" maxY="0.0"/>
+                                                                <state key="normal" image="trash-image"/>
+                                                                <connections>
+                                                                    <action selector="trashButtonAction:" destination="BPU-d6-CfA" eventType="touchUpInside" id="Pmq-2C-QFx"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeQ-CU-hdl">
+                                                                <rect key="frame" x="126" y="26" width="30" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <inset key="imageEdgeInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                <state key="normal" image="square.and.pencil-image"/>
+                                                                <connections>
+                                                                    <action selector="editButtonAction:" destination="BPU-d6-CfA" eventType="touchUpInside" id="JDX-ne-vnt"/>
+                                                                </connections>
+                                                            </button>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="kqZ-KJ-4SI">
+                                                                <rect key="frame" x="20" y="11" width="60" height="60"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jno-0D-VIZ">
                                                                 <rect key="frame" x="196" y="19" width="124" height="45"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                                <state key="normal" title="10:34">
+                                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                </state>
+                                                            </button>
                                                         </subviews>
                                                     </tableViewCellContentView>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <outlet property="dateLabel" destination="JBx-mH-KuP" id="3Fg-1r-fge"/>
-                                                        <outlet property="editImageView" destination="606-Xz-U5C" id="QFC-TO-cRy"/>
-                                                        <outlet property="mainImageView" destination="aO1-0L-M8U" id="nP7-xv-1Kx"/>
+                                                        <outlet property="editImageButton" destination="JeQ-CU-hdl" id="0LX-Wx-L62"/>
+                                                        <outlet property="mainImageView" destination="kqZ-KJ-4SI" id="Qgx-hF-XqC"/>
                                                         <outlet property="pmLabel" destination="ge9-nJ-FA6" id="UWy-Xg-feL"/>
                                                         <outlet property="regionLabel" destination="mdQ-hq-gAo" id="qn4-6f-JQF"/>
-                                                        <outlet property="timeLabel" destination="PiD-dp-5CN" id="A19-c7-tpf"/>
-                                                        <outlet property="trashImageView" destination="Yfr-3c-5Ib" id="57g-Az-STv"/>
+                                                        <outlet property="timeLabel" destination="Jno-0D-VIZ" id="NJa-Ta-FpL"/>
+                                                        <outlet property="trashImageButton" destination="vcO-ld-8tg" id="l7e-5Z-nBd"/>
                                                     </connections>
                                                 </tableViewCell>
                                             </prototypes>
@@ -375,9 +383,9 @@
         <image name="1.circle.fill" catalog="system" width="64" height="60"/>
         <image name="location" catalog="system" width="64" height="56"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+        <image name="square.and.pencil-image" width="97.5" height="99"/>
         <image name="text.badge.xmark" catalog="system" width="64" height="54"/>
-        <image name="trash" catalog="system" width="60" height="64"/>
+        <image name="trash-image" width="95" height="109"/>
         <image name="xmark.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>

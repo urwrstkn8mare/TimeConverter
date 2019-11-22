@@ -7,5 +7,6 @@ target 'TimeConverter' do
 
   # Pods for TimeConverter
   pod 'FloatingPanel'
+  pod 'SwiftLocation', '~> 4.0'
 
 end

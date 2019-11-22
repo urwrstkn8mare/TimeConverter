@@ -1,16 +1,20 @@
 PODS:
   - FloatingPanel (1.7.0)
+  - SwiftLocation (4.2.0)
 
 DEPENDENCIES:
   - FloatingPanel
+  - SwiftLocation (~> 4.0)
 
 SPEC REPOS:
   trunk:
     - FloatingPanel
+    - SwiftLocation
 
 SPEC CHECKSUMS:
   FloatingPanel: f686602da8eff56375e577f19be37348a95f4e24
+  SwiftLocation: 609ac8859f2c5d48a6cadd2a58c63b1dae02dc25
 
-PODFILE CHECKSUM: 0f2079378d5708fa42f76994bcd787af6bf1c222
+PODFILE CHECKSUM: 50da708907e026afce6af6cb27686ed5d42ae0f6
 
 COCOAPODS: 1.8.4
