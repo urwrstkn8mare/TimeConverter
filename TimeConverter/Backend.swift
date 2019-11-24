@@ -18,7 +18,7 @@ class BackendSearchLocations {
     func updateMatchingItems(text: String, completion: (() -> Void)? = nil) {
         
         guard let mapView = mapView else {
-            print("mapView not set")
+            Log("mapView not set")
             return
         }
         let request = MKLocalSearch.Request()
@@ -27,14 +27,14 @@ class BackendSearchLocations {
         let search = MKLocalSearch(request: request)
         search.start { response, error in
             guard let response = response else {
-                print("updateMatchingItems() - Error : \(error?.localizedDescription ?? "Unknown error").")
+                Log("updateMatchingItems() - Error : \(error?.localizedDescription ?? "Unknown error").")
                 return
             }
             
             self.matchingItems = response.mapItems
             
             // debugging
-            print(self.matchingItems)
+            Log(self.matchingItems)
             
             if completion != nil {
                 completion!()
@@ -78,15 +78,16 @@ class LocationStore {
                 }
                 return returnArray
             } else {
-                let data = (result as! [NSManagedObject])[0]
-                
+                Log("result:")
+                Log(result)
+                let data = result[0] as! NSManagedObject
                 
                 guard let decodedMapItem = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data.value(forKey: "mapItem") as! Data) as? MKMapItem else { return [] }
                 return [LocationStruct(id: Int(data.value(forKey: "id") as! Double), location: decodedMapItem)]
                 
             }
         } catch {
-            print("Read Failed")
+            Log("Read Failed")
             return []
         }
         // (result as! [NSManagedObject])
@@ -105,7 +106,7 @@ class LocationStore {
                 let mapItem = try NSKeyedArchiver.archivedData(withRootObject: locationParam, requiringSecureCoding: false)
                 location.setValue(mapItem, forKey: "mapItem")
             } catch {
-                print("cant encode data")
+                Log("cant encode data")
             }
         } else {
             let mapItem = NSKeyedArchiver.archivedData(withRootObject: locationParam)
@@ -120,7 +121,7 @@ class LocationStore {
             try managedContext.save()
             return newId
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            Log("Could not save. \(error), \(error.userInfo)")
             return nil
         }
         
@@ -146,7 +147,7 @@ class LocationStore {
                             let mapItem = try NSKeyedArchiver.archivedData(withRootObject: newLocation!, requiringSecureCoding: false)
                             object.setValue(mapItem, forKey: "mapItem")
                         } catch {
-                            print("cant encode data")
+                            Log("cant encode data")
                         }
                     } else {
                         let mapItem = NSKeyedArchiver.archivedData(withRootObject: newLocation!)
@@ -161,13 +162,16 @@ class LocationStore {
                 
                 do {
                     try managedContext.save()
-                    print("saved: ", read(id: id))
+                    Log("before update read")
+                    Log("read:")
+                    Log(read(id: newId))
+                    Log("after update read")
                 } catch {
-                    print(error)
+                    Log(error)
                 }
                 
             } catch {
-                print(error)
+                Log(error)
             }
         }
         
@@ -185,22 +189,23 @@ class LocationStore {
         
             let object = test[0] as! NSManagedObject
             
-            managedContext.delete(object)
-            
             for location in read() {
+                Log("first read success")
                 if location.id > id {
                     self.update(id: location.id, newLocation: nil, newId: location.id - 1)
                 }
             }
             
+            managedContext.delete(object)
+            
             do {
                 try managedContext.save()
             } catch {
-                print(error)
+                Log(error)
             }
             
         } catch {
-                print(error)
+                Log(error)
         }
         
     }
@@ -214,9 +219,9 @@ extension UIViewController {
     }
 }
 
-// Adapted from https://stackoverflow.com/a/46869540
-extension CLLocation {
-    func geocode(completion: @escaping (_ placemark: [CLPlacemark]?, _ error: Error?) -> Void)  {
-        CLGeocoder().reverseGeocodeLocation(self, completionHandler: completion)
-    }
+public func Log<T>(_ object: T?, filename: String = #file, line: Int = #line, funcname: String = #function) {
+    #if DEBUG
+        guard let object = object else { return }
+        print("***** \(Date()) \(filename.components(separatedBy: "/").last ?? "") (line: \(line)) :: \(funcname) :: \(object)")
+    #endif
 }

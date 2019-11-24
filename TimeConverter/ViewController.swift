@@ -15,9 +15,10 @@ import FloatingPanel // https://github.com/SCENEE/FloatingPanel
 import MapKit
 import CoreLocation
 import Foundation
+import SwiftLocation
 
 // MARK: ViewController
-class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTapDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTapDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, RemoveAnnotationDelegate, SetMapCentreDelegate {
 
     // Outlets
     @IBOutlet weak var sideButtons: UIVisualEffectView!
@@ -93,7 +94,10 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
             // Fallback on earlier versions
             contentVC = (storyboard?.instantiateViewController(withIdentifier: "TimesPanel") as? TimesPanelViewController)!
         }
+        contentVC?.removeAnnotationDelegate = self
+        contentVC?.setMapCentreDelegate = self
         fpc.set(contentViewController: contentVC)
+        fpc.track(scrollView: contentVC?.tableView)
         
         // Add and show the views managed by the `FloatingPanelController` object to self.view.
         fpc.addPanel(toParent: self)
@@ -121,28 +125,45 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         
     }
     
+    func setMapCentre(coordinate: CLLocationCoordinate2D) {
+        // Later you could make this more advanced with stuff from here: https://stackoverflow.com/questions/15421106/centering-mkmapview-on-spot-n-pixels-below-pin
+        fpc.move(to: .tip, animated: true)
+        mapView.setCenter(coordinate, animated: true)
+    }
+    
     @objc func mapViewLongPress(recogniser: UIGestureRecognizer) {
         if recogniser.state == UIGestureRecognizer.State.began {
             let touchPoint = recogniser.location(in: mapView)
             let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             
-            print("detected")
-            
             let newId = addAnnotation(item: MKMapItem(placemark: MKPlacemark(coordinate: newCoordinates)))
             if newId != nil {
-                CLLocation(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude).geocode(completion: { (placemark, error) in
-                    if let error = error as? CLError {
-                        print("CLError:", error)
-                        return
-                    } else if let placemark = placemark?.first {
-                        print(placemark)
-                        let mapItem = MKMapItem(placemark: MKPlacemark(placemark: placemark))
-                        print("updating")
-                        LocationStore().update(id: newId!, newLocation: mapItem, newId: nil)
-                        self.contentVC?.tableView.reloadData()
-                        
-                    }
-                })
+//                CLLocation(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude).geocode(completion: { (placemark, error) in
+//                    if let error = error as? CLError {
+//                        Log("CLError:", error)
+//                        return
+//                    } else if let placemark = placemark?.first {
+//                        Log(placemark)
+//                        let mapItem = MKMapItem(placemark: MKPlacemark(placemark: placemark))
+//                        Log("updating")
+//                        LocationStore().update(id: newId!, newLocation: mapItem, newId: nil)
+//                        self.contentVC?.tableView.reloadData()
+//
+//                    }
+//                })
+                LocationManager.shared.locateFromCoordinates(newCoordinates, service: .apple(GeocoderRequest.Options())) { result in
+                  switch result {
+                    case .failure(let error):
+                      Log("Geoocoder Error:", error)
+                    case .success(let places):
+                        if let placemark = places.first?.placemark {
+                            let mapItem = MKMapItem(placemark: MKPlacemark(placemark: placemark))
+                            LocationStore().update(id: newId!, newLocation: mapItem, newId: nil)
+                            self.contentVC?.tableView.reloadData()
+                        }
+                  }
+                }
+
             }
             
         }
@@ -203,7 +224,7 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     // Floating Panel Delegate Methods
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         if vc.contentViewController?.className == "TimesPanelViewController" {
-            return TimesPanelLayout()
+            return (newCollection.verticalSizeClass == .compact) ? TimesPanelLandscapeLayout() : TimesPanelLayout()
         } else if vc.contentViewController?.className == "SearchPanelViewController" {
             return SearchPanelLayout()
         } else {
@@ -247,9 +268,9 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
             
             for locationStruct in result {
                 if (item.placemark.location?.distance(from: locationStruct.location.placemark.location!))! < Double(distanceApartOtherAnnotationsMustBe + 1) {
-                    print("too close")
+                    Log("too close")
                     
-                    self.mapView.setCenter(locationStruct.location.placemark.coordinate, animated: true)
+                    self.setMapCentre(coordinate: locationStruct.location.placemark.coordinate)
                     self.mapView.removeAnnotation(newAnnotation)
                     locationStore.delete(id: newId!)
                     
@@ -269,12 +290,9 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     func removeAnnotation(id: Int) {
         let locationStore = LocationStore()
         locationStore.delete(id: id)
-        for item in locationStore.read() {
-            if item.id > id {
-                locationStore.update(id: item.id, newLocation: nil, newId: item.id - 1)
-            }
-        }
+        Log("success")
         loadAnnotations()
+        contentVC?.tableView.reloadData()
     }
     
     // Map View Delegate Methods
@@ -311,7 +329,10 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("the annotation was selected")
+        Log("the annotation was selected")
+        fpc.move(to: .full, animated: true)
+        let annotation = view.annotation as! CustomAnnotationClass
+        contentVC?.tableView.scrollToRow(at: IndexPath(row: annotation.id - 1, section: 0), at: .top, animated: true)
     }
     
     // CLLocationManagerDelegate Methods
@@ -322,18 +343,18 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // this function is delayed for some reason
-        print("location requested")
+        Log("location requested")
         if let location = locations.first {
-            print("location requested 2")
+            Log("location requested 2")
             
             let span = MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            print("locaiton requested 3")
+            Log("locaiton requested 3")
             mapView.setRegion(region, animated: true)
         }
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error:: \(error)")
+        Log("error:: \(error)")
     }
     
     // UIGestureRecognizerDelegate methods
@@ -355,8 +376,17 @@ class CustomAnnotationClass: NSObject, MKAnnotation {
     }
 }
 
+// MARK: RemoveAnnotationDelegate
+protocol RemoveAnnotationDelegate {
+    func removeAnnotation(id: Int)
+}
+
+protocol SetMapCentreDelegate {
+    func setMapCentre(coordinate: CLLocationCoordinate2D)
+}
+
 // MARK: TimesPanelViewController
-class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UniversalTimeDelegate {
+class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Outlets
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
@@ -366,14 +396,25 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
     // For iOS 10 only
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
     
-    var universalTime: Date?
+    var removeAnnotationDelegate: RemoveAnnotationDelegate?
+    var setMapCentreDelegate: SetMapCentreDelegate?
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-        universalTime = Date()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapCell(_:)))
+        tableView.addGestureRecognizer(tapGesture)
+        //tapGesture.delegate = self
+        
+        if defaults.object(forKey: "universalTime") == nil {
+            defaults.set(Date(), forKey: "universalTime")
+        }
+        
+        Log(defaults.value(forKey: "universalTime")!)
         
         // Programatically setup stuff in the top title section.
         // Subtitle
@@ -388,7 +429,7 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
         subtitle.attributedText = NSMutableAttributedString(string: "FROM YOUR SELECTIONS", attributes: [NSAttributedString.Key.kern: -0.08, NSAttributedString.Key.paragraphStyle: subtitleParagraphStyle])
         topTitleView.addSubview(subtitle)
         subtitle.translatesAutoresizingMaskIntoConstraints = false
-        subtitle.widthAnchor.constraint(equalToConstant: 164).isActive = true
+        subtitle.widthAnchor.constraint(equalToConstant: 170).isActive = true
         subtitle.heightAnchor.constraint(equalToConstant: 18).isActive = true
         subtitle.leadingAnchor.constraint(equalTo: topTitleView.leadingAnchor, constant: 16).isActive = true
         subtitle.topAnchor.constraint(equalTo: topTitleView.topAnchor, constant: 25).isActive = true
@@ -437,15 +478,45 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: todo below
     // TODO: Do stuff here
     @IBAction func trashButtonAction(_ sender: UIButton) {
-        let cell = sender.superview as! CustomTimesTableViewCell
-        let indexPath = tableView.indexPath(for: cell)
         
+        removeAnnotationDelegate?.removeAnnotation(id: sender.tag)
         
     }
     @IBAction func editButtonAction(_ sender: UIButton) {
-        let cell = sender.superview as! CustomTimesTableViewCell
-        let indexPath = tableView.indexPath(for: cell)
         
+        Log("editing not implemented yet")
+        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 25, width: self.view.frame.size.width, height: 260))
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.timeZone = LocationStore().read(id: sender.tag)[0].location.timeZone
+
+        //add to actionsheetview
+        let alertController = UIAlertController(title: "Change the time", message:" " , preferredStyle: UIAlertController.Style.actionSheet)
+
+        alertController.view.addSubview(datePicker)//add subview
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+
+            Log("cancel action")
+
+        }
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { (action) in
+            
+            Log("confrim action", datePicker.date)
+            self.defaults.set(datePicker.date, forKey: "universalTime")
+            self.tableView.reloadData()
+            
+        })
+
+        //add buttons to action sheet
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+
+        let height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 400)
+        alertController.view.addConstraint(height)
+
+        self.present(alertController, animated: true, completion: nil)
         
     }
     
@@ -458,8 +529,9 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTimesTableViewCell") as! CustomTimesTableViewCell
-        cell.delegate = self
-        let item = LocationStore().read()[indexPath.row]
+        Log(indexPath.row)
+        let item = LocationStore().read(id: indexPath.row + 1)[0]
+        let universalTime = defaults.value(forKey: "universalTime")! as! Date
         
         if #available(iOS 13, *) {
             cell.editImageButton.imageView?.image = UIImage(systemName: "square.and.pencil")
@@ -476,30 +548,39 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
         formatter.timeZone = item.location.timeZone
         
         formatter.dateFormat = "h:mm"
-        cell.timeLabel.titleLabel?.text = formatter.string(from: universalTime!)
+        cell.timeLabel.text = formatter.string(from: universalTime)
         
         formatter.dateFormat = "a"
-        cell.pmLabel.text = formatter.string(from: universalTime!).uppercased()
+        cell.pmLabel.text = formatter.string(from: universalTime).uppercased()
         
         formatter.dateFormat = "EEEE, d MMM"
-        cell.dateLabel.text = formatter.string(from: universalTime!)
+        cell.dateLabel.text = formatter.string(from: universalTime)
+        
+        cell.trashImageButton.tag = item.id
+        cell.editImageButton.tag = item.id
         
         return cell
     }
-    // when table view cell is selectedy
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        
-        
-    }
     
-    // Universal Time Delegate Methods
-    func set(time: Date) {
-        universalTime = time
+    @objc func tapCell(_ recognizer: UITapGestureRecognizer)  {
+        if recognizer.state == UIGestureRecognizer.State.ended {
+            let tapLocation = recognizer.location(in: self.tableView)
+            if let indexPath = self.tableView.indexPathForRow(at: tapLocation) {
+                Log("selected", indexPath.row)
+                
+                setMapCentreDelegate?.setMapCentre(coordinate: LocationStore().read(id: indexPath.row + 1)[0].location.placemark.coordinate)
+            }
+        }
     }
-    func get() -> Date {
-        return universalTime!
-    }
+    // when table view cell is selected
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: false)
+//
+//        Log("selected", indexPath.row)
+//
+//        setMapCentreDelegate?.setMapCentre(coordinate: LocationStore().read(id: indexPath.row)[0].location.placemark.coordinate)
+//
+//    }
     
 }
 
@@ -511,22 +592,15 @@ class CustomTimesTableViewCell: UITableViewCell {
     @IBOutlet weak var regionLabel: UILabel!
     @IBOutlet weak var trashImageButton: UIButton!
     @IBOutlet weak var editImageButton: UIButton!
-    @IBOutlet weak var timeLabel: UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var pmLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
-    var delegate: UniversalTimeDelegate?
     
     override func layoutSubviews() {
         super.layoutSubviews()
     }
     
     
-}
-
-protocol UniversalTimeDelegate {
-    func set(time: Date)
-    func get() -> Date
 }
 
 // MARK: TimesPanelLayout
@@ -559,6 +633,36 @@ class TimesPanelLayout: FloatingPanelLayout {
         }
     }
     
+}
+
+class TimesPanelLandscapeLayout: FloatingPanelLayout {
+    public var initialPosition: FloatingPanelPosition {
+        return .full
+    }
+    public var supportedPositions: Set<FloatingPanelPosition> {
+        return [.full, .tip]
+    }
+
+    public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
+        switch position {
+            case .full: return 16.0
+            case .tip: return 69.0
+            default: return nil
+        }
+    }
+
+    public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
+        let leftAnchorConstraint: NSLayoutConstraint
+        if #available(iOS 11.0, *) {
+            leftAnchorConstraint = surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8.0)
+        } else {
+            // Fallback on earlier versions
+            leftAnchorConstraint = surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0)
+        }
+        return [
+            leftAnchorConstraint, surfaceView.widthAnchor.constraint(equalToConstant: 414),
+        ]
+    }
 }
 
 // MARK: SearchViewController
@@ -609,7 +713,7 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
     
     // Actions
     @IBAction func closeButtonAction(recogniser: UITapGestureRecognizer) {
-        print("hi")
+        Log("hi")
         UIView.animate(withDuration: 0.1, animations: {
             () in
             self.closeButton.alpha = 0.2
@@ -680,20 +784,10 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Cell Tapped
-        print("cell tapped")
-        
-        UIView.animate(withDuration: 0.1, animations: { () in
-            tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3)
-        }, completion: { (finished) in
-            tableView.cellForRow(at: indexPath)?.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.1)
-        })
-        
-        tableView.deselectRow(at: indexPath, animated: false)
     
         if self.searchResults.count != 0 {
             if let cellTapDelegate = self.cellTapDelegate {
-                print("cell tapped 2")
+                Log("cell tapped 2")
                 let searchRequest = MKLocalSearch.Request(completion: searchResults[indexPath.row])
                 let search = MKLocalSearch(request: searchRequest)
                 search.start { (response, error) in
@@ -701,7 +795,7 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
                         cellTapDelegate.cellTapped(matchingItem: (response?.mapItems[0])!)
                         self.close()
                     } else {
-                        print(error ?? "no error?")
+                        Log(error ?? "no error?")
                     }
                 }
             }
@@ -716,11 +810,11 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
     
     // Close
     private func close() {
-        print("test")
+        Log("test")
         // Hide it
         self.dismiss(animated: true, completion: {
             () in
-            print("dismissed")
+            Log("dismissed")
         })
     }
     
@@ -738,7 +832,7 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print("completer error:: \(error)")
+        Log("completer error:: \(error)")
     }
     
 }
@@ -773,7 +867,7 @@ class CustomSearchTableViewCell: UITableViewCell {
 //
 //        if selected {
 //            contentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3)
-//            print("cool")
+//            Log("cool")
 //        } else {
 //            contentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.1)
 //        }
