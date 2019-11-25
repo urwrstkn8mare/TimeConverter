@@ -78,8 +78,7 @@ class LocationStore {
                 }
                 return returnArray
             } else {
-                Log("result:")
-                Log(result)
+                Log("result: \(result)")
                 let data = result[0] as! NSManagedObject
                 
                 guard let decodedMapItem = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data.value(forKey: "mapItem") as! Data) as? MKMapItem else { return [] }
@@ -222,6 +221,6 @@ extension UIViewController {
 public func Log<T>(_ object: T?, filename: String = #file, line: Int = #line, funcname: String = #function) {
     #if DEBUG
         guard let object = object else { return }
-        print("***** \(Date()) \(filename.components(separatedBy: "/").last ?? "") (line: \(line)) :: \(funcname) :: \(object)")
+        print("***** \(Date()) | \(filename.components(separatedBy: "/").last ?? "") (line: \(line)) :: \(funcname) :: \(object)")
     #endif
 }

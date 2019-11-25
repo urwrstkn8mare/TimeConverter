@@ -67,7 +67,14 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         } else {
             sideButtons.layer.borderColor = UIColor(red: 198.0/255.0, green: 198.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
         }
-        sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.height / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
+        if UIDevice.current.orientation.isLandscape {
+            Log("Landscape")
+            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.width / 2) - (sideButtons.frame.height / 2)), width: sideButtons.frame.width, height: sideButtons.frame.height)
+            
+        } else {
+            Log("Portrait")
+            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.height / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
+        }
         
         // Initialize a `FloatingPanelController` object.
         fpc = FloatingPanelController()
@@ -154,7 +161,7 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
                 LocationManager.shared.locateFromCoordinates(newCoordinates, service: .apple(GeocoderRequest.Options())) { result in
                   switch result {
                     case .failure(let error):
-                      Log("Geoocoder Error:", error)
+                      Log("Geoocoder Error: \(error)")
                     case .success(let places):
                         if let placemark = places.first?.placemark {
                             let mapItem = MKMapItem(placemark: MKPlacemark(placemark: placemark))
@@ -183,11 +190,15 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         // Show the user that the button has been tapped
         UIView.animate(withDuration: 0.1, animations: {
             () in
-            self.searchIconView.backgroundColor = UIColor.lightGray
+            if #available(iOS 13, *) {
+                self.searchIconView.backgroundColor = UIColor.opaqueSeparator
+            } else {
+                self.searchIconView.backgroundColor = UIColor(red: 198.0/255.0, green: 198.0/255.0, blue: 200.0/255.0, alpha: 1.0)
+            }
             self.searchIconView.alpha = 0.8
         }, completion: {
             (finished: Bool) in
-            self.searchIconView.backgroundColor = UIColor.clear
+            self.searchIconView.backgroundColor = .clear
             self.searchIconView.alpha = 1
         })
         
@@ -196,15 +207,19 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     }
     @IBAction func handleLocationTap(recogniser:UITapGestureRecognizer) {
         // Show the user that the button has been tapped
-        UIView.animate(withDuration: 0.1, animations: {
-            () in
-            self.locationIconView.backgroundColor = UIColor.lightGray
-            self.locationIconView.alpha = 0.8
-        }, completion: {
-            (finished: Bool) in
-            self.locationIconView.backgroundColor = UIColor.clear
-            self.locationIconView.alpha = 1
-        })
+         UIView.animate(withDuration: 0.1, animations: {
+                   () in
+                   if #available(iOS 13, *) {
+                       self.locationIconView.backgroundColor = UIColor.opaqueSeparator
+                   } else {
+                       self.locationIconView.backgroundColor = UIColor(red: 198.0/255.0, green: 198.0/255.0, blue: 200.0/255.0, alpha: 1.0)
+                   }
+                   self.locationIconView.alpha = 0.8
+               }, completion: {
+                   (finished: Bool) in
+                   self.searchIconView.backgroundColor = .clear
+                   self.searchIconView.alpha = 1
+               })
         
         if !locationButtonPressedBefore {
             // Setup location manager
@@ -361,6 +376,17 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            Log("Landscape")
+            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.width / 2) - (sideButtons.frame.height / 2)), width: sideButtons.frame.width, height: sideButtons.frame.height)
+            
+        } else {
+            Log("Portrait")
+            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.width / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
+        }
+    }
 
 }
 
@@ -475,8 +501,6 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    // MARK: todo below
-    // TODO: Do stuff here
     @IBAction func trashButtonAction(_ sender: UIButton) {
         
         removeAnnotationDelegate?.removeAnnotation(id: sender.tag)
@@ -502,7 +526,7 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { (action) in
             
-            Log("confrim action", datePicker.date)
+            Log("confrim action \(datePicker.date)")
             self.defaults.set(datePicker.date, forKey: "universalTime")
             self.tableView.reloadData()
             
@@ -566,7 +590,7 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
         if recognizer.state == UIGestureRecognizer.State.ended {
             let tapLocation = recognizer.location(in: self.tableView)
             if let indexPath = self.tableView.indexPathForRow(at: tapLocation) {
-                Log("selected", indexPath.row)
+                Log("selected \(indexPath.row)")
                 
                 setMapCentreDelegate?.setMapCentre(coordinate: LocationStore().read(id: indexPath.row + 1)[0].location.placemark.coordinate)
             }
@@ -795,7 +819,7 @@ class SearchPanelViewController: UIViewController, UITableViewDataSource, UISear
                         cellTapDelegate.cellTapped(matchingItem: (response?.mapItems[0])!)
                         self.close()
                     } else {
-                        Log(error ?? "no error?")
+                        Log(error!)
                     }
                 }
             }
