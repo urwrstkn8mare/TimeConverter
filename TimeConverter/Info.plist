@@ -62,6 +62,8 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to show your location lol.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>WE NEED YOUR LOCATION TO SHOW YOUR LOCATION lol.</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>

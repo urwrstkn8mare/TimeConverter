@@ -8,5 +8,6 @@ target 'TimeConverter' do
   # Pods for TimeConverter
   pod 'FloatingPanel'
   pod 'SwiftLocation', '~> 4.0'
+  pod 'SwiftyPickerPopover', :git => 'https://github.com/urwrstkn8mare/SwiftyPickerPopover.git'
 
 end

@@ -7,143 +7,201 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00FFD8ADC30BA3D06088F9899F662424 /* AutoComplete+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A9623229486AD6C8BC27431AD0311 /* AutoComplete+Support.swift */; };
-		087C3587086EE596ACCAB8898932ECD8 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A722DA7786F0E80ACE4497448392E0 /* Observers.swift */; };
-		0CA9942B45A746675912FD54A495C886 /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA4225323599F603EEFA6C7903685B /* Support.swift */; };
-		0D5B34134DBE90BE7EF4952EC05631C1 /* PlaceMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0DF7F852C9D1894C815D0A40639B20 /* PlaceMatch.swift */; };
-		0F1DC05188F301E721DE2D5BFE4B43ED /* IPPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD4235C5DF5D0F23B6A380051ACCF7B /* IPPlace.swift */; };
-		1E3C3EE31EFCE967BCC6ED003AF1D0AF /* GoogleAutoCompleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466832C4567BC3C7CF769D2F81532D39 /* GoogleAutoCompleteRequest.swift */; };
-		1F98F8CA3A615DCEB242684160B7A00A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4293FDF30D6B2989004E31DD1DE10FE /* LocationManager.swift */; };
-		21D29AD3D75D1AF3036B783E2D168D6D /* SwiftLocation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3400A75B1D7EC455D637474D896E4DB6 /* SwiftLocation-dummy.m */; };
-		2433AE4A319102C4C6D8494A79881EC8 /* LocationByIPRequest+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D3CC4B1F2CE3B74B83E3C07C61B537 /* LocationByIPRequest+Support.swift */; };
-		2C000FFD2D40FD9F728E1F83134FDB1B /* FloatingPanel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A56B0D1ECC8D68F712B23B80C4B80ACE /* FloatingPanel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2D0F1CC893E47E7561029ABDC93A5A00 /* AutoCompleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204CB5147B96194064023E1B82AF8B54 /* AutoCompleteRequest.swift */; };
+		00FFD8ADC30BA3D06088F9899F662424 /* AutoComplete+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DAF3C3E66B75639B3DF5BB4DAD28E4 /* AutoComplete+Support.swift */; };
+		071D52F82B602FB85E35CA8583EEF456 /* FloatingPanelSurfaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347B0AB05765BB0EEA1E614B369C050 /* FloatingPanelSurfaceView.swift */; };
+		087C3587086EE596ACCAB8898932ECD8 /* Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F08CB998FFC6BD64EAF571CA16006CF /* Observers.swift */; };
+		0CA9942B45A746675912FD54A495C886 /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C0A5DE55151E45C72A4CE06A65B9E /* Support.swift */; };
+		0D5B34134DBE90BE7EF4952EC05631C1 /* PlaceMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AEDBB488097B485A39E449AE6C271 /* PlaceMatch.swift */; };
+		0F1DC05188F301E721DE2D5BFE4B43ED /* IPPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1723617B8B4D452510A52A97FCB09 /* IPPlace.swift */; };
+		11C570009724A480F57336A8170E4DF6 /* CountdownPickerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31EA2B6FEC14607A96D26FCEDF7031 /* CountdownPickerPopover.swift */; };
+		1E3C3EE31EFCE967BCC6ED003AF1D0AF /* GoogleAutoCompleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503A0EE122FD63A79217889326BE5CD6 /* GoogleAutoCompleteRequest.swift */; };
+		1F98F8CA3A615DCEB242684160B7A00A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC91FB29532F37BF47BFB4144499BE0 /* LocationManager.swift */; };
+		21D29AD3D75D1AF3036B783E2D168D6D /* SwiftLocation-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9992C4C2C6D130AB50BD173233C1B690 /* SwiftLocation-dummy.m */; };
+		2433AE4A319102C4C6D8494A79881EC8 /* LocationByIPRequest+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2B9B1961F91590B4BEC6D7A4F816C /* LocationByIPRequest+Support.swift */; };
+		2C000FFD2D40FD9F728E1F83134FDB1B /* FloatingPanel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3899B72CE99E5F8A76981AF75B3F5A66 /* FloatingPanel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2D0F1CC893E47E7561029ABDC93A5A00 /* AutoCompleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B13175EE73BB7C535FC97069E61A0E9 /* AutoCompleteRequest.swift */; };
+		2FFE731595506A08CFDECE74A7F3CC27 /* SwiftyPickerPopover-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6655F11D8E9A824A3CCD500A83AD6 /* SwiftyPickerPopover-dummy.m */; };
 		32EBE7D838A5BCE80A8AFB5B18E2DD76 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34D833522A6B65FD978F16AAFA4C2A8 /* CoreLocation.framework */; };
-		36394F16966D99620981A230DB22F10E /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD14163BF9610471CE9B25051D345FDA /* UIExtensions.swift */; };
-		3B01FA56FEFD2B3370085E84065BEB7D /* FloatingPanelSurfaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC43DE8A9A423E06116C7A8058F22EC /* FloatingPanelSurfaceView.swift */; };
-		3FC67FDA1CECAF0F38B04F4DD38872B7 /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F082812C7692A7AEDAA1009A6BB7AB9 /* LocationRequest.swift */; };
-		402EF39055C35C318A40499E3DAC8915 /* FloatingPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCC4E3F806B37ED6CA65B205B4116C8 /* FloatingPanelController.swift */; };
-		45717F0132A07B5B1B0B99CFCA78169A /* AppleGeocoderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E338A3F1539927E0E2521CC8C66CC60C /* AppleGeocoderRequest.swift */; };
-		4EA88A9DA32F42DBEADEF7782206D219 /* BeaconsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8C1D59AFFEE4F76C94F3154F79C8EB /* BeaconsRequest.swift */; };
-		526142AF564F67224962CE05F147E04F /* IPAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CC2F1533D0BB2F25818ECE6BE05659 /* IPAPIRequest.swift */; };
-		553D36441A4B13B909B4283CEADE9F3F /* SwiftLocation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C1485025CF8CFD35E14455B48E0808D /* SwiftLocation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5783B7F0079AD2CCC55915D143F39283 /* IPAPICoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4348C038245010E4C81A5B9147D66B76 /* IPAPICoRequest.swift */; };
+		3D408305B29250792B2CDDC90990ECAC /* FloatingPanelCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6D7CAD44FA0E4C451A53EF5D481B68 /* FloatingPanelCore.swift */; };
+		3FC67FDA1CECAF0F38B04F4DD38872B7 /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6281D15ADE8246A37C3BE0B050121702 /* LocationRequest.swift */; };
+		45717F0132A07B5B1B0B99CFCA78169A /* AppleGeocoderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CFCE1AC3F047E1840482DCE8EF01ED /* AppleGeocoderRequest.swift */; };
+		4D5068028AE83DAF1A224C65AA7A5FA5 /* DatePickerPopover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AA057C601BA6B611C3A7A29CE7CA124 /* DatePickerPopover.storyboard */; };
+		4DED71DD813E3196FC227BAB38256C07 /* DatePickerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73216AAEE1F409FA556A02BD86257D24 /* DatePickerPopover.swift */; };
+		4EA88A9DA32F42DBEADEF7782206D219 /* BeaconsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD0D4AF04C5351813A333EA7560EB40 /* BeaconsRequest.swift */; };
+		526142AF564F67224962CE05F147E04F /* IPAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D49F05C4683052573490B5003730254 /* IPAPIRequest.swift */; };
+		553D36441A4B13B909B4283CEADE9F3F /* SwiftLocation-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B0738894F5FB1305E2A1737616069D59 /* SwiftLocation-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5783B7F0079AD2CCC55915D143F39283 /* IPAPICoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F4044E67B6049C4B4E9399434002DF /* IPAPICoRequest.swift */; };
 		5B3B4A6A696A32172C74E359227D938C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23486453A43DD9F3F19CE946918C2E3 /* Foundation.framework */; };
-		5BFFB56A0C2237866F39CED0F8AAD977 /* JSONOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9CE560A283639DD4DA79E96B49893A /* JSONOperation.swift */; };
-		64319DAACAB1C3D2BB29D834D8B352DC /* CLLocationManager+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D93BF5D56716FA17F97A2832DC5074F /* CLLocationManager+Extras.swift */; };
-		672C1161D858966C5BBC22F5F6D360D7 /* FloatingPanel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE85AE00E2F5FBFB1C37B4C1D7CED34 /* FloatingPanel-dummy.m */; };
-		704E4FC2D7894547751E0AC722952C85 /* OpenStreetGeocoderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331941498AF3BE3540974049C1FC40FE /* OpenStreetGeocoderRequest.swift */; };
-		7292F49200E9A6ECCB478FF68D4F3C4D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D7C8373DC13E59667B54CCF09BDDD1 /* Place.swift */; };
-		802BAED0F84E8DA4B69CF3B46186189E /* GeocoderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AEFDFA39B43E4D62490783A6567C6A /* GeocoderRequest.swift */; };
-		843366134EB58985B503D170DACC2A73 /* FloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3DB364D9315F0373DE8D5DDD999994 /* FloatingPanel.swift */; };
-		8A42899DC597962DCCC65F0F874BB9D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C3593C999B4C152BAAF61472F86575 /* Logger.swift */; };
-		8E15F2B7310921A52BDC452FD8D4B15F /* Timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46EF4862112A9873A195D610056580 /* Timeout.swift */; };
-		975E7BC2F369B22E173641EEE5F073F1 /* FloatingPanelBackdropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AD9667D9895A0812CDE44DBC260485 /* FloatingPanelBackdropView.swift */; };
-		A370787826261C7EBA7E1529D1729E2D /* FloatingPanelTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A8287BF4CB773908AD94D661CBD236 /* FloatingPanelTransitioning.swift */; };
-		A8ACA800D0915472599339CDEBE07A6A /* FloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03260211D7F302CA3CE9C3205E06375A /* FloatingPanelLayout.swift */; };
+		5BFFB56A0C2237866F39CED0F8AAD977 /* JSONOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E328B7E040367CF09AB1622D73C34C3 /* JSONOperation.swift */; };
+		5D6F117A4D4953B3A1B37F5CF8D9FCB4 /* Pods-TimeConverter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5145E814CB2427D139A547E2A85F1824 /* Pods-TimeConverter-dummy.m */; };
+		5E4F2639A7D9F5B7BD420B08E566F8F6 /* SwiftyPickerPopover-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D88B3626C968A490351AD1E3FFEBB465 /* SwiftyPickerPopover-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		64319DAACAB1C3D2BB29D834D8B352DC /* CLLocationManager+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D736677A8116FD3AD39CEB47A31260B /* CLLocationManager+Extras.swift */; };
+		64E0041279E7EAE2C18661D5E6D6DBF9 /* Pods-TimeConverter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 24A2D1E2D76BC1074C7FF2B03A58A86E /* Pods-TimeConverter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		667E1E84C07F5B93E5DD28EDB887DDD3 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A271C6268F9D1D78F1EC77331DD34A3 /* String+Extension.swift */; };
+		704E4FC2D7894547751E0AC722952C85 /* OpenStreetGeocoderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF446FD7AC8F7E5A032E839C912C6A9 /* OpenStreetGeocoderRequest.swift */; };
+		7292F49200E9A6ECCB478FF68D4F3C4D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC97CFF8935114BDB11564C80C7580FE /* Place.swift */; };
+		792716759991D6268FA4CDBDAE44925E /* StringPickerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4563634E7F3C234FAEADE888614F38E /* StringPickerPopover.swift */; };
+		7F33D301C610F13690785094BFC27969 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23486453A43DD9F3F19CE946918C2E3 /* Foundation.framework */; };
+		7FA96F5D3B8F4CE9C95C35D1CD4D6A91 /* FloatingPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626F940DAF6BBB99C57937778363B469 /* FloatingPanelController.swift */; };
+		802BAED0F84E8DA4B69CF3B46186189E /* GeocoderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE8A6CC29B7C7FB7008FCB584966764 /* GeocoderRequest.swift */; };
+		850183247B3E3879649527CDBA09D777 /* AbstractPickerPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ED113C39C2EFCE4B1114F36859182E /* AbstractPickerPopoverViewController.swift */; };
+		8541579DBFD3FE12AF37A0EF66370A39 /* DispatchQueue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60514556A3C5FA218E051810B7BE144 /* DispatchQueue+Extension.swift */; };
+		8CD12EE2F35F4DC4DFCE91010CFF2071 /* StringPickerPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8248E814687BFE516CDE55630C3F650 /* StringPickerPopoverViewController.swift */; };
+		8E15F2B7310921A52BDC452FD8D4B15F /* Timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33328DDCCF655D2C3C26263EEFAE3DB /* Timeout.swift */; };
+		970E5351EB7A3C92CD346BCDCC6652A3 /* FloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61FBF6769D6771C42D97B6EAFBB7F94 /* FloatingPanelLayout.swift */; };
+		A04D8B3B3650926C5F7D42B22A67DE7D /* FloatingPanelBackdropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF23BF9A679505C4552FB82D780ACAF5 /* FloatingPanelBackdropView.swift */; };
+		A3673FD39025DE753731C568DB5E23B9 /* FloatingPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940937FD799EB295A0EBF77B6B14C9AE /* FloatingPanelView.swift */; };
+		A49977EF1D94933CE588A5F237D5DD7C /* GrabberHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6207AC9B83C545356092B846725BD9EE /* GrabberHandleView.swift */; };
+		A696FE118006841FB09A5E76C11B8978 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFDFE9CB1F92A299883C6511EBD99D /* Logger.swift */; };
+		A6ACF15F7D8D91944319BAC26794B49B /* CollectionType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74313CFF36720796060C216CBFD703A4 /* CollectionType+Extension.swift */; };
+		A6DB10D310FD18E8B6C25EA33D81DF4E /* FloatingPanel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E065FEB3516BFC60B1BA70061C9C2553 /* FloatingPanel-dummy.m */; };
 		AAE1B9134D32C7B612C5CEAE638F0D9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23486453A43DD9F3F19CE946918C2E3 /* Foundation.framework */; };
-		B61E34BC509ECB7D321E49E37F3F2BC2 /* HeadingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874FC5DD0F4AEE41AD134CE244448A8 /* HeadingRequest.swift */; };
-		BBC347D6BBF39403E23E786D30940D78 /* GoogleGeocoderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F9907B52AE5533E72659F04AC27A9 /* GoogleGeocoderRequest.swift */; };
+		B61E34BC509ECB7D321E49E37F3F2BC2 /* HeadingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFA6858FBEB75041B41472AF6A0BC5B /* HeadingRequest.swift */; };
+		BBC347D6BBF39403E23E786D30940D78 /* GoogleGeocoderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBE7828761ACAB4F16DEFAA8737CBD9 /* GoogleGeocoderRequest.swift */; };
 		C17DD90FDB535CC886156FEA4A17B02C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE82A277E681AC6D1CE89296ABEF609C /* UIKit.framework */; };
-		C25D8296151FFC4433A4104403B67CCA /* AppleAutoCompleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63470CCBC6A76000355D0BBE9CB8D48 /* AppleAutoCompleteRequest.swift */; };
+		C25D8296151FFC4433A4104403B67CCA /* AppleAutoCompleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E685C2A4DA76979DE148DFC2E716BF46 /* AppleAutoCompleteRequest.swift */; };
 		C33761AB072D15173945DF3FDFF05EE9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3088391FC8B52B71E477762DEF28B2D /* MapKit.framework */; };
-		C3547F575C561CFA3EA2217A65FA6430 /* LocationByIPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4D863BA65A0AE7FD380FA6129E7820 /* LocationByIPRequest.swift */; };
-		C3D4D7A6B5B5B42BC09DFE7EC5E55731 /* FloatingPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956AC42AB1400388A89B9187440ADA53 /* FloatingPanelView.swift */; };
-		D046B7EDD314B6E8018BA95EF70DBCE0 /* Pods-TimeConverter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5145E814CB2427D139A547E2A85F1824 /* Pods-TimeConverter-dummy.m */; };
-		D2E8B327C0FC0EFEDC7DA214455AF25C /* ServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55353950463C00D4D9E5FF1A872A259 /* ServiceRequest.swift */; };
-		D396A592D8469DD4D248230E01223FD7 /* FloatingPanelBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899784AB62B2054748503014133FDDF0 /* FloatingPanelBehavior.swift */; };
-		D82ED0685DDA7CBDBBB649F9C7676FBA /* Geocoder+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE8580B46D656F36508397AD031AE2 /* Geocoder+Support.swift */; };
-		D9EF7D7219FA75EB42063AE684144092 /* LocationManager+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4AE4F45866769A90DB662CB6DCB9A /* LocationManager+Support.swift */; };
-		E0DCF2C275146D65271386B0370C749B /* Pods-TimeConverter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 24A2D1E2D76BC1074C7FF2B03A58A86E /* Pods-TimeConverter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F7376A4529D84064C33E52F7F316BBFF /* GrabberHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B31AC4EC3B8CAF9F55BE43FB78AA185 /* GrabberHandleView.swift */; };
-		FFB0DE13F1B7ECF316785D6A1BDAF74E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23486453A43DD9F3F19CE946918C2E3 /* Foundation.framework */; };
+		C3547F575C561CFA3EA2217A65FA6430 /* LocationByIPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C605A5F1F7888DB6C55CDD12CDDB9FB5 /* LocationByIPRequest.swift */; };
+		CABBF852F8E2788068F20AAA80082A09 /* ColumnStringPickerPopover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B35B52A83FA9EC584275BAE555243EA /* ColumnStringPickerPopover.storyboard */; };
+		CDA5A09E6A571F5EDEBE0DC667D888E9 /* AbstractPopover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D546A8638D874A1CD2B6BEC8533B9FE /* AbstractPopover.storyboard */; };
+		CE71478B1F2A472203FB8AC74E2C9808 /* ColumnStringPickerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE08483D4570E5CCA422BE624A769B83 /* ColumnStringPickerPopover.swift */; };
+		CF925E8C4C99A77E1C9FE0049826FCE4 /* FloatingPanelBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4CBD9B7069E6580494363AD5916FD4 /* FloatingPanelBehavior.swift */; };
+		D13AC4B3EDF1F6A5973A039FCE488B92 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AF6FB04A91D81C2C908A08B6E645C5 /* UIExtensions.swift */; };
+		D2E8B327C0FC0EFEDC7DA214455AF25C /* ServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B03FA5B3ED256EED490B1EE235B26E8 /* ServiceRequest.swift */; };
+		D4A0FD32AB4814B83A052FAEB2D77ADA /* CountdownPickerPopover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B2905B7363C22D41E340E9B386B9AA1 /* CountdownPickerPopover.storyboard */; };
+		D5C88E9BE7F0538D4BBC7EB2A11B3B8E /* StringPickerPopover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24B614D3C964E9A46562D9D36D31E31F /* StringPickerPopover.storyboard */; };
+		D82ED0685DDA7CBDBBB649F9C7676FBA /* Geocoder+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF8B8C3A38FF2A08ECE1BBA0509058B /* Geocoder+Support.swift */; };
+		D8D428E6CDBD0C3667B87FAC58B0FBCE /* ColumnStringPickerPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EAECBDC371FC0B495A259CB64FF786 /* ColumnStringPickerPopoverViewController.swift */; };
+		D9122BC7629C971295D5975C51685D28 /* AbstractPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E646F7081FD37490DF89BE3934095A8 /* AbstractPopover.swift */; };
+		D9EF7D7219FA75EB42063AE684144092 /* LocationManager+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB85A8F12AFA7C79B24164DF088065D /* LocationManager+Support.swift */; };
+		E4F7BD315E481CACAA91DE1F2F9EEBFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1825189360C20C973B25D4E780F5D1E /* Localizable.strings */; };
+		E62E543CA9182791942A0DE76D3E6C6C /* FloatingPanelTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBE47FE8C44651FDF048FD23ACFCE4 /* FloatingPanelTransitioning.swift */; };
+		EBC1EB33F5CD1F6871DA50279E4832FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23486453A43DD9F3F19CE946918C2E3 /* Foundation.framework */; };
+		ECBF17BD3B11E770E3EF4A674F18AF9F /* DatePickerPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4238F9629FE42C2F5651BD5A469D78FA /* DatePickerPopoverViewController.swift */; };
+		F26DA44907E548CC031E1A06398927C9 /* CountdownPickerPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0285D36CF1AB793DAAA47E0110643B /* CountdownPickerPopoverViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4BB637F9BDB0B0D8296C43F2D36AC1AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4874E7E655CEB4C01E4572AD903AEA21;
-			remoteInfo = FloatingPanel;
-		};
-		F5FF927B12A4767B0D417484DB756B2F /* PBXContainerItemProxy */ = {
+		138304C772A2A8FA697C68FD8E0F129D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A77DC3FBE3DFD1D1CA8D8812A6CF0776;
 			remoteInfo = SwiftLocation;
 		};
+		8E106205DAB195FAF010B21A7840D0C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C8EE6C163FA34ECFF46A347CCB5746E;
+			remoteInfo = SwiftyPickerPopover;
+		};
+		E5F2A493F84A8A96158E7D3DF4584589 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4874E7E655CEB4C01E4572AD903AEA21;
+			remoteInfo = FloatingPanel;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03260211D7F302CA3CE9C3205E06375A /* FloatingPanelLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelLayout.swift; path = Framework/Sources/FloatingPanelLayout.swift; sourceTree = "<group>"; };
-		0C3DB364D9315F0373DE8D5DDD999994 /* FloatingPanel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanel.swift; path = Framework/Sources/FloatingPanel.swift; sourceTree = "<group>"; };
-		111EC06F367D7DB1212641B6D9D8F8F8 /* SwiftLocation.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLocation.xcconfig; sourceTree = "<group>"; };
-		160C31F359A0EE885F373A98F195075A /* SwiftLocation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftLocation.modulemap; sourceTree = "<group>"; };
-		1D46EF4862112A9873A195D610056580 /* Timeout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeout.swift; path = Sources/SwiftLocation/Support/Timeout.swift; sourceTree = "<group>"; };
-		204CB5147B96194064023E1B82AF8B54 /* AutoCompleteRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoCompleteRequest.swift; path = "Sources/SwiftLocation/Auto Complete/AutoCompleteRequest.swift"; sourceTree = "<group>"; };
+		03FBE47FE8C44651FDF048FD23ACFCE4 /* FloatingPanelTransitioning.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelTransitioning.swift; path = Framework/Sources/FloatingPanelTransitioning.swift; sourceTree = "<group>"; };
+		083C0A5DE55151E45C72A4CE06A65B9E /* Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Support.swift; path = Sources/SwiftLocation/Support/Support.swift; sourceTree = "<group>"; };
+		0B13175EE73BB7C535FC97069E61A0E9 /* AutoCompleteRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoCompleteRequest.swift; path = "Sources/SwiftLocation/Auto Complete/AutoCompleteRequest.swift"; sourceTree = "<group>"; };
+		0BC4C1F017DAC3923833DCFAD9414FFF /* SwiftLocation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftLocation-Info.plist"; sourceTree = "<group>"; };
+		0D736677A8116FD3AD39CEB47A31260B /* CLLocationManager+Extras.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CLLocationManager+Extras.swift"; path = "Sources/SwiftLocation/Support/CLLocationManager+Extras.swift"; sourceTree = "<group>"; };
+		0EAFDFE9CB1F92A299883C6511EBD99D /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Framework/Sources/Logger.swift; sourceTree = "<group>"; };
+		0FB85A8F12AFA7C79B24164DF088065D /* LocationManager+Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LocationManager+Support.swift"; path = "Sources/SwiftLocation/LocationManager+Support.swift"; sourceTree = "<group>"; };
+		148DDBFB4FEEDF2006FDC1F179F129F5 /* SwiftyPickerPopover-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyPickerPopover-Info.plist"; sourceTree = "<group>"; };
+		1F08CB998FFC6BD64EAF571CA16006CF /* Observers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Observers.swift; path = "Sources/SwiftLocation/Data Models/Observers.swift"; sourceTree = "<group>"; };
 		24A2D1E2D76BC1074C7FF2B03A58A86E /* Pods-TimeConverter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TimeConverter-umbrella.h"; sourceTree = "<group>"; };
 		250F1D3CBAE70E1421BB105E3EF0EEEE /* Pods-TimeConverter-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TimeConverter-frameworks.sh"; sourceTree = "<group>"; };
-		2AE85AE00E2F5FBFB1C37B4C1D7CED34 /* FloatingPanel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FloatingPanel-dummy.m"; sourceTree = "<group>"; };
-		2D93BF5D56716FA17F97A2832DC5074F /* CLLocationManager+Extras.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CLLocationManager+Extras.swift"; path = "Sources/SwiftLocation/Support/CLLocationManager+Extras.swift"; sourceTree = "<group>"; };
-		331941498AF3BE3540974049C1FC40FE /* OpenStreetGeocoderRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OpenStreetGeocoderRequest.swift; path = Sources/SwiftLocation/Geocoding/Services/OpenStreetGeocoderRequest.swift; sourceTree = "<group>"; };
-		3400A75B1D7EC455D637474D896E4DB6 /* SwiftLocation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftLocation-dummy.m"; sourceTree = "<group>"; };
-		3C9CE560A283639DD4DA79E96B49893A /* JSONOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONOperation.swift; path = Sources/SwiftLocation/Support/JSONOperation.swift; sourceTree = "<group>"; };
-		4348C038245010E4C81A5B9147D66B76 /* IPAPICoRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IPAPICoRequest.swift; path = "Sources/SwiftLocation/Locating By IP/Services/IPAPICoRequest.swift"; sourceTree = "<group>"; };
-		466832C4567BC3C7CF769D2F81532D39 /* GoogleAutoCompleteRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GoogleAutoCompleteRequest.swift; path = "Sources/SwiftLocation/Auto Complete/Services/GoogleAutoCompleteRequest.swift"; sourceTree = "<group>"; };
-		4B31AC4EC3B8CAF9F55BE43FB78AA185 /* GrabberHandleView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GrabberHandleView.swift; path = Framework/Sources/GrabberHandleView.swift; sourceTree = "<group>"; };
-		4B4D863BA65A0AE7FD380FA6129E7820 /* LocationByIPRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationByIPRequest.swift; path = "Sources/SwiftLocation/Locating By IP/LocationByIPRequest.swift"; sourceTree = "<group>"; };
-		4C678B4A8CAADE71D75DA8311295097A /* SwiftLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftLocation.framework; path = SwiftLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CC43DE8A9A423E06116C7A8058F22EC /* FloatingPanelSurfaceView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelSurfaceView.swift; path = Framework/Sources/FloatingPanelSurfaceView.swift; sourceTree = "<group>"; };
+		2B03FA5B3ED256EED490B1EE235B26E8 /* ServiceRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceRequest.swift; path = Sources/SwiftLocation/ServiceRequest.swift; sourceTree = "<group>"; };
+		2E4CBD9B7069E6580494363AD5916FD4 /* FloatingPanelBehavior.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelBehavior.swift; path = Framework/Sources/FloatingPanelBehavior.swift; sourceTree = "<group>"; };
+		33EB79EA5B3BE2348B562517F0B387F2 /* SwiftLocation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftLocation-prefix.pch"; sourceTree = "<group>"; };
+		34CFCE1AC3F047E1840482DCE8EF01ED /* AppleGeocoderRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleGeocoderRequest.swift; path = Sources/SwiftLocation/Geocoding/Services/AppleGeocoderRequest.swift; sourceTree = "<group>"; };
+		35DAF3C3E66B75639B3DF5BB4DAD28E4 /* AutoComplete+Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "AutoComplete+Support.swift"; path = "Sources/SwiftLocation/Auto Complete/AutoComplete+Support.swift"; sourceTree = "<group>"; };
+		37AF6FB04A91D81C2C908A08B6E645C5 /* UIExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIExtensions.swift; path = Framework/Sources/UIExtensions.swift; sourceTree = "<group>"; };
+		3899B72CE99E5F8A76981AF75B3F5A66 /* FloatingPanel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FloatingPanel-umbrella.h"; sourceTree = "<group>"; };
+		4238F9629FE42C2F5651BD5A469D78FA /* DatePickerPopoverViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerPopoverViewController.swift; path = SwiftyPickerPopover/DatePickerPopoverViewController.swift; sourceTree = "<group>"; };
+		4C678B4A8CAADE71D75DA8311295097A /* SwiftLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D49F05C4683052573490B5003730254 /* IPAPIRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IPAPIRequest.swift; path = "Sources/SwiftLocation/Locating By IP/Services/IPAPIRequest.swift"; sourceTree = "<group>"; };
 		4DCBE3CB3F70A898C60DE135DD180770 /* Pods-TimeConverter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TimeConverter.modulemap"; sourceTree = "<group>"; };
+		503A0EE122FD63A79217889326BE5CD6 /* GoogleAutoCompleteRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GoogleAutoCompleteRequest.swift; path = "Sources/SwiftLocation/Auto Complete/Services/GoogleAutoCompleteRequest.swift"; sourceTree = "<group>"; };
 		5145E814CB2427D139A547E2A85F1824 /* Pods-TimeConverter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TimeConverter-dummy.m"; sourceTree = "<group>"; };
 		547FFBD91F1D316E2E3827516F1D3EF0 /* Pods-TimeConverter-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TimeConverter-acknowledgements.markdown"; sourceTree = "<group>"; };
-		63053AE319C83433106B3BF1A1416D58 /* FloatingPanel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FloatingPanel-prefix.pch"; sourceTree = "<group>"; };
+		54AA55C273EC92E15B62DD32B74B093B /* DatePickerPopover.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = DatePickerPopover.storyboard; path = Base.lproj/DatePickerPopover.storyboard; sourceTree = "<group>"; };
+		55EAECBDC371FC0B495A259CB64FF786 /* ColumnStringPickerPopoverViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ColumnStringPickerPopoverViewController.swift; path = SwiftyPickerPopover/ColumnStringPickerPopoverViewController.swift; sourceTree = "<group>"; };
+		58A0F37089B0D389D96A2619D66212D3 /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		595CD5FCB5566E90B60D693B197CF231 /* SwiftyPickerPopover-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyPickerPopover-prefix.pch"; sourceTree = "<group>"; };
+		5A271C6268F9D1D78F1EC77331DD34A3 /* String+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Extension.swift"; path = "SwiftyPickerPopover/String+Extension.swift"; sourceTree = "<group>"; };
+		6207AC9B83C545356092B846725BD9EE /* GrabberHandleView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GrabberHandleView.swift; path = Framework/Sources/GrabberHandleView.swift; sourceTree = "<group>"; };
+		626F940DAF6BBB99C57937778363B469 /* FloatingPanelController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelController.swift; path = Framework/Sources/FloatingPanelController.swift; sourceTree = "<group>"; };
+		6281D15ADE8246A37C3BE0B050121702 /* LocationRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationRequest.swift; path = Sources/SwiftLocation/Locating/LocationRequest.swift; sourceTree = "<group>"; };
 		672121606168A873217F5C5947D62659 /* Pods-TimeConverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TimeConverter.debug.xcconfig"; sourceTree = "<group>"; };
-		6F082812C7692A7AEDAA1009A6BB7AB9 /* LocationRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationRequest.swift; path = Sources/SwiftLocation/Locating/LocationRequest.swift; sourceTree = "<group>"; };
-		6FAAB7D3DE9B2564509ABD18687E938E /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FloatingPanel.framework; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		71D3CC4B1F2CE3B74B83E3C07C61B537 /* LocationByIPRequest+Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LocationByIPRequest+Support.swift"; path = "Sources/SwiftLocation/Locating By IP/LocationByIPRequest+Support.swift"; sourceTree = "<group>"; };
-		72DA4225323599F603EEFA6C7903685B /* Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Support.swift; path = Sources/SwiftLocation/Support/Support.swift; sourceTree = "<group>"; };
-		74E2DEF17AA906AFD6791FFA4C99ABD6 /* FloatingPanel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FloatingPanel.modulemap; sourceTree = "<group>"; };
-		75EE8580B46D656F36508397AD031AE2 /* Geocoder+Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Geocoder+Support.swift"; path = "Sources/SwiftLocation/Geocoding/Geocoder+Support.swift"; sourceTree = "<group>"; };
-		77AD9667D9895A0812CDE44DBC260485 /* FloatingPanelBackdropView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelBackdropView.swift; path = Framework/Sources/FloatingPanelBackdropView.swift; sourceTree = "<group>"; };
-		7E0DF7F852C9D1894C815D0A40639B20 /* PlaceMatch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlaceMatch.swift; path = "Sources/SwiftLocation/Data Models/PlaceMatch.swift"; sourceTree = "<group>"; };
-		899784AB62B2054748503014133FDDF0 /* FloatingPanelBehavior.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelBehavior.swift; path = Framework/Sources/FloatingPanelBehavior.swift; sourceTree = "<group>"; };
-		8C1485025CF8CFD35E14455B48E0808D /* SwiftLocation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftLocation-umbrella.h"; sourceTree = "<group>"; };
-		8D8F9907B52AE5533E72659F04AC27A9 /* GoogleGeocoderRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GoogleGeocoderRequest.swift; path = Sources/SwiftLocation/Geocoding/Services/GoogleGeocoderRequest.swift; sourceTree = "<group>"; };
-		90AEFDFA39B43E4D62490783A6567C6A /* GeocoderRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeocoderRequest.swift; path = Sources/SwiftLocation/Geocoding/GeocoderRequest.swift; sourceTree = "<group>"; };
-		9255682E8BDCEC6F6BD852E93546DAED /* SwiftLocation-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftLocation-prefix.pch"; sourceTree = "<group>"; };
-		956AC42AB1400388A89B9187440ADA53 /* FloatingPanelView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelView.swift; path = Framework/Sources/FloatingPanelView.swift; sourceTree = "<group>"; };
-		9B8C1D59AFFEE4F76C94F3154F79C8EB /* BeaconsRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeaconsRequest.swift; path = Sources/SwiftLocation/Beacons/BeaconsRequest.swift; sourceTree = "<group>"; };
-		9C110702A5114C6DC77381E80AE984E8 /* SwiftLocation-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftLocation-Info.plist"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A56B0D1ECC8D68F712B23B80C4B80ACE /* FloatingPanel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FloatingPanel-umbrella.h"; sourceTree = "<group>"; };
-		A5A722DA7786F0E80ACE4497448392E0 /* Observers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Observers.swift; path = "Sources/SwiftLocation/Data Models/Observers.swift"; sourceTree = "<group>"; };
-		ABFE9DB31B10FD81E283A4B3F878D560 /* FloatingPanel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FloatingPanel.xcconfig; sourceTree = "<group>"; };
-		B55353950463C00D4D9E5FF1A872A259 /* ServiceRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceRequest.swift; path = Sources/SwiftLocation/ServiceRequest.swift; sourceTree = "<group>"; };
-		B8A8287BF4CB773908AD94D661CBD236 /* FloatingPanelTransitioning.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelTransitioning.swift; path = Framework/Sources/FloatingPanelTransitioning.swift; sourceTree = "<group>"; };
+		6CBE7828761ACAB4F16DEFAA8737CBD9 /* GoogleGeocoderRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GoogleGeocoderRequest.swift; path = Sources/SwiftLocation/Geocoding/Services/GoogleGeocoderRequest.swift; sourceTree = "<group>"; };
+		6CF1723617B8B4D452510A52A97FCB09 /* IPPlace.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IPPlace.swift; path = "Sources/SwiftLocation/Data Models/IPPlace.swift"; sourceTree = "<group>"; };
+		6E328B7E040367CF09AB1622D73C34C3 /* JSONOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONOperation.swift; path = Sources/SwiftLocation/Support/JSONOperation.swift; sourceTree = "<group>"; };
+		6FAAB7D3DE9B2564509ABD18687E938E /* FloatingPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatingPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		712F56203C4C059A17B6102655E9E89F /* FloatingPanel-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FloatingPanel-Info.plist"; sourceTree = "<group>"; };
+		73216AAEE1F409FA556A02BD86257D24 /* DatePickerPopover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DatePickerPopover.swift; path = SwiftyPickerPopover/DatePickerPopover.swift; sourceTree = "<group>"; };
+		74313CFF36720796060C216CBFD703A4 /* CollectionType+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CollectionType+Extension.swift"; path = "SwiftyPickerPopover/CollectionType+Extension.swift"; sourceTree = "<group>"; };
+		7A7D9EE15F06AF9E6C3F4E3830F29D9E /* SwiftyPickerPopover.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyPickerPopover.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E646F7081FD37490DF89BE3934095A8 /* AbstractPopover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AbstractPopover.swift; path = SwiftyPickerPopover/AbstractPopover.swift; sourceTree = "<group>"; };
+		85F4044E67B6049C4B4E9399434002DF /* IPAPICoRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IPAPICoRequest.swift; path = "Sources/SwiftLocation/Locating By IP/Services/IPAPICoRequest.swift"; sourceTree = "<group>"; };
+		8B35B52A83FA9EC584275BAE555243EA /* ColumnStringPickerPopover.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = ColumnStringPickerPopover.storyboard; path = SwiftyPickerPopover/ColumnStringPickerPopover.storyboard; sourceTree = "<group>"; };
+		9347D653D01FB6B85CD2E2FB537B96A2 /* SwiftyPickerPopover.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyPickerPopover.modulemap; sourceTree = "<group>"; };
+		940937FD799EB295A0EBF77B6B14C9AE /* FloatingPanelView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelView.swift; path = Framework/Sources/FloatingPanelView.swift; sourceTree = "<group>"; };
+		9992C4C2C6D130AB50BD173233C1B690 /* SwiftLocation-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftLocation-dummy.m"; sourceTree = "<group>"; };
+		9AD0D4AF04C5351813A333EA7560EB40 /* BeaconsRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeaconsRequest.swift; path = Sources/SwiftLocation/Beacons/BeaconsRequest.swift; sourceTree = "<group>"; };
+		9CD6655F11D8E9A824A3CCD500A83AD6 /* SwiftyPickerPopover-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyPickerPopover-dummy.m"; sourceTree = "<group>"; };
+		9D546A8638D874A1CD2B6BEC8533B9FE /* AbstractPopover.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = AbstractPopover.storyboard; path = SwiftyPickerPopover/AbstractPopover.storyboard; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9DF2B9B1961F91590B4BEC6D7A4F816C /* LocationByIPRequest+Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LocationByIPRequest+Support.swift"; path = "Sources/SwiftLocation/Locating By IP/LocationByIPRequest+Support.swift"; sourceTree = "<group>"; };
+		9ED6F9068718E2907E97C0B5D9463BED /* SwiftLocation.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftLocation.modulemap; sourceTree = "<group>"; };
+		A16614DA3EC864274A610C22A74AF6E3 /* FloatingPanel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FloatingPanel.xcconfig; sourceTree = "<group>"; };
+		A2D6ACB1FC42BF5147EA5908A4C6962A /* DatePickerPopover.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = DatePickerPopover.strings; path = ja.lproj/DatePickerPopover.strings; sourceTree = "<group>"; };
+		A60514556A3C5FA218E051810B7BE144 /* DispatchQueue+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Extension.swift"; path = "SwiftyPickerPopover/DispatchQueue+Extension.swift"; sourceTree = "<group>"; };
+		AD2502971469483DE7AF910F0061B52E /* CountdownPickerPopover.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = CountdownPickerPopover.strings; path = ja.lproj/CountdownPickerPopover.strings; sourceTree = "<group>"; };
+		AEF8B8C3A38FF2A08ECE1BBA0509058B /* Geocoder+Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Geocoder+Support.swift"; path = "Sources/SwiftLocation/Geocoding/Geocoder+Support.swift"; sourceTree = "<group>"; };
+		B0738894F5FB1305E2A1737616069D59 /* SwiftLocation-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftLocation-umbrella.h"; sourceTree = "<group>"; };
+		B2BBA91AE817C6427728E6117F1E7125 /* SwiftLocation.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLocation.xcconfig; sourceTree = "<group>"; };
+		B61FBF6769D6771C42D97B6EAFBB7F94 /* FloatingPanelLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelLayout.swift; path = Framework/Sources/FloatingPanelLayout.swift; sourceTree = "<group>"; };
+		BA629E9E5B8B08BB83A90E227B2A94A3 /* CountdownPickerPopover.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = CountdownPickerPopover.storyboard; path = Base.lproj/CountdownPickerPopover.storyboard; sourceTree = "<group>"; };
+		BA6D7CAD44FA0E4C451A53EF5D481B68 /* FloatingPanelCore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelCore.swift; path = Framework/Sources/FloatingPanelCore.swift; sourceTree = "<group>"; };
+		BC7242CB3F080DE59EE9D3425F0EEA00 /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE82A277E681AC6D1CE89296ABEF609C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		BED11CAD3A7A22E904505F19CB32BF5B /* FloatingPanel-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FloatingPanel-Info.plist"; sourceTree = "<group>"; };
-		BF1A9623229486AD6C8BC27431AD0311 /* AutoComplete+Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "AutoComplete+Support.swift"; path = "Sources/SwiftLocation/Auto Complete/AutoComplete+Support.swift"; sourceTree = "<group>"; };
-		C0C3593C999B4C152BAAF61472F86575 /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Framework/Sources/Logger.swift; sourceTree = "<group>"; };
+		BF23BF9A679505C4552FB82D780ACAF5 /* FloatingPanelBackdropView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelBackdropView.swift; path = Framework/Sources/FloatingPanelBackdropView.swift; sourceTree = "<group>"; };
 		C23486453A43DD9F3F19CE946918C2E3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		C874FC5DD0F4AEE41AD134CE244448A8 /* HeadingRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HeadingRequest.swift; path = Sources/SwiftLocation/Heading/HeadingRequest.swift; sourceTree = "<group>"; };
+		C347B0AB05765BB0EEA1E614B369C050 /* FloatingPanelSurfaceView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelSurfaceView.swift; path = Framework/Sources/FloatingPanelSurfaceView.swift; sourceTree = "<group>"; };
+		C605A5F1F7888DB6C55CDD12CDDB9FB5 /* LocationByIPRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationByIPRequest.swift; path = "Sources/SwiftLocation/Locating By IP/LocationByIPRequest.swift"; sourceTree = "<group>"; };
 		CCE4DFF973EFE743CF3E9DF8148756B3 /* Pods-TimeConverter-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TimeConverter-Info.plist"; sourceTree = "<group>"; };
-		CD14163BF9610471CE9B25051D345FDA /* UIExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIExtensions.swift; path = Framework/Sources/UIExtensions.swift; sourceTree = "<group>"; };
-		CD7FA554A905FAC96BC4CBE84E4C05A9 /* Pods_TimeConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TimeConverter.framework; path = "Pods-TimeConverter.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDD4235C5DF5D0F23B6A380051ACCF7B /* IPPlace.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IPPlace.swift; path = "Sources/SwiftLocation/Data Models/IPPlace.swift"; sourceTree = "<group>"; };
-		CFCC4E3F806B37ED6CA65B205B4116C8 /* FloatingPanelController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatingPanelController.swift; path = Framework/Sources/FloatingPanelController.swift; sourceTree = "<group>"; };
-		D5D7C8373DC13E59667B54CCF09BDDD1 /* Place.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Place.swift; path = "Sources/SwiftLocation/Data Models/Place.swift"; sourceTree = "<group>"; };
+		CD0285D36CF1AB793DAAA47E0110643B /* CountdownPickerPopoverViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CountdownPickerPopoverViewController.swift; path = SwiftyPickerPopover/CountdownPickerPopoverViewController.swift; sourceTree = "<group>"; };
+		CD7FA554A905FAC96BC4CBE84E4C05A9 /* Pods_TimeConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFC91FB29532F37BF47BFB4144499BE0 /* LocationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Sources/SwiftLocation/LocationManager.swift; sourceTree = "<group>"; };
+		D702E340F5C030CEBFF0552921622701 /* FloatingPanel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FloatingPanel-prefix.pch"; sourceTree = "<group>"; };
+		D88B3626C968A490351AD1E3FFEBB465 /* SwiftyPickerPopover-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyPickerPopover-umbrella.h"; sourceTree = "<group>"; };
+		DC97CFF8935114BDB11564C80C7580FE /* Place.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Place.swift; path = "Sources/SwiftLocation/Data Models/Place.swift"; sourceTree = "<group>"; };
+		DCE8A6CC29B7C7FB7008FCB584966764 /* GeocoderRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GeocoderRequest.swift; path = Sources/SwiftLocation/Geocoding/GeocoderRequest.swift; sourceTree = "<group>"; };
+		DFDF2C546349EE3E7FC5EF8B572060B4 /* StringPickerPopover.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = StringPickerPopover.storyboard; path = Base.lproj/StringPickerPopover.storyboard; sourceTree = "<group>"; };
+		E065FEB3516BFC60B1BA70061C9C2553 /* FloatingPanel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FloatingPanel-dummy.m"; sourceTree = "<group>"; };
 		E0D4228E162E45BF4299AA26BE6B7336 /* Pods-TimeConverter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TimeConverter.release.xcconfig"; sourceTree = "<group>"; };
-		E338A3F1539927E0E2521CC8C66CC60C /* AppleGeocoderRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleGeocoderRequest.swift; path = Sources/SwiftLocation/Geocoding/Services/AppleGeocoderRequest.swift; sourceTree = "<group>"; };
+		E2B42A0DEA96CEA0FD8E0513E6B175FC /* SwiftyPickerPopover.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyPickerPopover.xcconfig; sourceTree = "<group>"; };
+		E33328DDCCF655D2C3C26263EEFAE3DB /* Timeout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeout.swift; path = Sources/SwiftLocation/Support/Timeout.swift; sourceTree = "<group>"; };
 		E34D833522A6B65FD978F16AAFA4C2A8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
-		E4CC2F1533D0BB2F25818ECE6BE05659 /* IPAPIRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IPAPIRequest.swift; path = "Sources/SwiftLocation/Locating By IP/Services/IPAPIRequest.swift"; sourceTree = "<group>"; };
-		E63470CCBC6A76000355D0BBE9CB8D48 /* AppleAutoCompleteRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleAutoCompleteRequest.swift; path = "Sources/SwiftLocation/Auto Complete/Services/AppleAutoCompleteRequest.swift"; sourceTree = "<group>"; };
+		E4563634E7F3C234FAEADE888614F38E /* StringPickerPopover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringPickerPopover.swift; path = SwiftyPickerPopover/StringPickerPopover.swift; sourceTree = "<group>"; };
+		E685C2A4DA76979DE148DFC2E716BF46 /* AppleAutoCompleteRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleAutoCompleteRequest.swift; path = "Sources/SwiftLocation/Auto Complete/Services/AppleAutoCompleteRequest.swift"; sourceTree = "<group>"; };
+		E99AEDBB488097B485A39E449AE6C271 /* PlaceMatch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlaceMatch.swift; path = "Sources/SwiftLocation/Data Models/PlaceMatch.swift"; sourceTree = "<group>"; };
+		E9D061F13A473ACC83EFFE8B5CF060C4 /* FloatingPanel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FloatingPanel.modulemap; sourceTree = "<group>"; };
 		EC0AC725B0E372DCC5E30D25ECA98C84 /* Pods-TimeConverter-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TimeConverter-acknowledgements.plist"; sourceTree = "<group>"; };
-		F1D4AE4F45866769A90DB662CB6DCB9A /* LocationManager+Support.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LocationManager+Support.swift"; path = "Sources/SwiftLocation/LocationManager+Support.swift"; sourceTree = "<group>"; };
+		ED31EA2B6FEC14607A96D26FCEDF7031 /* CountdownPickerPopover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CountdownPickerPopover.swift; path = SwiftyPickerPopover/CountdownPickerPopover.swift; sourceTree = "<group>"; };
+		EDF446FD7AC8F7E5A032E839C912C6A9 /* OpenStreetGeocoderRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OpenStreetGeocoderRequest.swift; path = Sources/SwiftLocation/Geocoding/Services/OpenStreetGeocoderRequest.swift; sourceTree = "<group>"; };
+		EE08483D4570E5CCA422BE624A769B83 /* ColumnStringPickerPopover.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ColumnStringPickerPopover.swift; path = SwiftyPickerPopover/ColumnStringPickerPopover.swift; sourceTree = "<group>"; };
 		F3088391FC8B52B71E477762DEF28B2D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
-		F4293FDF30D6B2989004E31DD1DE10FE /* LocationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Sources/SwiftLocation/LocationManager.swift; sourceTree = "<group>"; };
+		F5ED113C39C2EFCE4B1114F36859182E /* AbstractPickerPopoverViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AbstractPickerPopoverViewController.swift; path = SwiftyPickerPopover/AbstractPickerPopoverViewController.swift; sourceTree = "<group>"; };
+		F8248E814687BFE516CDE55630C3F650 /* StringPickerPopoverViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringPickerPopoverViewController.swift; path = SwiftyPickerPopover/StringPickerPopoverViewController.swift; sourceTree = "<group>"; };
+		FFFA6858FBEB75041B41472AF6A0BC5B /* HeadingRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HeadingRequest.swift; path = Sources/SwiftLocation/Heading/HeadingRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +211,14 @@
 			files = (
 				AAE1B9134D32C7B612C5CEAE638F0D9B /* Foundation.framework in Frameworks */,
 				C17DD90FDB535CC886156FEA4A17B02C /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36D93F44601C862433BAE42AC1829B7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F33D301C610F13690785094BFC27969 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,109 +232,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E055E3027A9B7EEDD28FC9B5B371F9D2 /* Frameworks */ = {
+		F82A35245100B5BEE28D90FBF588E74A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFB0DE13F1B7ECF316785D6A1BDAF74E /* Foundation.framework in Frameworks */,
+				EBC1EB33F5CD1F6871DA50279E4832FC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2DF1CFE8E8D0464BB74CABC69F1835BD /* Products */ = {
+		45004F8A5DDB69010CECC1409958965B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6FAAB7D3DE9B2564509ABD18687E938E /* FloatingPanel.framework */,
-				CD7FA554A905FAC96BC4CBE84E4C05A9 /* Pods_TimeConverter.framework */,
-				4C678B4A8CAADE71D75DA8311295097A /* SwiftLocation.framework */,
+				9D546A8638D874A1CD2B6BEC8533B9FE /* AbstractPopover.storyboard */,
+				8B35B52A83FA9EC584275BAE555243EA /* ColumnStringPickerPopover.storyboard */,
+				6B2905B7363C22D41E340E9B386B9AA1 /* CountdownPickerPopover.storyboard */,
+				2AA057C601BA6B611C3A7A29CE7CA124 /* DatePickerPopover.storyboard */,
+				F1825189360C20C973B25D4E780F5D1E /* Localizable.strings */,
+				24B614D3C964E9A46562D9D36D31E31F /* StringPickerPopover.storyboard */,
 			);
-			name = Products;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		310BD6A2C4101AD9978B010BDD646AED /* SwiftLocation */ = {
+		4A3F8A41E58E2F14BF69767E91A50065 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E63470CCBC6A76000355D0BBE9CB8D48 /* AppleAutoCompleteRequest.swift */,
-				E338A3F1539927E0E2521CC8C66CC60C /* AppleGeocoderRequest.swift */,
-				BF1A9623229486AD6C8BC27431AD0311 /* AutoComplete+Support.swift */,
-				204CB5147B96194064023E1B82AF8B54 /* AutoCompleteRequest.swift */,
-				9B8C1D59AFFEE4F76C94F3154F79C8EB /* BeaconsRequest.swift */,
-				2D93BF5D56716FA17F97A2832DC5074F /* CLLocationManager+Extras.swift */,
-				75EE8580B46D656F36508397AD031AE2 /* Geocoder+Support.swift */,
-				90AEFDFA39B43E4D62490783A6567C6A /* GeocoderRequest.swift */,
-				466832C4567BC3C7CF769D2F81532D39 /* GoogleAutoCompleteRequest.swift */,
-				8D8F9907B52AE5533E72659F04AC27A9 /* GoogleGeocoderRequest.swift */,
-				C874FC5DD0F4AEE41AD134CE244448A8 /* HeadingRequest.swift */,
-				4348C038245010E4C81A5B9147D66B76 /* IPAPICoRequest.swift */,
-				E4CC2F1533D0BB2F25818ECE6BE05659 /* IPAPIRequest.swift */,
-				CDD4235C5DF5D0F23B6A380051ACCF7B /* IPPlace.swift */,
-				3C9CE560A283639DD4DA79E96B49893A /* JSONOperation.swift */,
-				4B4D863BA65A0AE7FD380FA6129E7820 /* LocationByIPRequest.swift */,
-				71D3CC4B1F2CE3B74B83E3C07C61B537 /* LocationByIPRequest+Support.swift */,
-				F4293FDF30D6B2989004E31DD1DE10FE /* LocationManager.swift */,
-				F1D4AE4F45866769A90DB662CB6DCB9A /* LocationManager+Support.swift */,
-				6F082812C7692A7AEDAA1009A6BB7AB9 /* LocationRequest.swift */,
-				A5A722DA7786F0E80ACE4497448392E0 /* Observers.swift */,
-				331941498AF3BE3540974049C1FC40FE /* OpenStreetGeocoderRequest.swift */,
-				D5D7C8373DC13E59667B54CCF09BDDD1 /* Place.swift */,
-				7E0DF7F852C9D1894C815D0A40639B20 /* PlaceMatch.swift */,
-				B55353950463C00D4D9E5FF1A872A259 /* ServiceRequest.swift */,
-				72DA4225323599F603EEFA6C7903685B /* Support.swift */,
-				1D46EF4862112A9873A195D610056580 /* Timeout.swift */,
-				5E307D7A7B5B069E74DFC47CBBE222FB /* Support Files */,
+				A4F7E2B618BDD03F5AE6B27B8EF7D8F0 /* FloatingPanel */,
+				9F4B1A612DE214BD8CF1AFEE091073F5 /* SwiftLocation */,
+				F9A0A7316208D303A89237292B094A7F /* SwiftyPickerPopover */,
 			);
-			name = SwiftLocation;
-			path = SwiftLocation;
-			sourceTree = "<group>";
-		};
-		4FC767DE7DC08BFB09FFEE51B7B9BACC /* FloatingPanel */ = {
-			isa = PBXGroup;
-			children = (
-				0C3DB364D9315F0373DE8D5DDD999994 /* FloatingPanel.swift */,
-				77AD9667D9895A0812CDE44DBC260485 /* FloatingPanelBackdropView.swift */,
-				899784AB62B2054748503014133FDDF0 /* FloatingPanelBehavior.swift */,
-				CFCC4E3F806B37ED6CA65B205B4116C8 /* FloatingPanelController.swift */,
-				03260211D7F302CA3CE9C3205E06375A /* FloatingPanelLayout.swift */,
-				4CC43DE8A9A423E06116C7A8058F22EC /* FloatingPanelSurfaceView.swift */,
-				B8A8287BF4CB773908AD94D661CBD236 /* FloatingPanelTransitioning.swift */,
-				956AC42AB1400388A89B9187440ADA53 /* FloatingPanelView.swift */,
-				4B31AC4EC3B8CAF9F55BE43FB78AA185 /* GrabberHandleView.swift */,
-				C0C3593C999B4C152BAAF61472F86575 /* Logger.swift */,
-				CD14163BF9610471CE9B25051D345FDA /* UIExtensions.swift */,
-				60BCCD7AED5161DAE81D08C71491F5F8 /* Support Files */,
-			);
-			name = FloatingPanel;
-			path = FloatingPanel;
-			sourceTree = "<group>";
-		};
-		5E307D7A7B5B069E74DFC47CBBE222FB /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				160C31F359A0EE885F373A98F195075A /* SwiftLocation.modulemap */,
-				111EC06F367D7DB1212641B6D9D8F8F8 /* SwiftLocation.xcconfig */,
-				3400A75B1D7EC455D637474D896E4DB6 /* SwiftLocation-dummy.m */,
-				9C110702A5114C6DC77381E80AE984E8 /* SwiftLocation-Info.plist */,
-				9255682E8BDCEC6F6BD852E93546DAED /* SwiftLocation-prefix.pch */,
-				8C1485025CF8CFD35E14455B48E0808D /* SwiftLocation-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftLocation";
-			sourceTree = "<group>";
-		};
-		60BCCD7AED5161DAE81D08C71491F5F8 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				74E2DEF17AA906AFD6791FFA4C99ABD6 /* FloatingPanel.modulemap */,
-				ABFE9DB31B10FD81E283A4B3F878D560 /* FloatingPanel.xcconfig */,
-				2AE85AE00E2F5FBFB1C37B4C1D7CED34 /* FloatingPanel-dummy.m */,
-				BED11CAD3A7A22E904505F19CB32BF5B /* FloatingPanel-Info.plist */,
-				63053AE319C83433106B3BF1A1416D58 /* FloatingPanel-prefix.pch */,
-				A56B0D1ECC8D68F712B23B80C4B80ACE /* FloatingPanel-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/FloatingPanel";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		705339D2E326E08FD962F962F138375D /* Targets Support Files */ = {
@@ -296,6 +291,60 @@
 			path = "Target Support Files/Pods-TimeConverter";
 			sourceTree = "<group>";
 		};
+		9F4B1A612DE214BD8CF1AFEE091073F5 /* SwiftLocation */ = {
+			isa = PBXGroup;
+			children = (
+				E685C2A4DA76979DE148DFC2E716BF46 /* AppleAutoCompleteRequest.swift */,
+				34CFCE1AC3F047E1840482DCE8EF01ED /* AppleGeocoderRequest.swift */,
+				35DAF3C3E66B75639B3DF5BB4DAD28E4 /* AutoComplete+Support.swift */,
+				0B13175EE73BB7C535FC97069E61A0E9 /* AutoCompleteRequest.swift */,
+				9AD0D4AF04C5351813A333EA7560EB40 /* BeaconsRequest.swift */,
+				0D736677A8116FD3AD39CEB47A31260B /* CLLocationManager+Extras.swift */,
+				AEF8B8C3A38FF2A08ECE1BBA0509058B /* Geocoder+Support.swift */,
+				DCE8A6CC29B7C7FB7008FCB584966764 /* GeocoderRequest.swift */,
+				503A0EE122FD63A79217889326BE5CD6 /* GoogleAutoCompleteRequest.swift */,
+				6CBE7828761ACAB4F16DEFAA8737CBD9 /* GoogleGeocoderRequest.swift */,
+				FFFA6858FBEB75041B41472AF6A0BC5B /* HeadingRequest.swift */,
+				85F4044E67B6049C4B4E9399434002DF /* IPAPICoRequest.swift */,
+				4D49F05C4683052573490B5003730254 /* IPAPIRequest.swift */,
+				6CF1723617B8B4D452510A52A97FCB09 /* IPPlace.swift */,
+				6E328B7E040367CF09AB1622D73C34C3 /* JSONOperation.swift */,
+				C605A5F1F7888DB6C55CDD12CDDB9FB5 /* LocationByIPRequest.swift */,
+				9DF2B9B1961F91590B4BEC6D7A4F816C /* LocationByIPRequest+Support.swift */,
+				CFC91FB29532F37BF47BFB4144499BE0 /* LocationManager.swift */,
+				0FB85A8F12AFA7C79B24164DF088065D /* LocationManager+Support.swift */,
+				6281D15ADE8246A37C3BE0B050121702 /* LocationRequest.swift */,
+				1F08CB998FFC6BD64EAF571CA16006CF /* Observers.swift */,
+				EDF446FD7AC8F7E5A032E839C912C6A9 /* OpenStreetGeocoderRequest.swift */,
+				DC97CFF8935114BDB11564C80C7580FE /* Place.swift */,
+				E99AEDBB488097B485A39E449AE6C271 /* PlaceMatch.swift */,
+				2B03FA5B3ED256EED490B1EE235B26E8 /* ServiceRequest.swift */,
+				083C0A5DE55151E45C72A4CE06A65B9E /* Support.swift */,
+				E33328DDCCF655D2C3C26263EEFAE3DB /* Timeout.swift */,
+				CFD1687118A4CDABA6383F723FBADD73 /* Support Files */,
+			);
+			path = SwiftLocation;
+			sourceTree = "<group>";
+		};
+		A4F7E2B618BDD03F5AE6B27B8EF7D8F0 /* FloatingPanel */ = {
+			isa = PBXGroup;
+			children = (
+				BF23BF9A679505C4552FB82D780ACAF5 /* FloatingPanelBackdropView.swift */,
+				2E4CBD9B7069E6580494363AD5916FD4 /* FloatingPanelBehavior.swift */,
+				626F940DAF6BBB99C57937778363B469 /* FloatingPanelController.swift */,
+				BA6D7CAD44FA0E4C451A53EF5D481B68 /* FloatingPanelCore.swift */,
+				B61FBF6769D6771C42D97B6EAFBB7F94 /* FloatingPanelLayout.swift */,
+				C347B0AB05765BB0EEA1E614B369C050 /* FloatingPanelSurfaceView.swift */,
+				03FBE47FE8C44651FDF048FD23ACFCE4 /* FloatingPanelTransitioning.swift */,
+				940937FD799EB295A0EBF77B6B14C9AE /* FloatingPanelView.swift */,
+				6207AC9B83C545356092B846725BD9EE /* GrabberHandleView.swift */,
+				0EAFDFE9CB1F92A299883C6511EBD99D /* Logger.swift */,
+				37AF6FB04A91D81C2C908A08B6E645C5 /* UIExtensions.swift */,
+				D8E3965B8F5670A6BC75DF1FD50B0DF7 /* Support Files */,
+			);
+			path = FloatingPanel;
+			sourceTree = "<group>";
+		};
 		BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,24 +353,68 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CEC8C0065B1E9AAF9D59C78EE8183DE5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6FAAB7D3DE9B2564509ABD18687E938E /* FloatingPanel.framework */,
+				CD7FA554A905FAC96BC4CBE84E4C05A9 /* Pods_TimeConverter.framework */,
+				4C678B4A8CAADE71D75DA8311295097A /* SwiftLocation.framework */,
+				7A7D9EE15F06AF9E6C3F4E3830F29D9E /* SwiftyPickerPopover.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */,
-				D4358D2DCEC8A0D1C11AE780B5A19A38 /* Pods */,
-				2DF1CFE8E8D0464BB74CABC69F1835BD /* Products */,
+				4A3F8A41E58E2F14BF69767E91A50065 /* Pods */,
+				CEC8C0065B1E9AAF9D59C78EE8183DE5 /* Products */,
 				705339D2E326E08FD962F962F138375D /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D4358D2DCEC8A0D1C11AE780B5A19A38 /* Pods */ = {
+		CFD1687118A4CDABA6383F723FBADD73 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				4FC767DE7DC08BFB09FFEE51B7B9BACC /* FloatingPanel */,
-				310BD6A2C4101AD9978B010BDD646AED /* SwiftLocation */,
+				9ED6F9068718E2907E97C0B5D9463BED /* SwiftLocation.modulemap */,
+				B2BBA91AE817C6427728E6117F1E7125 /* SwiftLocation.xcconfig */,
+				9992C4C2C6D130AB50BD173233C1B690 /* SwiftLocation-dummy.m */,
+				0BC4C1F017DAC3923833DCFAD9414FFF /* SwiftLocation-Info.plist */,
+				33EB79EA5B3BE2348B562517F0B387F2 /* SwiftLocation-prefix.pch */,
+				B0738894F5FB1305E2A1737616069D59 /* SwiftLocation-umbrella.h */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/SwiftLocation";
+			sourceTree = "<group>";
+		};
+		D8E3965B8F5670A6BC75DF1FD50B0DF7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9D061F13A473ACC83EFFE8B5CF060C4 /* FloatingPanel.modulemap */,
+				A16614DA3EC864274A610C22A74AF6E3 /* FloatingPanel.xcconfig */,
+				E065FEB3516BFC60B1BA70061C9C2553 /* FloatingPanel-dummy.m */,
+				712F56203C4C059A17B6102655E9E89F /* FloatingPanel-Info.plist */,
+				D702E340F5C030CEBFF0552921622701 /* FloatingPanel-prefix.pch */,
+				3899B72CE99E5F8A76981AF75B3F5A66 /* FloatingPanel-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/FloatingPanel";
+			sourceTree = "<group>";
+		};
+		DFC47B0682BFF62EB771ECCE132FA1FA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9347D653D01FB6B85CD2E2FB537B96A2 /* SwiftyPickerPopover.modulemap */,
+				E2B42A0DEA96CEA0FD8E0513E6B175FC /* SwiftyPickerPopover.xcconfig */,
+				9CD6655F11D8E9A824A3CCD500A83AD6 /* SwiftyPickerPopover-dummy.m */,
+				148DDBFB4FEEDF2006FDC1F179F129F5 /* SwiftyPickerPopover-Info.plist */,
+				595CD5FCB5566E90B60D693B197CF231 /* SwiftyPickerPopover-prefix.pch */,
+				D88B3626C968A490351AD1E3FFEBB465 /* SwiftyPickerPopover-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyPickerPopover";
 			sourceTree = "<group>";
 		};
 		F2629938C98D809D3D3480612C22B4C3 /* iOS */ = {
@@ -335,14 +428,36 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		F9A0A7316208D303A89237292B094A7F /* SwiftyPickerPopover */ = {
+			isa = PBXGroup;
+			children = (
+				F5ED113C39C2EFCE4B1114F36859182E /* AbstractPickerPopoverViewController.swift */,
+				7E646F7081FD37490DF89BE3934095A8 /* AbstractPopover.swift */,
+				74313CFF36720796060C216CBFD703A4 /* CollectionType+Extension.swift */,
+				EE08483D4570E5CCA422BE624A769B83 /* ColumnStringPickerPopover.swift */,
+				55EAECBDC371FC0B495A259CB64FF786 /* ColumnStringPickerPopoverViewController.swift */,
+				ED31EA2B6FEC14607A96D26FCEDF7031 /* CountdownPickerPopover.swift */,
+				CD0285D36CF1AB793DAAA47E0110643B /* CountdownPickerPopoverViewController.swift */,
+				73216AAEE1F409FA556A02BD86257D24 /* DatePickerPopover.swift */,
+				4238F9629FE42C2F5651BD5A469D78FA /* DatePickerPopoverViewController.swift */,
+				A60514556A3C5FA218E051810B7BE144 /* DispatchQueue+Extension.swift */,
+				5A271C6268F9D1D78F1EC77331DD34A3 /* String+Extension.swift */,
+				E4563634E7F3C234FAEADE888614F38E /* StringPickerPopover.swift */,
+				F8248E814687BFE516CDE55630C3F650 /* StringPickerPopoverViewController.swift */,
+				45004F8A5DDB69010CECC1409958965B /* Resources */,
+				DFC47B0682BFF62EB771ECCE132FA1FA /* Support Files */,
+			);
+			path = SwiftyPickerPopover;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		32A2891CEE937B02B8085BBF5BE2DEE8 /* Headers */ = {
+		072FDE1F62B8D385456356D8E43ADAF5 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0DCF2C275146D65271386B0370C749B /* Pods-TimeConverter-umbrella.h in Headers */,
+				64E0041279E7EAE2C18661D5E6D6DBF9 /* Pods-TimeConverter-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +466,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				553D36441A4B13B909B4283CEADE9F3F /* SwiftLocation-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		669F4507EB3B314B78C76CCD864AF0A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E4F2639A7D9F5B7BD420B08E566F8F6 /* SwiftyPickerPopover-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +493,7 @@
 			buildConfigurationList = 6044DE3C7C1CBDBFC5A9C046CA3BD8D7 /* Build configuration list for PBXNativeTarget "FloatingPanel" */;
 			buildPhases = (
 				762B49C0AF1BD4B956053A6E4C37A52C /* Headers */,
-				D873A09126421F30B264A30A3ADE66CB /* Sources */,
+				AAD82367C4E6F146582EDE6D9A440D57 /* Sources */,
 				0E25907FC421D8E714ADD71C47A8FDC9 /* Frameworks */,
 				5FDD3CD220FC9D412FCF202F7E122871 /* Resources */,
 			);
@@ -383,20 +506,39 @@
 			productReference = 6FAAB7D3DE9B2564509ABD18687E938E /* FloatingPanel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9D2FFFDB29837D19674C36B88C4DABEF /* Pods-TimeConverter */ = {
+		6C8EE6C163FA34ECFF46A347CCB5746E /* SwiftyPickerPopover */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D96A3E0D884560ADE1A32215B68C6C1 /* Build configuration list for PBXNativeTarget "Pods-TimeConverter" */;
+			buildConfigurationList = BEFB22A8C7BF2FB92C226D71F74B21CC /* Build configuration list for PBXNativeTarget "SwiftyPickerPopover" */;
 			buildPhases = (
-				32A2891CEE937B02B8085BBF5BE2DEE8 /* Headers */,
-				F633F7B654D61162AD55971A41007A35 /* Sources */,
-				E055E3027A9B7EEDD28FC9B5B371F9D2 /* Frameworks */,
-				6D538F658359AD574BA7E2B59137F8B7 /* Resources */,
+				669F4507EB3B314B78C76CCD864AF0A1 /* Headers */,
+				385E37B359B9022DF40AC7CD0DE013CE /* Sources */,
+				36D93F44601C862433BAE42AC1829B7E /* Frameworks */,
+				D96150B64F5A03015E08C4A88B80DF98 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BFEF3DAFA1C2DF99DD25B2B8653C9AC2 /* PBXTargetDependency */,
-				DFFC2C874913581F4366A86272B838C0 /* PBXTargetDependency */,
+			);
+			name = SwiftyPickerPopover;
+			productName = SwiftyPickerPopover;
+			productReference = 7A7D9EE15F06AF9E6C3F4E3830F29D9E /* SwiftyPickerPopover.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9D2FFFDB29837D19674C36B88C4DABEF /* Pods-TimeConverter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16A650D8CD7900F4D13B224E9D44FA5F /* Build configuration list for PBXNativeTarget "Pods-TimeConverter" */;
+			buildPhases = (
+				072FDE1F62B8D385456356D8E43ADAF5 /* Headers */,
+				8859993FDE1ABFF46D8584D9D89221D3 /* Sources */,
+				F82A35245100B5BEE28D90FBF588E74A /* Frameworks */,
+				ED7762E5C63DB83EF946D3069A134E9C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06E388319778A9514313286D87EF5739 /* PBXTargetDependency */,
+				F062661A97EE75CA9ABA6D167608A43C /* PBXTargetDependency */,
+				F3D3980B95F4C2AD0DA8E496B1456476 /* PBXTargetDependency */,
 			);
 			name = "Pods-TimeConverter";
 			productName = "Pods-TimeConverter";
@@ -437,15 +579,17 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 2DF1CFE8E8D0464BB74CABC69F1835BD /* Products */;
+			productRefGroup = CEC8C0065B1E9AAF9D59C78EE8183DE5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				4874E7E655CEB4C01E4572AD903AEA21 /* FloatingPanel */,
 				9D2FFFDB29837D19674C36B88C4DABEF /* Pods-TimeConverter */,
 				A77DC3FBE3DFD1D1CA8D8812A6CF0776 /* SwiftLocation */,
+				6C8EE6C163FA34ECFF46A347CCB5746E /* SwiftyPickerPopover */,
 			);
 		};
 /* End PBXProject section */
@@ -465,7 +609,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D538F658359AD574BA7E2B59137F8B7 /* Resources */ = {
+		D96150B64F5A03015E08C4A88B80DF98 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDA5A09E6A571F5EDEBE0DC667D888E9 /* AbstractPopover.storyboard in Resources */,
+				CABBF852F8E2788068F20AAA80082A09 /* ColumnStringPickerPopover.storyboard in Resources */,
+				D4A0FD32AB4814B83A052FAEB2D77ADA /* CountdownPickerPopover.storyboard in Resources */,
+				4D5068028AE83DAF1A224C65AA7A5FA5 /* DatePickerPopover.storyboard in Resources */,
+				E4F7BD315E481CACAA91DE1F2F9EEBFF /* Localizable.strings in Resources */,
+				D5C88E9BE7F0538D4BBC7EB2A11B3B8E /* StringPickerPopover.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7762E5C63DB83EF946D3069A134E9C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -475,6 +632,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		385E37B359B9022DF40AC7CD0DE013CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				850183247B3E3879649527CDBA09D777 /* AbstractPickerPopoverViewController.swift in Sources */,
+				D9122BC7629C971295D5975C51685D28 /* AbstractPopover.swift in Sources */,
+				A6ACF15F7D8D91944319BAC26794B49B /* CollectionType+Extension.swift in Sources */,
+				CE71478B1F2A472203FB8AC74E2C9808 /* ColumnStringPickerPopover.swift in Sources */,
+				D8D428E6CDBD0C3667B87FAC58B0FBCE /* ColumnStringPickerPopoverViewController.swift in Sources */,
+				11C570009724A480F57336A8170E4DF6 /* CountdownPickerPopover.swift in Sources */,
+				F26DA44907E548CC031E1A06398927C9 /* CountdownPickerPopoverViewController.swift in Sources */,
+				4DED71DD813E3196FC227BAB38256C07 /* DatePickerPopover.swift in Sources */,
+				ECBF17BD3B11E770E3EF4A674F18AF9F /* DatePickerPopoverViewController.swift in Sources */,
+				8541579DBFD3FE12AF37A0EF66370A39 /* DispatchQueue+Extension.swift in Sources */,
+				667E1E84C07F5B93E5DD28EDB887DDD3 /* String+Extension.swift in Sources */,
+				792716759991D6268FA4CDBDAE44925E /* StringPickerPopover.swift in Sources */,
+				8CD12EE2F35F4DC4DFCE91010CFF2071 /* StringPickerPopoverViewController.swift in Sources */,
+				2FFE731595506A08CFDECE74A7F3CC27 /* SwiftyPickerPopover-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		68F400A5A7640306E39C5B8C6EA11E0D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -510,54 +688,102 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D873A09126421F30B264A30A3ADE66CB /* Sources */ = {
+		8859993FDE1ABFF46D8584D9D89221D3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				672C1161D858966C5BBC22F5F6D360D7 /* FloatingPanel-dummy.m in Sources */,
-				843366134EB58985B503D170DACC2A73 /* FloatingPanel.swift in Sources */,
-				975E7BC2F369B22E173641EEE5F073F1 /* FloatingPanelBackdropView.swift in Sources */,
-				D396A592D8469DD4D248230E01223FD7 /* FloatingPanelBehavior.swift in Sources */,
-				402EF39055C35C318A40499E3DAC8915 /* FloatingPanelController.swift in Sources */,
-				A8ACA800D0915472599339CDEBE07A6A /* FloatingPanelLayout.swift in Sources */,
-				3B01FA56FEFD2B3370085E84065BEB7D /* FloatingPanelSurfaceView.swift in Sources */,
-				A370787826261C7EBA7E1529D1729E2D /* FloatingPanelTransitioning.swift in Sources */,
-				C3D4D7A6B5B5B42BC09DFE7EC5E55731 /* FloatingPanelView.swift in Sources */,
-				F7376A4529D84064C33E52F7F316BBFF /* GrabberHandleView.swift in Sources */,
-				8A42899DC597962DCCC65F0F874BB9D0 /* Logger.swift in Sources */,
-				36394F16966D99620981A230DB22F10E /* UIExtensions.swift in Sources */,
+				5D6F117A4D4953B3A1B37F5CF8D9FCB4 /* Pods-TimeConverter-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F633F7B654D61162AD55971A41007A35 /* Sources */ = {
+		AAD82367C4E6F146582EDE6D9A440D57 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D046B7EDD314B6E8018BA95EF70DBCE0 /* Pods-TimeConverter-dummy.m in Sources */,
+				A6DB10D310FD18E8B6C25EA33D81DF4E /* FloatingPanel-dummy.m in Sources */,
+				A04D8B3B3650926C5F7D42B22A67DE7D /* FloatingPanelBackdropView.swift in Sources */,
+				CF925E8C4C99A77E1C9FE0049826FCE4 /* FloatingPanelBehavior.swift in Sources */,
+				7FA96F5D3B8F4CE9C95C35D1CD4D6A91 /* FloatingPanelController.swift in Sources */,
+				3D408305B29250792B2CDDC90990ECAC /* FloatingPanelCore.swift in Sources */,
+				970E5351EB7A3C92CD346BCDCC6652A3 /* FloatingPanelLayout.swift in Sources */,
+				071D52F82B602FB85E35CA8583EEF456 /* FloatingPanelSurfaceView.swift in Sources */,
+				E62E543CA9182791942A0DE76D3E6C6C /* FloatingPanelTransitioning.swift in Sources */,
+				A3673FD39025DE753731C568DB5E23B9 /* FloatingPanelView.swift in Sources */,
+				A49977EF1D94933CE588A5F237D5DD7C /* GrabberHandleView.swift in Sources */,
+				A696FE118006841FB09A5E76C11B8978 /* Logger.swift in Sources */,
+				D13AC4B3EDF1F6A5973A039FCE488B92 /* UIExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BFEF3DAFA1C2DF99DD25B2B8653C9AC2 /* PBXTargetDependency */ = {
+		06E388319778A9514313286D87EF5739 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FloatingPanel;
 			target = 4874E7E655CEB4C01E4572AD903AEA21 /* FloatingPanel */;
-			targetProxy = 4BB637F9BDB0B0D8296C43F2D36AC1AF /* PBXContainerItemProxy */;
+			targetProxy = E5F2A493F84A8A96158E7D3DF4584589 /* PBXContainerItemProxy */;
 		};
-		DFFC2C874913581F4366A86272B838C0 /* PBXTargetDependency */ = {
+		F062661A97EE75CA9ABA6D167608A43C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftLocation;
 			target = A77DC3FBE3DFD1D1CA8D8812A6CF0776 /* SwiftLocation */;
-			targetProxy = F5FF927B12A4767B0D417484DB756B2F /* PBXContainerItemProxy */;
+			targetProxy = 138304C772A2A8FA697C68FD8E0F129D /* PBXContainerItemProxy */;
+		};
+		F3D3980B95F4C2AD0DA8E496B1456476 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyPickerPopover;
+			target = 6C8EE6C163FA34ECFF46A347CCB5746E /* SwiftyPickerPopover */;
+			targetProxy = 8E106205DAB195FAF010B21A7840D0C2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		24B614D3C964E9A46562D9D36D31E31F /* StringPickerPopover.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFDF2C546349EE3E7FC5EF8B572060B4 /* StringPickerPopover.storyboard */,
+			);
+			name = StringPickerPopover.storyboard;
+			path = SwiftyPickerPopover;
+			sourceTree = "<group>";
+		};
+		2AA057C601BA6B611C3A7A29CE7CA124 /* DatePickerPopover.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				54AA55C273EC92E15B62DD32B74B093B /* DatePickerPopover.storyboard */,
+				A2D6ACB1FC42BF5147EA5908A4C6962A /* DatePickerPopover.strings */,
+			);
+			name = DatePickerPopover.storyboard;
+			path = SwiftyPickerPopover;
+			sourceTree = "<group>";
+		};
+		6B2905B7363C22D41E340E9B386B9AA1 /* CountdownPickerPopover.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA629E9E5B8B08BB83A90E227B2A94A3 /* CountdownPickerPopover.storyboard */,
+				AD2502971469483DE7AF910F0061B52E /* CountdownPickerPopover.strings */,
+			);
+			name = CountdownPickerPopover.storyboard;
+			path = SwiftyPickerPopover;
+			sourceTree = "<group>";
+		};
+		F1825189360C20C973B25D4E780F5D1E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC7242CB3F080DE59EE9D3425F0EEA00 /* Localizable.strings */,
+				58A0F37089B0D389D96A2619D66212D3 /* Localizable.strings */,
+			);
+			name = Localizable.strings;
+			path = SwiftyPickerPopover;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		10BE8AB7B02D98C6CB15BDE04A2371E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 111EC06F367D7DB1212641B6D9D8F8F8 /* SwiftLocation.xcconfig */;
+			baseConfigurationReference = B2BBA91AE817C6427728E6117F1E7125 /* SwiftLocation.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -594,7 +820,7 @@
 		};
 		297C70AED0E8BB6CC83F765DFA937B6C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 111EC06F367D7DB1212641B6D9D8F8F8 /* SwiftLocation.xcconfig */;
+			baseConfigurationReference = B2BBA91AE817C6427728E6117F1E7125 /* SwiftLocation.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -627,45 +853,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		2C3338C610AFF9C9CFB25AC8F8D62342 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0D4228E162E45BF4299AA26BE6B7336 /* Pods-TimeConverter.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		2F5CE9157A6944C572608740FA41A6A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -731,11 +918,10 @@
 			};
 			name = Debug;
 		};
-		662939AB60AC6F861DA5F437D8435325 /* Release */ = {
+		59E2AA669CB677C29117D91C2E5F895A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ABFE9DB31B10FD81E283A4B3F878D560 /* FloatingPanel.xcconfig */;
+			baseConfigurationReference = E2B42A0DEA96CEA0FD8E0513E6B175FC /* SwiftyPickerPopover.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -745,55 +931,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FloatingPanel/FloatingPanel-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FloatingPanel/FloatingPanel-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyPickerPopover/SwiftyPickerPopover-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyPickerPopover/SwiftyPickerPopover-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/FloatingPanel/FloatingPanel.modulemap";
-				PRODUCT_MODULE_NAME = FloatingPanel;
-				PRODUCT_NAME = FloatingPanel;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7C3BBACD8A24FFC23C19E9322196DC12 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ABFE9DB31B10FD81E283A4B3F878D560 /* FloatingPanel.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FloatingPanel/FloatingPanel-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FloatingPanel/FloatingPanel-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/FloatingPanel/FloatingPanel.modulemap";
-				PRODUCT_MODULE_NAME = FloatingPanel;
-				PRODUCT_NAME = FloatingPanel;
+				MODULEMAP_FILE = "Target Support Files/SwiftyPickerPopover/SwiftyPickerPopover.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyPickerPopover;
+				PRODUCT_NAME = SwiftyPickerPopover;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -804,7 +953,7 @@
 			};
 			name = Debug;
 		};
-		A28CC26E9B8BF2D610254DF0C13CF2C9 /* Debug */ = {
+		616AE1958BAC81B1611F135C24181F70 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 672121606168A873217F5C5947D62659 /* Pods-TimeConverter.debug.xcconfig */;
 			buildSettings = {
@@ -841,6 +990,154 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		662939AB60AC6F861DA5F437D8435325 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A16614DA3EC864274A610C22A74AF6E3 /* FloatingPanel.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FloatingPanel/FloatingPanel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FloatingPanel/FloatingPanel-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FloatingPanel/FloatingPanel.modulemap";
+				PRODUCT_MODULE_NAME = FloatingPanel;
+				PRODUCT_NAME = FloatingPanel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6BADC7145575E012A8A3803A795D2C1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E2B42A0DEA96CEA0FD8E0513E6B175FC /* SwiftyPickerPopover.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyPickerPopover/SwiftyPickerPopover-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyPickerPopover/SwiftyPickerPopover-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SwiftyPickerPopover/SwiftyPickerPopover.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyPickerPopover;
+				PRODUCT_NAME = SwiftyPickerPopover;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7C3BBACD8A24FFC23C19E9322196DC12 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A16614DA3EC864274A610C22A74AF6E3 /* FloatingPanel.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FloatingPanel/FloatingPanel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FloatingPanel/FloatingPanel-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FloatingPanel/FloatingPanel.modulemap";
+				PRODUCT_MODULE_NAME = FloatingPanel;
+				PRODUCT_NAME = FloatingPanel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A719302A8D4DEEECAE290C6E8497A8A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0D4228E162E45BF4299AA26BE6B7336 /* Pods-TimeConverter.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		B102853BB3392A16E68667C38114BC6A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -905,11 +1202,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D96A3E0D884560ADE1A32215B68C6C1 /* Build configuration list for PBXNativeTarget "Pods-TimeConverter" */ = {
+		16A650D8CD7900F4D13B224E9D44FA5F /* Build configuration list for PBXNativeTarget "Pods-TimeConverter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A28CC26E9B8BF2D610254DF0C13CF2C9 /* Debug */,
-				2C3338C610AFF9C9CFB25AC8F8D62342 /* Release */,
+				616AE1958BAC81B1611F135C24181F70 /* Debug */,
+				A719302A8D4DEEECAE290C6E8497A8A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -937,6 +1234,15 @@
 			buildConfigurations = (
 				297C70AED0E8BB6CC83F765DFA937B6C /* Debug */,
 				10BE8AB7B02D98C6CB15BDE04A2371E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEFB22A8C7BF2FB92C226D71F74B21CC /* Build configuration list for PBXNativeTarget "SwiftyPickerPopover" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59E2AA669CB677C29117D91C2E5F895A /* Debug */,
+				6BADC7145575E012A8A3803A795D2C1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

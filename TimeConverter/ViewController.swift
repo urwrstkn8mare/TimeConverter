@@ -16,6 +16,7 @@ import MapKit
 import CoreLocation
 import Foundation
 import SwiftLocation
+import SwiftyPickerPopover
 
 // MARK: ViewController
 class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTapDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, RemoveAnnotationDelegate, SetMapCentreDelegate {
@@ -39,6 +40,8 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        Log(UIDevice.current.orientation.isLandscape)
+        
         if #available(iOS 13, *) {
             searchIconImageView.image = UIImage(systemName: "magnifyingglass")
             locationIconImageView.image = UIImage(systemName: "location")
@@ -55,7 +58,7 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         
         // Set up long press
         let longPressGestureRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(mapViewLongPress(recogniser:)))
-        longPressGestureRecogniser.minimumPressDuration = 0.25
+        longPressGestureRecogniser.minimumPressDuration = 0.35
         mapView.addGestureRecognizer(longPressGestureRecogniser)
         
         // Set up side buttons on the map
@@ -67,14 +70,8 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
         } else {
             sideButtons.layer.borderColor = UIColor(red: 198.0/255.0, green: 198.0/255.0, blue: 200.0/255.0, alpha: 1.0).cgColor
         }
-        if UIDevice.current.orientation.isLandscape {
-            Log("Landscape")
-            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.width / 2) - (sideButtons.frame.height / 2)), width: sideButtons.frame.width, height: sideButtons.frame.height)
-            
-        } else {
-            Log("Portrait")
-            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.height / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
-        }
+        
+        sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.height / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
         
         // Initialize a `FloatingPanelController` object.
         fpc = FloatingPanelController()
@@ -207,39 +204,51 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     }
     @IBAction func handleLocationTap(recogniser:UITapGestureRecognizer) {
         // Show the user that the button has been tapped
-         UIView.animate(withDuration: 0.1, animations: {
-                   () in
-                   if #available(iOS 13, *) {
-                       self.locationIconView.backgroundColor = UIColor.opaqueSeparator
-                   } else {
-                       self.locationIconView.backgroundColor = UIColor(red: 198.0/255.0, green: 198.0/255.0, blue: 200.0/255.0, alpha: 1.0)
-                   }
-                   self.locationIconView.alpha = 0.8
-               }, completion: {
-                   (finished: Bool) in
-                   self.searchIconView.backgroundColor = .clear
-                   self.searchIconView.alpha = 1
-               })
+         UIView.animate(withDuration: 0.1, animations: { () in
+            if #available(iOS 13, *) {
+                self.locationIconView.backgroundColor = UIColor.opaqueSeparator
+            } else {
+                self.locationIconView.backgroundColor = UIColor(red: 198.0/255.0, green: 198.0/255.0, blue: 200.0/255.0, alpha: 1.0)
+            }
+            self.locationIconView.alpha = 0.8
+         }, completion: { (finished: Bool) in
+            self.locationIconView.backgroundColor = .clear
+            self.locationIconView.alpha = 1
+         })
         
-        if !locationButtonPressedBefore {
-            // Setup location manager
-            locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
-            mapView.showsUserLocation = true
-            
-            locationButtonPressedBefore = true
+        LocationManager.shared.requireUserAuthorization(.whenInUse)
+        mapView.showsUserLocation = !mapView.showsUserLocation
+        
+//        if !locationButtonPressedBefore {
+//            // Setup location manager
+//            locationManager = CLLocationManager()
+//            locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//            locationManager.requestWhenInUseAuthorization()
+//            mapView.showsUserLocation = true
+//
+//            locationButtonPressedBefore = true
+//        }
+//
+//        locationManager.requestLocation()
+        
+        LocationManager.shared.locateFromGPS(.oneShot, accuracy: .city) { result in
+          switch result {
+            case .failure(let error):
+              Log("Received error: \(error)")
+            case .success(let location):
+              Log("Location received: \(location)")
+              self.setMapCentre(coordinate: location.coordinate)
+          }
         }
-        
-        locationManager.requestLocation()
         
     }
     
     // Floating Panel Delegate Methods
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         if vc.contentViewController?.className == "TimesPanelViewController" {
-            return (newCollection.verticalSizeClass == .compact) ? TimesPanelLandscapeLayout() : TimesPanelLayout()
+            Log(UIDevice.current.orientation.isLandscape)
+            return (UIDevice.current.orientation.isLandscape) ? TimesPanelLandscapeLayout() : TimesPanelLayout()
         } else if vc.contentViewController?.className == "SearchPanelViewController" {
             return SearchPanelLayout()
         } else {
@@ -345,32 +354,35 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         Log("the annotation was selected")
-        fpc.move(to: .full, animated: true)
-        let annotation = view.annotation as! CustomAnnotationClass
-        contentVC?.tableView.scrollToRow(at: IndexPath(row: annotation.id - 1, section: 0), at: .top, animated: true)
+        if let annotation = view.annotation as? CustomAnnotationClass {
+            contentVC?.tableView.scrollToRow(at: IndexPath(row: annotation.id - 1, section: 0), at: .top, animated: true)
+            fpc.move(to: .full, animated: true)
+        } else {
+            
+        }
     }
     
     // CLLocationManagerDelegate Methods
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.requestLocation()
-        }
-    }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // this function is delayed for some reason
-        Log("location requested")
-        if let location = locations.first {
-            Log("location requested 2")
-            
-            let span = MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            Log("locaiton requested 3")
-            mapView.setRegion(region, animated: true)
-        }
-    }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        Log("error:: \(error)")
-    }
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        if status == .authorizedWhenInUse {
+//            locationManager.requestLocation()
+//        }
+//    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        // this function is delayed for some reason
+//        Log("location requested")
+//        if let location = locations.first {
+//            Log("location requested 2")
+//
+//            let span = MKCoordinateSpan(latitudeDelta: 50, longitudeDelta: 50)
+//            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+//            Log("locaiton requested 3")
+//            mapView.setRegion(region, animated: true)
+//        }
+//    }
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        Log("error:: \(error)")
+//    }
     
     // UIGestureRecognizerDelegate methods
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -378,14 +390,64 @@ class ViewController: UIViewController, FloatingPanelControllerDelegate, CellTap
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isLandscape {
-            Log("Landscape")
-            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.width / 2) - (sideButtons.frame.height / 2)), width: sideButtons.frame.width, height: sideButtons.frame.height)
-            
+        
+        let isLandscape = UIDevice.current.orientation.isLandscape
+        let isIpad = UIDevice.current.userInterfaceIdiom == .pad ? true : false
+        let bounds = UIScreen.main.bounds
+        var width: CGFloat?
+        var height: CGFloat?
+        
+        if isIpad {
+            width = bounds.width
+            height = bounds.height
         } else {
-            Log("Portrait")
-            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.width / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
+            width = bounds.height
+            height = bounds.width
         }
+        
+        Log(isLandscape)
+        Log(isIpad)
+        Log(width)
+        Log(height)
+        Log("-------------")
+        
+        if isLandscape {
+            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((height! / 2) - (sideButtons.frame.height / 2)), width: sideButtons.frame.width, height: sideButtons.frame.height)
+        } else {
+            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((height! / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
+        }
+        
+//        let bounds = UIScreen.main.bounds
+//        let width: CGFloat?
+//        let height: CGFloat?
+//        if bounds.width < bounds.height {
+//            width = bounds.width
+//            height = bounds.height
+//        } else {
+//            width = bounds.height
+//            height = bounds.width
+//        }
+//        sideButtons.frame = CGRect(x: sideButtons.frame.minX,
+//                                   y: <#T##CGFloat#>,
+//                                   width: sideButtons.frame.width,
+//                                   height: sideButtons.frame.height)
+        
+        fpc.updateLayout()
+//        let isPortrait = UIApplication.shared.statusBarOrientation.isPortrait
+////        if UIDevice.current.userInterfaceIdiom == .pad {
+////            isPortrait = !isPortrait
+////        }
+//        if isPortrait {
+//            Log("Landscape")
+//            sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.width / 2) - (sideButtons.frame.height / 2)), width: sideButtons.frame.width, height: sideButtons.frame.height)
+//        } else {
+//            Log("Portrait")
+////            if UIDevice.current.userInterfaceIdiom == .pad {
+////                sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.width / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
+////            } else {
+//                sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: ((UIScreen.main.bounds.height / 2) - 20 - sideButtons.frame.height), width: sideButtons.frame.width, height: sideButtons.frame.height)
+////            }
+//        }
     }
 
 }
@@ -509,40 +571,67 @@ class TimesPanelViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func editButtonAction(_ sender: UIButton) {
         
         Log("editing not implemented yet")
-        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 25, width: self.view.frame.size.width, height: 260))
-        datePicker.datePickerMode = .dateAndTime
-        datePicker.timeZone = LocationStore().read(id: sender.tag)[0].location.timeZone
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+//            DatePickerPopover(title: "Change the time").setDateMode(.dateAndTime).setLocale(Locale(identifier: LocationStore().read(id: sender.tag)[0].location.timeZone!.identifier)).setSelectedDate(defaults.value(forKey: "universalTime") as! Date).setDoneButton(action: { popover, selectedDate in
+//                self.defaults.set(selectedDate, forKey: "universalTime")
+//                self.tableView.reloadData()
+//            }).setCancelButton(action: { _, _ in
+//                Log("cancel")
+//                })
+            DatePickerPopover(title: "Change the time")
+                .setDateMode(.dateAndTime)
+                .setSize(width: 350)
+                .setSelectedDate(defaults.value(forKey: "universalTime") as! Date)
+                .setDoneButton(title: "Confirm", action: { (popover, selectedDate) in
+                    self.defaults.set(selectedDate, forKey: "universalTime")
+                    self.tableView.reloadData()
+                })
+                .setCancelButton(action: {(_, _) in
+                    Log("cancel")
+                })
+                .setArrowColor(.white)
+                .setTimeZone(LocationStore().read(id: sender.tag)[0].location.timeZone!)
+                .appear(originView: sender, baseViewController: self)
+        } else {
+            //add to actionsheetview
+            let alertController = UIAlertController(title: "Change the time", message:" " , preferredStyle: UIAlertController.Style.actionSheet)
+            
+            let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 25, width: alertController.view.frame.width, height: 260))
+            datePicker.datePickerMode = .dateAndTime
+            datePicker.timeZone = LocationStore().read(id: sender.tag)[0].location.timeZone
 
-        //add to actionsheetview
-        let alertController = UIAlertController(title: "Change the time", message:" " , preferredStyle: UIAlertController.Style.actionSheet)
+            alertController.view.addSubview(datePicker)//add subview
 
-        alertController.view.addSubview(datePicker)//add subview
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                Log("cancel action")
 
-            Log("cancel action")
+            }
+            
+            let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { (action) in
+                
+                Log("confrim action \(datePicker.date)")
+                self.defaults.set(datePicker.date, forKey: "universalTime")
+                self.tableView.reloadData()
+                
+            })
 
+            //add buttons to action sheet
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            
+            let height: NSLayoutConstraint
+            height = NSLayoutConstraint(item: alertController.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 400)
+            alertController.view.addConstraint(height)
+
+            self.present(alertController, animated: true, completion: nil)
         }
         
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { (action) in
-            
-            Log("confrim action \(datePicker.date)")
-            self.defaults.set(datePicker.date, forKey: "universalTime")
-            self.tableView.reloadData()
-            
-        })
-
-        //add buttons to action sheet
-        alertController.addAction(confirmAction)
-        alertController.addAction(cancelAction)
-
-
-        let height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 400)
-        alertController.view.addConstraint(height)
-
-        self.present(alertController, animated: true, completion: nil)
-        
     }
+    
+    //popoverController.sourceView = sender
+    //popoverController.sourceRect = CGRect(x: popoverController.sourceRect.minX + sender.frame.width, y: popoverController.sourceRect.minY + (sender.frame.height / 2), width: 0, height: 0)
     
     // Table View Delegate and Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -670,7 +759,7 @@ class TimesPanelLandscapeLayout: FloatingPanelLayout {
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
         switch position {
             case .full: return 16.0
-            case .tip: return 69.0
+            case .tip: return 96.0
             default: return nil
         }
     }
@@ -686,6 +775,10 @@ class TimesPanelLandscapeLayout: FloatingPanelLayout {
         return [
             leftAnchorConstraint, surfaceView.widthAnchor.constraint(equalToConstant: 414),
         ]
+    }
+    
+    public func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
+        return 0.0
     }
 }
 
@@ -954,6 +1047,3 @@ class NothingFoundTableViewCell: UITableViewCell {
     }
     
 }
-
-// 16.0
-//

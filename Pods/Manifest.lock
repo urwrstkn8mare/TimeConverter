@@ -1,20 +1,32 @@
 PODS:
-  - FloatingPanel (1.7.0)
+  - FloatingPanel (1.7.1)
   - SwiftLocation (4.2.0)
+  - SwiftyPickerPopover (6.6.6)
 
 DEPENDENCIES:
   - FloatingPanel
   - SwiftLocation (~> 4.0)
+  - SwiftyPickerPopover (from `https://github.com/urwrstkn8mare/SwiftyPickerPopover.git`)
 
 SPEC REPOS:
   trunk:
     - FloatingPanel
     - SwiftLocation
 
-SPEC CHECKSUMS:
-  FloatingPanel: f686602da8eff56375e577f19be37348a95f4e24
-  SwiftLocation: 609ac8859f2c5d48a6cadd2a58c63b1dae02dc25
+EXTERNAL SOURCES:
+  SwiftyPickerPopover:
+    :git: https://github.com/urwrstkn8mare/SwiftyPickerPopover.git
 
-PODFILE CHECKSUM: 50da708907e026afce6af6cb27686ed5d42ae0f6
+CHECKOUT OPTIONS:
+  SwiftyPickerPopover:
+    :commit: df78c19f8e03ecd5d0b7cb1bf84a62bb749563b8
+    :git: https://github.com/urwrstkn8mare/SwiftyPickerPopover.git
+
+SPEC CHECKSUMS:
+  FloatingPanel: 2f87246071476cf05d77ba3f50a373ca4b04549e
+  SwiftLocation: 609ac8859f2c5d48a6cadd2a58c63b1dae02dc25
+  SwiftyPickerPopover: a402960a6687c911ffcb4e9fb282a1bc61186ab4
+
+PODFILE CHECKSUM: 018abc9fd0059562f3facad92693faa312d64893
 
 COCOAPODS: 1.8.4
