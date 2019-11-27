@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyPickerPopover:
-    :commit: df78c19f8e03ecd5d0b7cb1bf84a62bb749563b8
+    :commit: 3285e5d829875890258ba66416dda9cd6f5ff1c2
     :git: https://github.com/urwrstkn8mare/SwiftyPickerPopover.git
 
 SPEC CHECKSUMS:
@@ -27,6 +27,6 @@ SPEC CHECKSUMS:
   SwiftLocation: 609ac8859f2c5d48a6cadd2a58c63b1dae02dc25
   SwiftyPickerPopover: a402960a6687c911ffcb4e9fb282a1bc61186ab4
 
-PODFILE CHECKSUM: 018abc9fd0059562f3facad92693faa312d64893
+PODFILE CHECKSUM: 230c74840d9131186087beb746afbf79e521fa1c
 
 COCOAPODS: 1.8.4

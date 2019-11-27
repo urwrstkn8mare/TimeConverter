@@ -41,7 +41,7 @@ public class DatePickerPopover: AbstractPopover {
     private(set) var selectedDate: ItemType = ItemType()
     private(set) var locale: Locale = Locale.current
     /// Time Zone
-    private(set) var timeZone_: TimeZone?
+    private(set) var timeZone_: TimeZone = TimeZone.current
     
     // MARK: - Initializer
     
@@ -70,6 +70,13 @@ public class DatePickerPopover: AbstractPopover {
     /// - Returns: self
     public func setDateMode(_ dateMode: UIDatePicker.Mode)->Self{
         self.dateMode_ = dateMode
+        return self
+    }
+    
+    /// Set the time zone for pciker
+    /// - Parameter timeZoneParam: Time zone for pciker
+    public func setTimeZone(_ timeZone: TimeZone)->Self{
+        self.timeZone_ = timeZone
         return self
     }
     
@@ -184,13 +191,6 @@ public class DatePickerPopover: AbstractPopover {
     /// - Returns: Self
     public func setValueChange(action: ActionHandlerType?)->Self{
         valueChangeAction = action
-        return self
-    }
-    
-    /// Set the Time Zone for Date Picker
-    /// - Parameter timeZoneParam: Time Zone for Date Picker
-    public func setTimeZone(_ timeZone: TimeZone) -> Self {
-        timeZone_ = timeZone
         return self
     }
 }
