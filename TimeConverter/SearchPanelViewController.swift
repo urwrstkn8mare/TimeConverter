@@ -6,13 +6,13 @@
 //  Copyright © 2019 Samit Shaikh. All rights reserved.
 //
 
+import UIKit
 import CoreLocation
 import FloatingPanel // https://github.com/SCENEE/FloatingPanel
 import Foundation
 import MapKit
 import SwiftLocation // https://github.com/malcommac/SwiftLocation
-import SwiftyPickerPopover // https://github.com/hsylife/SwiftyPickerPopover
-import UIKit
+import SwiftyPickerPopover // https://github.com/urwrstkn8mare/SwiftyPickerPopover
 
 // MARK: SearchPanelViewController
 

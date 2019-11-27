@@ -6,13 +6,14 @@
 //  Copyright © 2019 Samit Shaikh. All rights reserved.
 //
 
+import UIKit
 import CoreLocation
 import FloatingPanel // https://github.com/SCENEE/FloatingPanel
 import Foundation
 import MapKit
 import SwiftLocation // https://github.com/malcommac/SwiftLocation
-import SwiftyPickerPopover // https://github.com/hsylife/SwiftyPickerPopover
-import UIKit
+import SwiftyPickerPopover // https://github.com/urwrstkn8mare/SwiftyPickerPopover
+
 
 // MARK: TimesPanelViewController
 
@@ -120,8 +121,8 @@ class TimesPanelViewController: UIViewController {
         Log("editing not implemented yet")
 
         if UIDevice.current.userInterfaceIdiom == .pad {
-            DatePickerPopover(title: "Change the time")
-                .setDateMode(.dateAndTime)
+            DatePickerPopover(title: "Change the timee")
+                .setDateMode(UIDatePicker.Mode.dateAndTime)
                 .setSize(width: 350)
                 .setSelectedDate(defaults.value(forKey: "universalTime") as! Date)
                 .setDoneButton(title: "Confirm", action: { _, selectedDate in
@@ -176,15 +177,24 @@ class TimesPanelViewController: UIViewController {
 
 extension TimesPanelViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        // Get the locations from core data and return how many
+        // there and gives it to the table view. The table view then creates that
+        // many number of cells.
         return LocationStore().read().count
     }
 
+    // This method is called for each cell.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // This initialises a cell from the storyboard.
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTimesTableViewCell") as! CustomTimesTableViewCell
         Log(indexPath.row)
+        // This gets the corresponding item from core data.
         let item = LocationStore().read(id: indexPath.row + 1)[0]
+        // This reads the universal time from the universal defaults (like
+        // core data but simpler).
         let universalTime = defaults.value(forKey: "universalTime")! as! Date
-
+        
+        // Sets icons depending on the iOS version.
         if #available(iOS 13, *) {
             cell.editImageButton.imageView?.image = UIImage(systemName: "square.and.pencil")
             cell.trashImageButton.imageView?.image = UIImage(systemName: "trash")
@@ -194,8 +204,10 @@ extension TimesPanelViewController: UITableViewDelegate, UITableViewDataSource {
             cell.trashImageButton.imageView?.image = UIImage(named: "trash-image")
             cell.mainImageView.image = UIImage(named: String(item.id) + ".circle.fill-image")
         }
+        // Sets the region label to the identifier of the time zone uppercased.
         cell.regionLabel.text = item.location.timeZone?.identifier.uppercased()
-
+        
+        // Formats the time zone and puts it in each of the labels.
         let formatter = DateFormatter()
         formatter.timeZone = item.location.timeZone
 
@@ -208,6 +220,8 @@ extension TimesPanelViewController: UITableViewDelegate, UITableViewDataSource {
         formatter.dateFormat = "EEEE, d MMM"
         cell.dateLabel.text = formatter.string(from: universalTime)
 
+        // Gives the two buttons tags so they can be identified in their
+        // corresponding IBActions.
         cell.trashImageButton.tag = item.id
         cell.editImageButton.tag = item.id
 
@@ -253,11 +267,14 @@ class TimesPanelLayout: FloatingPanelLayout {
 
         // Setup snapping points of pull up view.
         switch position {
-        case .full: return 16.0 // A top inset from safe area
-        case .half:
-            return ((UIScreen.main.bounds.size.height / 2) - bottomSafeArea) // A bottom inset from the safe area
-        case .tip: return 96.0 // A bottom inset from the safe area
-        case .hidden: return nil // Or `case .hidden: return nil`
+        // A top inset from safe area
+        case .full: return 16.0
+        // A bottom inset from the safe area
+        case .half: return ((UIScreen.main.bounds.size.height / 2) - bottomSafeArea)
+        // A bottom inset from the safe area
+        case .tip: return 96.0
+        // Or `case .hidden: return nil`
+        case .hidden: return nil
         }
     }
 }
@@ -289,8 +306,19 @@ class TimesPanelLandscapeLayout: FloatingPanelLayout {
             // Fallback on earlier versions
             leftAnchorConstraint = surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0)
         }
+        
+        let isIpad = UIDevice.current.userInterfaceIdiom == .pad ? true : false
+        let bounds = UIScreen.main.bounds
+        var width: CGFloat?
+
+        if isIpad {
+            width = 414
+        } else {
+            width = bounds.width
+        }
+        
         return [
-            leftAnchorConstraint, surfaceView.widthAnchor.constraint(equalToConstant: 414),
+            leftAnchorConstraint, surfaceView.widthAnchor.constraint(equalToConstant: width!),
         ]
     }
 

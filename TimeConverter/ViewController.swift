@@ -26,7 +26,7 @@ import FloatingPanel // https://github.com/SCENEE/FloatingPanel
 import Foundation
 import MapKit
 import SwiftLocation // https://github.com/malcommac/SwiftLocation
-import SwiftyPickerPopover // https://github.com/hsylife/SwiftyPickerPopover
+import SwiftyPickerPopover // https://github.com/urwrstkn8mare/SwiftyPickerPopover
 import UIKit
 
 // MARK: ViewController
@@ -181,14 +181,11 @@ class ViewController: UIViewController {
         let isLandscape = UIDevice.current.orientation.isLandscape
         let isIpad = UIDevice.current.userInterfaceIdiom == .pad ? true : false
         let bounds = UIScreen.main.bounds
-        var width: CGFloat?
         var height: CGFloat?
 
         if isIpad {
-            width = bounds.width
             height = bounds.height
         } else {
-            width = bounds.height
             height = bounds.width
         }
 
@@ -200,21 +197,41 @@ class ViewController: UIViewController {
 
         fpc.updateLayout()
     }
-
+    
     @objc func mapViewLongPress(recogniser: UIGestureRecognizer) {
         if recogniser.state == UIGestureRecognizer.State.began {
+            // Converts the point on the screen on which the user held down
+            // to coordinates for a map.
             let touchPoint = recogniser.location(in: mapView)
             let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-
+            
+            // Gets the new id of the new annotation.
             let newId = addAnnotation(item: MKMapItem(placemark: MKPlacemark(coordinate: newCoordinates)))
             if newId != nil {
+                // Reverse geocoding after to not have any visual lag.
                 LocationManager.shared.locateFromCoordinates(newCoordinates, service: .apple(GeocoderRequest.Options())) { result in
                     switch result {
                     case let .failure(error):
                         Log("Geoocoder Error: \(error)")
+                        
+                        // Tell the user the geocoding failed most likely because
+                        // they have no internet. The app does not require
+                        // internet to convert time but it does to search
+                        // and create new locations.
+                        let alert = UIAlertController(title: "Geocoding failed", message: "Failed to get data on this location, try again.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
+                            self.removeAnnotation(id: newId!)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
                     case let .success(places):
+                        // I passed in the coordinates and it returns a list of
+                        // Place objects. I just get the placemark of the
+                        // first object.
                         if let placemark = places.first?.placemark {
+                            // I turn that into a MKMapItem for core data.
                             let mapItem = MKMapItem(placemark: MKPlacemark(placemark: placemark))
+                            // I use my class for interfacing with cordedata to
+                            // update the data with this new information.
                             LocationStore().update(id: newId!, newLocation: mapItem, newId: nil)
                             self.contentVC?.tableView.reloadData()
                         }
