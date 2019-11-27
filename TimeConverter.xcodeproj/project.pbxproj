@@ -15,7 +15,9 @@
 		A74861E0236E919E0045CAA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74861DE236E919E0045CAA3 /* Main.storyboard */; };
 		A74861E3236E919E0045CAA3 /* TimeConverter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A74861E1236E919E0045CAA3 /* TimeConverter.xcdatamodeld */; };
 		A74861E8236E91A50045CAA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74861E6236E91A50045CAA3 /* LaunchScreen.storyboard */; };
-		A7E2447F2372FCB200659290 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E2447D2372F14B00659290 /* Backend.swift */; };
+		A7E1A473238E774600EAAEC3 /* TimesPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1A472238E774500EAAEC3 /* TimesPanelViewController.swift */; };
+		A7E1A475238E787500EAAEC3 /* SearchPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E1A474238E787500EAAEC3 /* SearchPanelViewController.swift */; };
+		A7E2447F2372FCB200659290 /* BackendAndOther.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E2447D2372F14B00659290 /* BackendAndOther.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +30,9 @@
 		A74861E4236E91A50045CAA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A74861E7236E91A50045CAA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A74861E9236E91A50045CAA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7E2447D2372F14B00659290 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
+		A7E1A472238E774500EAAEC3 /* TimesPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesPanelViewController.swift; sourceTree = "<group>"; };
+		A7E1A474238E787500EAAEC3 /* SearchPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPanelViewController.swift; sourceTree = "<group>"; };
+		A7E2447D2372F14B00659290 /* BackendAndOther.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAndOther.swift; sourceTree = "<group>"; };
 		ED8A8AEA8F67CCBB24E7815F /* Pods-TimeConverter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeConverter.release.xcconfig"; path = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter.release.xcconfig"; sourceTree = "<group>"; };
 		F79A16562714C44C564729C8 /* Pods_TimeConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7E36D5F4CE86813CF8B8EB6 /* Pods-TimeConverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeConverter.debug.xcconfig"; path = "Target Support Files/Pods-TimeConverter/Pods-TimeConverter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,7 +83,9 @@
 				A74861D8236E919E0045CAA3 /* AppDelegate.swift */,
 				A74861DA236E919E0045CAA3 /* SceneDelegate.swift */,
 				A74861DC236E919E0045CAA3 /* ViewController.swift */,
-				A7E2447D2372F14B00659290 /* Backend.swift */,
+				A7E1A472238E774500EAAEC3 /* TimesPanelViewController.swift */,
+				A7E1A474238E787500EAAEC3 /* SearchPanelViewController.swift */,
+				A7E2447D2372F14B00659290 /* BackendAndOther.swift */,
 				A74861DE236E919E0045CAA3 /* Main.storyboard */,
 				A74861E4236E91A50045CAA3 /* Assets.xcassets */,
 				A74861E6236E91A50045CAA3 /* LaunchScreen.storyboard */,
@@ -212,11 +218,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7E1A473238E774600EAAEC3 /* TimesPanelViewController.swift in Sources */,
 				A74861DD236E919E0045CAA3 /* ViewController.swift in Sources */,
 				A74861E3236E919E0045CAA3 /* TimeConverter.xcdatamodeld in Sources */,
 				A74861D9236E919E0045CAA3 /* AppDelegate.swift in Sources */,
+				A7E1A475238E787500EAAEC3 /* SearchPanelViewController.swift in Sources */,
 				A74861DB236E919E0045CAA3 /* SceneDelegate.swift in Sources */,
-				A7E2447F2372FCB200659290 /* Backend.swift in Sources */,
+				A7E2447F2372FCB200659290 /* BackendAndOther.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

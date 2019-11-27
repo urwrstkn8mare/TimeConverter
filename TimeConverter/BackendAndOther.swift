@@ -10,46 +10,6 @@ import Foundation
 import MapKit
 import CoreData
 
-class BackendSearchLocations {
-    
-    public private(set) var matchingItems:[MKMapItem] = []
-    var mapView: MKMapView? = nil
-    
-    func updateMatchingItems(text: String, completion: (() -> Void)? = nil) {
-        
-        guard let mapView = mapView else {
-            Log("mapView not set")
-            return
-        }
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = text
-        request.region = mapView.region
-        let search = MKLocalSearch(request: request)
-        search.start { response, error in
-            guard let response = response else {
-                Log("updateMatchingItems() - Error : \(error?.localizedDescription ?? "Unknown error").")
-                return
-            }
-            
-            self.matchingItems = response.mapItems
-            
-            // debugging
-            Log(self.matchingItems)
-            
-            if completion != nil {
-                completion!()
-            }
-        }
-        
-    }
-    
-    class func parseAddress(selectedItem:MKPlacemark) -> String {
-        
-        return "\(selectedItem.thoroughfare ?? ""), \(selectedItem.locality ?? ""), \(selectedItem.subLocality ?? ""), \(selectedItem.administrativeArea ?? ""), \(selectedItem.postalCode ?? ""), \(selectedItem.country ?? "")"
-    }
-    
-}
-
 struct LocationStruct {
     let id: Int
     let location: MKMapItem
