@@ -10,7 +10,7 @@
 // Purpose: To create an MVP for Computer Science assessemnt.
 // Description: This iOS application is an intuitive way to convert time between
 //              time zones.
-// Date of last revision: 27/11/2019 (you should just check git though)
+// Date of last revision: 28/11/2019 (you should just check git though)
 
 // Notes:
 //  - Ignore any Log() functions they are just for my own debugging use.
@@ -166,7 +166,7 @@ class ViewController: UIViewController {
         // view controller.
         searchContentVC.fpc = fpcSearch
 
-        // Another custom delegate to facilliate communication.
+        // Another custom delegate to faciliate communication.
         searchContentVC.cellTapDelegate = self
 
         // Setting the content view controller to the initialised content view
@@ -177,12 +177,15 @@ class ViewController: UIViewController {
         loadAnnotations()
     }
 
+    // This method runs whenever the device changes orientation (rotates).
     override func viewWillTransition(to _: CGSize, with _: UIViewControllerTransitionCoordinator) {
         let isLandscape = UIDevice.current.orientation.isLandscape
         let isIpad = UIDevice.current.userInterfaceIdiom == .pad ? true : false
         let bounds = UIScreen.main.bounds
-        var height: CGFloat?
 
+        // The heights of iPads and iPhones for some reason are different (as in on
+        // which side). This meant I have to account for that as well.
+        var height: CGFloat?
         if isIpad {
             height = bounds.height
         } else {
@@ -190,11 +193,18 @@ class ViewController: UIViewController {
         }
 
         if isLandscape {
+            // If the device is in landscape use this y coordinate.
             sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: (height! / 2) - (sideButtons.frame.height / 2), width: sideButtons.frame.width, height: sideButtons.frame.height)
         } else {
+            // If the device is in portrait use this y coordinate.
             sideButtons.frame = CGRect(x: sideButtons.frame.minX, y: (height! / 2) - 20 - sideButtons.frame.height, width: sideButtons.frame.width, height: sideButtons.frame.height)
         }
 
+        // The FloatingPanel pod has a problem right now where sometimes the
+        // update layout method of the controller that changes the layout (learn
+        // about that in the layouts in the TimesPanelController.swift) is not
+        // called when the orientation of the device is changed. Thus I have to
+        // manually call it.
         fpc.updateLayout()
     }
     
@@ -242,6 +252,8 @@ class ViewController: UIViewController {
     }
 
     func loadAnnotations() {
+        // This method removes all previous annotations for a blank slate, then
+        // creates annotations based on locations stored in coredata.
         let locationStore = LocationStore()
         mapView.removeAnnotations(mapView.annotations)
         for locationStruct in locationStore.read() {
@@ -253,6 +265,7 @@ class ViewController: UIViewController {
     func addAnnotation(item: MKMapItem) -> Int? {
         let locationStore = LocationStore()
 
+        // this variable just defines the maximum number of annotations allowed.
         let maxCount: Int
         if #available(iOS 13, *) {
             maxCount = 50
@@ -262,6 +275,9 @@ class ViewController: UIViewController {
 
         let result = locationStore.read()
         if result.count == maxCount {
+            // This alert is given to the user if the number of locations in
+            // coredata reaches the maximum limit for annotations for the iOS
+            // version.
             let alert = UIAlertController(title: "Too many locations!", message: "You can only create a maximum of \(maxCount) locations.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             present(alert, animated: true)
@@ -269,20 +285,34 @@ class ViewController: UIViewController {
         } else {
             let distanceApartOtherAnnotationsMustBe: Int = 900_000
 
+            // Creates a new location in core data and then stores the new id
+            // assigned to it in a variable.
             let newId = locationStore.create(locationParam: item)
 
+            // Creates a new annotation based on the custom annotation created by
+            // me.
             let newAnnotation = CustomAnnotationClass(id: newId!, coordinate: item.placemark.coordinate)
 
+            // Adds that annotation to the map.
             mapView.addAnnotation(newAnnotation)
 
             for locationStruct in result {
+                // For every location (item) in core data, check if the distance from
+                // the new location is the same distance from that location. If it
+                // is then...
                 if (item.placemark.location?.distance(from: locationStruct.location.placemark.location!))! < Double(distanceApartOtherAnnotationsMustBe + 1) {
                     Log("too close")
 
+                    // Move the map to be centered on the location that was too
+                    // close to the new location.
                     setMapCentre(coordinate: locationStruct.location.placemark.coordinate)
+                    
+                    // Remove the annotation from the map and delete it from core
+                    // data
                     mapView.removeAnnotation(newAnnotation)
                     locationStore.delete(id: newId!)
 
+                    // Give the user an alert explaining what happened.
                     let alert = UIAlertController(title: "Too many close!", message: "Your location must be at least \(distanceApartOtherAnnotationsMustBe / 1000)km away from any other location.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                     present(alert, animated: true)
@@ -344,13 +374,25 @@ class ViewController: UIViewController {
 // MARK: FloatingPanelControllerDelegate
 
 extension ViewController: FloatingPanelControllerDelegate {
+    // This method should be called whenever the device orientation is changed.
+    // This is the method that will be called by the .updateLayout() method from
+    // before.
     func floatingPanel(_ vc: FloatingPanelController, layoutFor _: UITraitCollection) -> FloatingPanelLayout? {
         if vc.contentViewController?.className == "TimesPanelViewController" {
             Log(UIDevice.current.orientation.isLandscape)
+            // If the content view controller is called "TimesPanelViewController",
+            // then if the device is in landscape then use the
+            // TimesPanelLandscapeLayout(). If not use the
+            // TimesPanelLayout(). These two classes just tell the content
+            // view controller how to layout the view.
             return (UIDevice.current.orientation.isLandscape) ? TimesPanelLandscapeLayout() : TimesPanelLayout()
         } else if vc.contentViewController?.className == "SearchPanelViewController" {
+            // If the content view controller is called "SearchPanelViewController",
+            // then use SearchPanelLayout() regarless of orientation.
             return SearchPanelLayout()
         } else {
+            // If the content view controller is called neither then just use
+            // default. This shouldn't happen though.
             return nil
         }
     }

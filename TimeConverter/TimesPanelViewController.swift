@@ -38,21 +38,22 @@ class TimesPanelViewController: UIViewController {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCell(_:)))
         tableView.addGestureRecognizer(tapGesture)
-        //tapGesture.delegate = self
 
+        // If there isn't a value already set than set it to the current date
+        // and time.
         if defaults.object(forKey: "universalTime") == nil {
             defaults.set(Date(), forKey: "universalTime")
         }
 
         Log(defaults.value(forKey: "universalTime")!)
 
-        // Programatically setup stuff in the top title section.
-        // Subtitle
+        // Programatically setup stuff in the top title section. This was originally
+        // exported from Figma but I had to change a lot of stuff because it didn't
+        // work properly with the app and outdated syntax.
         let subtitle = UILabel()
         subtitle.frame = CGRect(x: 0, y: 0, width: 164, height: 18)
         subtitle.backgroundColor = .clear
         subtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.39)
-
         subtitle.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
         let subtitleParagraphStyle = NSMutableParagraphStyle()
         subtitleParagraphStyle.lineHeightMultiple = 1.16
@@ -63,7 +64,6 @@ class TimesPanelViewController: UIViewController {
         subtitle.heightAnchor.constraint(equalToConstant: 18).isActive = true
         subtitle.leadingAnchor.constraint(equalTo: topTitleView.leadingAnchor, constant: 16).isActive = true
         subtitle.topAnchor.constraint(equalTo: topTitleView.topAnchor, constant: 25).isActive = true
-        // Large Title
         let largeTitle = UILabel()
         largeTitle.frame = CGRect(x: 0, y: 0, width: 104, height: 41)
         largeTitle.backgroundColor = .clear
@@ -120,12 +120,16 @@ class TimesPanelViewController: UIViewController {
     @IBAction func editButtonAction(_ sender: UIButton) {
         Log("editing not implemented yet")
 
+        // If the device is an iPad...
         if UIDevice.current.userInterfaceIdiom == .pad {
+            // Create a popover with the following configuaration.
             DatePickerPopover(title: "Change the timee")
                 .setDateMode(UIDatePicker.Mode.dateAndTime)
                 .setSize(width: 350)
                 .setSelectedDate(defaults.value(forKey: "universalTime") as! Date)
                 .setDoneButton(title: "Confirm", action: { _, selectedDate in
+                    // If the confirm button is set, then change the universalTime
+                    // to the selected date and reload the tableView.
                     self.defaults.set(selectedDate, forKey: "universalTime")
                     self.tableView.reloadData()
                 })
@@ -135,15 +139,17 @@ class TimesPanelViewController: UIViewController {
                 .setArrowColor(.white)
                 .setTimeZone(LocationStore().read(id: sender.tag)[0].location.timeZone!)
                 .appear(originView: sender, baseViewController: self)
+        // If the device is not an iPad...
         } else {
-            // add to actionsheetview
+            // Create an action sheeet
             let alertController = UIAlertController(title: "Change the time", message: " ", preferredStyle: UIAlertController.Style.actionSheet)
 
+            // Create and add a datepicker to the actionsheet with the following
+            // configuration.
             let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 25, width: alertController.view.frame.width, height: 260))
             datePicker.datePickerMode = .dateAndTime
             datePicker.timeZone = LocationStore().read(id: sender.tag)[0].location.timeZone
-
-            alertController.view.addSubview(datePicker) // add subview
+            alertController.view.addSubview(datePicker)
 
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
 
@@ -153,19 +159,21 @@ class TimesPanelViewController: UIViewController {
             let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { _ in
 
                 Log("confrim action \(datePicker.date)")
+                // Same thing as the other confirm action.
                 self.defaults.set(datePicker.date, forKey: "universalTime")
                 self.tableView.reloadData()
 
             })
 
-            // add buttons to action sheet
+            // Add buttons to action sheet.
             alertController.addAction(confirmAction)
             alertController.addAction(cancelAction)
 
-            let height: NSLayoutConstraint
-            height = NSLayoutConstraint(item: alertController.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 400)
+            // Add a height constraint to the action sheet.
+            let height: NSLayoutConstraint = NSLayoutConstraint(item: alertController.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 400)
             alertController.view.addConstraint(height)
 
+            // Present it.
             present(alertController, animated: true, completion: nil)
         }
     }
@@ -250,30 +258,31 @@ class CustomTimesTableViewCell: UITableViewCell {
 
 class TimesPanelLayout: FloatingPanelLayout {
     public var initialPosition: FloatingPanelPosition {
+        // Start the panel in the tip position.
         return .tip
     }
 
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
-        // Get safe area values
+        
+        // Get the height of the bottom safe area (the area you don't want to go in).
         var bottomSafeArea: CGFloat
         let window = UIApplication.shared.windows[0]
-
         if #available(iOS 11.0, *) {
             bottomSafeArea = window.safeAreaInsets.bottom
         } else {
             // Fallback on earlier versions
             bottomSafeArea = window.layoutMargins.bottom
         }
-
-        // Setup snapping points of pull up view.
+        
         switch position {
-        // A top inset from safe area
+        // The full position of the panel will be 16 from the top.
         case .full: return 16.0
-        // A bottom inset from the safe area
+        // The half position of the panel will be half the height of the screen
+        // minus the bottom safe area height from the bottom safe area.
         case .half: return ((UIScreen.main.bounds.size.height / 2) - bottomSafeArea)
-        // A bottom inset from the safe area
+        // The tip position will be 96 from the bottom safe area.
         case .tip: return 96.0
-        // Or `case .hidden: return nil`
+        // The hidden position will not show anything.
         case .hidden: return nil
         }
     }
@@ -281,44 +290,45 @@ class TimesPanelLayout: FloatingPanelLayout {
 
 // MARK: TimesPanelLandscapeLayout
 
+// This layouts the same panel as above but when in landscape mode.
 class TimesPanelLandscapeLayout: FloatingPanelLayout {
     public var initialPosition: FloatingPanelPosition {
+        // Start the panel in the full position.
         return .full
     }
 
     public var supportedPositions: Set<FloatingPanelPosition> {
+        // Only support the full and tip postion (not the half position like in
+        // portrait).
         return [.full, .tip]
     }
 
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
+        // Basically the same as portrait layout but without, the half positon.
         switch position {
         case .full: return 16.0
         case .tip: return 96.0
+        // Default represents and other positions which is half and hidden and we
+        // don't want to show anything in both.
         default: return nil
         }
     }
 
+    // This is basically where you can give the panel some constraints.
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
+        // Prepare the left anchor contstraint. The way to do this, however,
+        // is different in iOS 11 and later than iOS 10.
         let leftAnchorConstraint: NSLayoutConstraint
         if #available(iOS 11.0, *) {
             leftAnchorConstraint = surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8.0)
         } else {
-            // Fallback on earlier versions
             leftAnchorConstraint = surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0)
         }
         
-        let isIpad = UIDevice.current.userInterfaceIdiom == .pad ? true : false
-        let bounds = UIScreen.main.bounds
-        var width: CGFloat?
-
-        if isIpad {
-            width = 414
-        } else {
-            width = bounds.width
-        }
-        
+        // Return the left anchor constraint and also a width constraint which
+        // just tells the panel to have a width of 414.
         return [
-            leftAnchorConstraint, surfaceView.widthAnchor.constraint(equalToConstant: width!),
+            leftAnchorConstraint, surfaceView.widthAnchor.constraint(equalToConstant: 414)
         ]
     }
 
