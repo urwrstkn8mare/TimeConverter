@@ -10,11 +10,13 @@ import CoreData
 import Foundation
 import MapKit
 
+// MARK: LocationStruct
 struct LocationStruct {
     let id: Int
     let location: MKMapItem
 }
 
+// MARK: LocationStore
 class LocationStore {
     public func read(id: Int? = nil) -> [LocationStruct] {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
@@ -158,13 +160,14 @@ class LocationStore {
     }
 }
 
-// To get name of class
+// MARK: className
 extension UIViewController {
     var className: String {
         return NSStringFromClass(classForCoder).components(separatedBy: ".").last!
     }
 }
 
+// MARK: Log
 public func Log<T>(_ object: T?, filename: String = #file, line: Int = #line, funcname: String = #function) {
     #if DEBUG
         guard let object = object else { return }
