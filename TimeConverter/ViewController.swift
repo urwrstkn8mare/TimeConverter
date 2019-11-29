@@ -329,21 +329,31 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.1, animations: {
             () in
             if #available(iOS 13, *) {
+                // If the device is running iOS 13 or later than use the system
+                // opaque seperator colour.
                 self.searchIconView.backgroundColor = UIColor.opaqueSeparator
             } else {
+                // If the device is running iOS 12 or earlier, than use the same
+                // colour but via a RGB value.
                 self.searchIconView.backgroundColor = UIColor(red: 198.0 / 255.0, green: 198.0 / 255.0, blue: 200.0 / 255.0, alpha: 1.0)
             }
+            // Set the opacity of the view to 80%.
             self.searchIconView.alpha = 0.8
         }, completion: {
             (_: Bool) in
+            // Ounce the animation is done, finish with returning the view's colour
+            // to clear and the opacity to 100%.
             self.searchIconView.backgroundColor = .clear
             self.searchIconView.alpha = 1
         })
 
+        // Present the search floating panel (modal).
         present(fpcSearch, animated: true, completion: nil)
     }
 
     @IBAction func handleLocationTap(recogniser _: UITapGestureRecognizer) {
+        // Same animation as the one used in handleSearchTap(). Just with a
+        // different view.
         UIView.animate(withDuration: 0.1, animations: { () in
             if #available(iOS 13, *) {
                 self.locationIconView.backgroundColor = UIColor.opaqueSeparator
@@ -356,16 +366,25 @@ class ViewController: UIViewController {
             self.locationIconView.alpha = 1
         })
 
+        // Set the location manager to require user authorization only when the
+        // location is requested.
         LocationManager.shared.requireUserAuthorization(.whenInUse)
+        
+        // Toggle whether the map shows the user location or not.
         mapView.showsUserLocation = !mapView.showsUserLocation
 
-        LocationManager.shared.locateFromGPS(.oneShot, accuracy: .city) { result in
-            switch result {
-            case let .failure(error):
-                Log("Received error: \(error)")
-            case let .success(location):
-                Log("Location received: \(location)")
-                self.setMapCentre(coordinate: location.coordinate)
+        if mapView.showsUserLocation {
+            // If the map view is set to show the device's location, than get the
+            // location only ounce (not continuously) and make the map focus on that
+            // location.
+            LocationManager.shared.locateFromGPS(.oneShot, accuracy: .city) { result in
+                switch result {
+                case let .failure(error):
+                    Log("Received error: \(error)")
+                case let .success(location):
+                    Log("Location received: \(location)")
+                    self.setMapCentre(coordinate: location.coordinate)
+                }
             }
         }
     }
@@ -402,8 +421,12 @@ extension ViewController: FloatingPanelControllerDelegate {
 
 extension ViewController: CellTapDelegate {
     func cellTapped(matchingItem: MKMapItem) {
+        // This is called when a cell in the search panel is tapped.
         if addAnnotation(item: matchingItem) != nil {
-            mapView.setCenter(matchingItem.placemark.coordinate, animated: true)
+            // If the map item is successfully added as an annotation, then make
+            // the map focus on that location and reload the table view of the times
+            // panel (so it shows the new location).
+            setMapCentre(coordinate: matchingItem.placemark.coordinate)
             contentVC?.tableView.reloadData()
         }
     }
@@ -412,6 +435,7 @@ extension ViewController: CellTapDelegate {
 // MARK: MKMapViewDelegate
 
 extension ViewController: MKMapViewDelegate {
+    // This is similar to the method for table views that sets up the cells.
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? CustomAnnotationClass else { return nil }
 
@@ -423,31 +447,42 @@ extension ViewController: MKMapViewDelegate {
 
         var image: UIImage
         if #available(iOS 13.0, *) {
+            // If the device has an iOS version of 13 or later use the SF Symbols
+            // symbol of the number in a filled circle.
             image = UIImage(systemName: String(annotation.id) + ".circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .medium))!
         } else {
-            // Fallback on earlier versions
+            // Otherwise use the bitmap (png).
             image = UIImage(named: String(annotation.id) + ".circle.fill-image")!
         }
+        
+        // Scale the images size to 50x50.
         let size = CGSize(width: 50, height: 50)
         let renderer = UIGraphicsImageRenderer(size: size)
         annotationView?.image = renderer.image { _ in
             image.draw(in: CGRect(origin: .zero, size: size))
         }
+        
+        // Some other configuration.
         annotationView?.contentMode = .scaleAspectFit
         annotationView?.backgroundColor = .white
         annotationView?.clipsToBounds = true
         annotationView?.layer.cornerRadius = 25
 
+        // Stop the annotation from showing a callout.
         annotationView?.canShowCallout = false
 
         return annotationView
     }
 
+    // This method is called when any annotation is selected (or tapped).
     func mapView(_: MKMapView, didSelect view: MKAnnotationView) {
         Log("the annotation was selected")
+        // If the annotation is not the devices location's annotation, then...
         if let annotation = view.annotation as? CustomAnnotationClass {
-            contentVC?.tableView.scrollToRow(at: IndexPath(row: annotation.id - 1, section: 0), at: .top, animated: true)
+            // ... then move the floating panel's position to full and...
             fpc.move(to: .full, animated: true)
+            // ... scroll the table view to the annotation's corresponding cell.
+            contentVC?.tableView.scrollToRow(at: IndexPath(row: annotation.id - 1, section: 0), at: .top, animated: true)
         } else {}
     }
 }
@@ -464,10 +499,15 @@ extension ViewController: UIGestureRecognizerDelegate {
 
 extension ViewController: RemoveAnnotationDelegate {
     func removeAnnotation(id: Int) {
-        let locationStore = LocationStore()
-        locationStore.delete(id: id)
+        // Delete the location off coredata.
+        LocationStore().delete(id: id)
+        
         Log("success")
+        
+        // Reload the annotations.
         loadAnnotations()
+        
+        // Reload the table view of the floating panel.
         contentVC?.tableView.reloadData()
     }
 }
@@ -477,7 +517,11 @@ extension ViewController: RemoveAnnotationDelegate {
 extension ViewController: SetMapCentreDelegate {
     func setMapCentre(coordinate: CLLocationCoordinate2D) {
         // Later you could make this more advanced with stuff from here: https://stackoverflow.com/questions/15421106/centering-mkmapview-on-spot-n-pixels-below-pin
+        
+        // Move the the floating panel to the tip position.
         fpc.move(to: .tip, animated: true)
+        
+        // Set the center of the map to the coordinate parameter.
         mapView.setCenter(coordinate, animated: true)
     }
 }

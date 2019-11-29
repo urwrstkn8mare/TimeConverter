@@ -26,6 +26,7 @@ class TimesPanelViewController: UIViewController {
     // For iOS 10 only
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
 
+    // Delegates set in the viewDidLoad() of the ViewController.
     var removeAnnotationDelegate: RemoveAnnotationDelegate?
     var setMapCentreDelegate: SetMapCentreDelegate?
     let defaults = UserDefaults.standard
@@ -83,11 +84,11 @@ class TimesPanelViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         if #available(iOS 11, *) {
         } else {
-            // Add rounding corners on iOS 10
+            // Add rounding corners on iOS 10.
             visualEffectView.layer.cornerRadius = 9.0
             visualEffectView.clipsToBounds = true
 
-            // Add shadow manually on iOS 10
+            // Add a shadow manually on iOS 10.
             view.layer.insertSublayer(shadowLayer, at: 0)
             let rect = visualEffectView.frame
             let path = UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 9.0, height: 9.0))
@@ -102,18 +103,26 @@ class TimesPanelViewController: UIViewController {
         }
     }
 
+    // This method is called when a cell in the times panel is tapped.
     @objc func tapCell(_ recognizer: UITapGestureRecognizer) {
         if recognizer.state == UIGestureRecognizer.State.ended {
+            // Get the indexPath of the cell that was tapped.
             let tapLocation = recognizer.location(in: tableView)
             if let indexPath = self.tableView.indexPathForRow(at: tapLocation) {
                 Log("selected \(indexPath.row)")
 
+                // Get the location from coredata, get the coordinate of the location
+                // and then use the method defined in the ViewController to set the
+                // map view to focus on that coordinate.
                 setMapCentreDelegate?.setMapCentre(coordinate: LocationStore().read(id: indexPath.row + 1)[0].location.placemark.coordinate)
             }
         }
     }
 
     @IBAction func trashButtonAction(_ sender: UIButton) {
+        // Call the remove annotation method defined in the ViewController with
+        // sender.tag which is set in cellforrowat tableview delegate/datasource
+        // method.
         removeAnnotationDelegate?.removeAnnotation(id: sender.tag)
     }
 
