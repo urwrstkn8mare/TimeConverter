@@ -1,6 +1,6 @@
 # TimeConverter
 
-An iOS Time Converter app made with Swift for Comp. Sci. (2019). Supports portrait, landscape, iPad and iPhone.
+An iOS Time Converter app made with Swift for Comp. Sci. Spec. (2019). Supports portrait, landscape, iPad and iPhone.
 
 ![image.png](image.png) ![image2.png](image2.png)
 
